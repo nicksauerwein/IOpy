@@ -10,6 +10,10 @@ class Mode:
         
         self.driven = False
         
+    def __str__(self):
+        
+        return self.name
+        
 class Input:
     def __init__(self,name, mode, kappa, kind = 'bath', omega_drive = 0, bath_temp = 0):
         '''
@@ -45,6 +49,10 @@ class Input:
     def spectrum(self, omega):
         
         return self.nbar
+    
+    def __str__(self):
+        
+        return str(self.mode)+'_in,'+self.name
         
         
 
@@ -64,6 +72,10 @@ class Coupling:
         self.mode2 = mode2
         
         self.vg = vg
+   
+    def __str__(self):
+        
+        return 'g_'+str(mode1)+str(mode2)
 
         
         
