@@ -6,7 +6,7 @@ class Mode:
         self.name = name
         self.omega_rot = omega
         self.omega = omega
-        self.kappa0 = 0
+        self.kappa = 0
         
         self.driven = False
         
@@ -27,7 +27,7 @@ class Input:
         self.kind = kind
         self.mode = mode
         
-        self.mode.kappa0 += kappa
+        self.mode.kappa += kappa
         
         if kind == 'drive':
             
@@ -47,8 +47,7 @@ class Input:
             self.nbar = 1/(np.exp(hbar * (mode.omega) / k / bath_temp) - 1)
         
     def spectrum(self, omega):
-        
-        return self.nbar
+        return 0.5 * self.nbar + 0.25
     
     def __str__(self):
         
@@ -59,14 +58,13 @@ class Input:
 class Coupling:
     def __init__(self,mode1, mode2, vg):
         '''
-        vg: coupling vector [complex]
+        vg: coupling vector [real]
         
-        H_int = hbar ( vg[0] a1^dagger a2 + vg*[0] a1 a2^dagger 
-                       vg[1] a1 a2  + vg*[1] a1^dagger a2^dagger )
+        H_int = 4 hbar ( vg[0] q1 q2 + vg[1] q1 p2 + vg[2] p1 q2 + vg[3] p1 p2)
         
         EXAMPLE
         For optomechanics:
-        vg = [g , g] ; g [real]
+        vg = [g , 0, 0, 0, 0] 
         '''
         self.mode1 = mode1
         self.mode2 = mode2
@@ -127,20 +125,23 @@ class System:
             i = np.argwhere(self.modes == coupling.mode1)
             j = np.argwhere(self.modes == coupling.mode2)
             
-            M[2*i,2*j] = -1j*coupling.vg[0]
-            M[2*i + 1,2*j + 1] = 1j*np.conjugate(coupling.vg[0]) 
-            M[2*i,2*j + 1] = -1j*np.conjugate(coupling.vg[1])
-            M[2*i + 1,2*j] = 1j*coupling.vg[1]
+            M[2*i,2*j] = 2 * coupling.vg[2]
+            M[2*i + 1,2*j + 1] = - 2 * coupling.vg[1]
+            M[2*i,2*j + 1] =  2 * coupling.vg[3]
+            M[2*i + 1,2*j] = - 2 * coupling.vg[0]    
             
-            M[2*j,2*i] = -1j*np.conjugate(coupling.vg[0])
-            M[2*j + 1,2*i + 1] = 1j*coupling.vg[0] 
-            M[2*j,2*i + 1] = -1j*np.conjugate(coupling.vg[1])
-            M[2*j + 1,2*i] = 1j*coupling.vg[1]
+            M[2*j,2*i] =  2 * coupling.vg[1]
+            M[2*j + 1,2*i + 1] = - 2 * coupling.vg[2]
+            M[2*j,2*i + 1] = 2 * coupling.vg[3]
+            M[2*j + 1,2*i] = - 2 * coupling.vg[0] 
 
             
         for i,mode in enumerate(self.modes):
-            M[2*i,2*i] = -1j * mode.omega_rot - mode.kappa0/2
-            M[2*i + 1,2*i + 1] = 1j * mode.omega_rot - mode.kappa0/2
+            M[2*i,2*i] = - mode.kappa/2
+            M[2*i + 1,2*i + 1] = - mode.kappa/2
+            
+            M[2*i,2*i + 1] = mode.omega_rot
+            M[2*i + 1,2*i] = - mode.omega_rot
             
         self.M = M
         self.L = L

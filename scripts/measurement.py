@@ -1,31 +1,85 @@
 import numpy as np
 from scipy.constants import epsilon_0, hbar, k
 
-def spectrum(output, omega, components = False):
+
+class MeasurementOperator:
     
-    omega = - omega + output.input.omega_drive
+    def __init__(self, Q, system):
+        
+        self.system = system
+        self.Q = Q
+        
+
+class PowerMeasurement:
     
-    S1 = output.system.SMatrix(omega)
-    S2 = output.system.SMatrix(-omega)
+    def __init__(self, output):
+        
+        self.system = output.system
+        
+        r = np.argwhere(output.system.inputs == output.input)[0,0]
+        
+        n = len(output.system.inputs)
+        
+        self.Q = np.zeros((2*n,2*n))
+        
+        self.Q[2*r, 2*r] = 1
+        self.Q[2*r + 1, 2*r + 1] = 1
+        
+class HomodynMeasurement:
+    
+    def __init__(self, output, theta):
+        
+        self.system = output.system
+        
+        r = np.argwhere(output.system.inputs == output.input)[0,0]
+        
+        n = len(output.system.inputs)
+        
+        self.Q = np.zeros((2*n,2*n))
+        
+        self.Q[2*r, 2*r] = np.cos(theta)**2
+        self.Q[2*r, 2*r+1] = np.cos(theta)*np.sin(theta)
+        self.Q[2*r + 1, 2*r + 1] = np.sin(theta)**2
+        self.Q[2*r+1, 2*r] = np.cos(theta)*np.sin(theta)
+        
+
+
+
+def spectrum(omega, measurement, omega_rot = 0, components = False):
+    
+    omega = - omega + omega_rot
+    system = measurement.system
+    
+    S1 = system.SMatrix(omega)
+    S2 = system.SMatrix(-omega)
     
     
     ni = int(len(S1)/2)
     
-    r = np.argwhere(output.system.inputs == output.input)[0,0]
+    Q = measurement.Q
     
-    res = (np.array([ S1[2*r+1,2*k+1] * S2[2*r, 2*k] * output.system.inputs[k].spectrum(omega) for k in range(ni)]) +
-          np.array([ S1[2*r+1,2*k] * S2[2*r, 2*k+1] * (output.system.inputs[k].spectrum(-omega) +1) for k in range(ni)]))
+    spec = np.zeros((2*ni,2*ni,2*ni), dtype = 'complex128')
+    specQ = np.zeros((2*ni,2*ni), dtype = 'complex128')
     
+    for i in range(2*ni):
+        for j in range(2*ni):
+            if Q[i, j] == 0:
+                pass
+            
+            #classical term
+            spec[i, j] = Q[i,j] * np.array([S2[i,k] * S1[j,k] * system.inputs[int(k/2)].spectrum(omega) for k in range(2*ni)])
+            
+            #quantum term
+            
+            specQ[i, j] = Q[i,j] * 1j/2 * np.sum([(S2[i,2*r] * S1[j,2*r+1] - S2[i,2*r + 1] * S1[j,2*r])  for r in range(ni)])
+    
+    res = np.sum(np.sum(spec,axis = 0), axis = 0)
+    resQ = np.sum(np.sum(specQ))
+    
+    res = np.append(res, resQ)
     
     if components:
         return np.real (np.cumsum(res))
-        
     
-    
-    
-    return  np.real(res) #* hbar * (omega + output.input.omega_drive)
-
-def homodyning(output, omega, angle):
-    
-    return 0
+    return  np.real(sum(res)) #* hbar * (omega + output.input.omega_drive)
     
