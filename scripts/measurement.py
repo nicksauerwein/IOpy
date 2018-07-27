@@ -20,10 +20,13 @@ class PowerMeasurement:
         
         n = len(output.system.inputs)
         
-        self.Q = np.zeros((2*n,2*n))
+        self.Q = np.zeros((2*n,2*n), dtype = 'complex128')
         
         self.Q[2*r, 2*r] = 1
+        self.Q[2*r, 2*r+1] = 1j
+        
         self.Q[2*r + 1, 2*r + 1] = 1
+        self.Q[2*r + 1, 2*r] = -1j
         
 class HomodynMeasurement:
     
@@ -35,7 +38,7 @@ class HomodynMeasurement:
         
         n = len(output.system.inputs)
         
-        self.Q = np.zeros((2*n,2*n))
+        self.Q = np.zeros((2*n,2*n), dtype = 'complex128')
         
         self.Q[2*r, 2*r] = np.cos(theta)**2
         self.Q[2*r, 2*r+1] = np.cos(theta)*np.sin(theta)
@@ -59,7 +62,7 @@ def spectrum(omega, measurement, omega_rot = 0, components = False):
     Q = measurement.Q
     
     spec = np.zeros((2*ni,2*ni,2*ni), dtype = 'complex128')
-    specQ = np.zeros((2*ni,2*ni), dtype = 'complex128')
+    #specQ = np.zeros((2*ni,2*ni), dtype = 'complex128')
     
     for i in range(2*ni):
         for j in range(2*ni):
@@ -67,16 +70,16 @@ def spectrum(omega, measurement, omega_rot = 0, components = False):
                 pass
             
             #classical term
-            spec[i, j] = Q[i,j] * np.array([S2[i,k] * S1[j,k] * system.inputs[int(k/2)].spectrum(omega) for k in range(2*ni)])
-            
+            spec[i, j] = Q[i,j] * np.array([S1[i,k] * S2[j,k] * system.inputs[int(k/2)].spectrum(omega) for k in range(2*ni)])
+            #spec[i, j] += Q[i,j] * np.array([S1[i,k] * S2[j,k] * (system.inputs[int(k/2)].spectrum(omega) - 0.25) for k in range(2*ni)])
             #quantum term
             
-            specQ[i, j] = Q[i,j] * 1j/2 * np.sum([(S2[i,2*r] * S1[j,2*r+1] - S2[i,2*r + 1] * S1[j,2*r])  for r in range(ni)])
+            #specQ[i, j] = Q[i,j] * 1j/2 * np.sum([(S2[i,2*r] * S1[j,2*r+1] - S2[i,2*r + 1] * S1[j,2*r])  for r in range(ni)])
     
     res = np.sum(np.sum(spec,axis = 0), axis = 0)
-    resQ = np.sum(np.sum(specQ))
     
-    res = np.append(res, resQ)
+    #resQ = np.sum(np.sum(specQ))
+    #res = np.append(res, resQ)
     
     if components:
         return np.real (np.cumsum(res))
