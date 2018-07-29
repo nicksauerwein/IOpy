@@ -47,7 +47,7 @@ class Input:
             self.nbar = 1/(np.exp(hbar * (mode.omega) / k / bath_temp) - 1)
         
     def spectrum(self, omega):
-        return 0.5 * self.nbar + 0.25
+        return 0.5 * self.nbar + 0.25 * np.ones_like(omega)
     
     def __str__(self):
         
@@ -146,13 +146,15 @@ class System:
         self.M = M
         self.L = L
             
-    def SMatrix(self, omega):
+    def SMatrix(self, omegas):
         M = self.M
         L = self.L
         
-        S = np.eye(len(L)) + L @ np.linalg.inv(1j * omega * np.eye(len(M)) + M) @ L.T
+        #lo = len(omegas)
         
-        return S
+        Ss = np.array([np.eye(len(L)) + L @ np.linalg.inv(1j * omega * np.eye(len(M)) + M) @ L.T for omega in omegas])
+        
+        return Ss
 
 class Output:
     def __init__(self, system, inp):
