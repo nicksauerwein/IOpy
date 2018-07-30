@@ -4,9 +4,12 @@ from scipy.constants import epsilon_0, hbar, k
 
 class MeasurementOperator:
     
-    def __init__(self, Q, system):
+    def __init__(self, Q, system, omega_rot = 0):
         
         self.system = system
+        
+        self.omega_rot = omega_rot
+        
         self.Q = Q
         
 
@@ -15,6 +18,8 @@ class PowerMeasurement:
     def __init__(self, output):
         
         self.system = output.system
+        
+        self.omega_rot = output.input.omega_drive
         
         r = np.argwhere(output.system.inputs == output.input)[0,0]
         
@@ -34,6 +39,8 @@ class HomodynMeasurement:
         
         self.system = output.system
         
+        self.omega_rot = 0
+        
         r = np.argwhere(output.system.inputs == output.input)[0,0]
         
         n = len(output.system.inputs)
@@ -48,7 +55,10 @@ class HomodynMeasurement:
 
 
 
-def spectrum(omega, measurement, omega_rot = 0, components = False):
+def spectrum(omega, measurement, components = False):
+    
+    omega_rot = measurement.omega_rot
+    
     
     omega = - omega + omega_rot
     system = measurement.system
