@@ -1,6 +1,6 @@
 import numpy as np
 from scipy.constants import epsilon_0, hbar, k
-
+#test
 class Mode:
     def __init__(self,name, omega):
         self.name = name
