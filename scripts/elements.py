@@ -64,7 +64,7 @@ class Coupling:
         
         EXAMPLE
         For optomechanics:
-        vg = [g , 0, 0, 0, 0] 
+        vg = [g , 0, 0, 0] 
         '''
         self.mode1 = mode1
         self.mode2 = mode2
