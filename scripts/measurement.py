@@ -1,14 +1,13 @@
 import numpy as np
 from scipy.constants import epsilon_0, hbar, k
 
-
 class MeasurementOperator:
 
-    def __init__(self, Q, system, omega_rot = 0):
+    def __init__(self, Q, system, omega_d = 0):
 
         self.system = system
 
-        self.omega_rot = omega_rot
+        self.omega_d = omega_d
 
         self.Q = Q
 
@@ -19,7 +18,7 @@ class PowerMeasurement:
 
         self.system = output.system
 
-        self.omega_rot = output.input.omega_drive
+        self.omega_d = output.mode.omega_d
 
         r = np.argwhere(output.system.inputs == output.input)[0,0]
 
@@ -39,7 +38,7 @@ class HomodynMeasurement:
 
         self.system = output.system
 
-        self.omega_rot = 0
+        self.omega_d = 0
 
         r = np.argwhere(output.system.inputs == output.input)[0,0]
 
@@ -53,56 +52,38 @@ class HomodynMeasurement:
         self.Q[2*r+1, 2*r] = np.cos(theta)*np.sin(theta)
 
 
-def response(omegas, system, inputs):
+def linear_response(omegas, system, output, input, plot = False):
+    omega_d_in = input.mode.omega_d
 
-    n_modes = len(system.modes)
-    n_inputs = len(inputs)
+    omegas -= omega_d_in
 
-    M = np.zeros((2 * n_modes, 2 * n_modes), dtype = 'complex')
-    L = np.zeros((2 * n_inputs, 2 * n_modes), dtype = 'complex')
+    S = system.SMatrix(omegas)
 
-    for i,mode in enumerate(system.modes):
-        M[2*i,2*i] = - mode.kappa/2
-        M[2*i + 1,2*i + 1] = - mode.kappa/2
+    omega_d_out = output.mode.omega_d
+    i = np.argwhere(system.modes == input.mode)
+    j = np.argwhere(system.modes == output.mode)
 
-        M[2*i,2*i + 1] = mode.omega
-        M[2*i + 1,2*i] = - mode.omega
+    omegas_out = omegas + omega_d_out
 
-    for coupling in system.couplings:
-        i = np.argwhere(system.modes == coupling.mode1)
-        j = np.argwhere(system.modes == coupling.mode2)
+    a = S[:,2*j,2*i] + 1j * S[:,2*j+1,2*i]
 
-        M[2*i, 2*j] = 2 * coupling[2]
-        M[2*i, 2*j+1] = 2 * coupling[3]
-        M[2i+1, 2*j] = -2 * coupling[0]
-        M[2i+1, 2*j+1] = -2 * coupling[1]
+    if plot:
+        from plots import plot_linear_response
+        plot_linear_response(omegas_out, a[:,0,0], system, output, input)
 
-        M[2*j, 2*i] = 2 * couling[1]
-        M[2*j, 2*i+1] = 2 * coupling[3]
-        M[2*j+1, 2*i] = -2 * coupling[0]
-        M[2*j+1, 2*i+1] = -2 * coupling[2]
-
-    for i,inp in enumerate(inputs):
-        j = np.argwhere(system.modes == inp.mode)
-
-        L[2*i, 2*j] = np.sqrt(inp.kappa)
-        L[2*i + 1, 2*j + 1] = np.sqrt(inp.kappa)
-
-    S = np.array([np.eye(len(L)) + L @ np.linalg.inv(1j * omega * np.eye(len(M)) + M) @ L.T for omega in omegas])
-
-    return S
+    return omegas_out, a[:,0,0]
 
 
 def spectrum(omega, measurement, components = False):
 
-    omega_rot = measurement.omega_rot
+    omega_d = measurement.omega_d
 
 
-    omega = - omega + omega_rot
+    omega = omega - omega_d
     system = measurement.system
 
-    S1 = system.SMatrix(omega)
-    S2 = np.conjugate(S1) #system.SMatrix(-omega)
+    S1 = system.SMatrix(-omega)
+    S2 = np.conjugate(S1) #system.SMatrix(omega)
 
     ni = int(S1.shape[1]/2)
 
