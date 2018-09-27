@@ -74,20 +74,20 @@ def linear_response(omegas, system, output, input, plot = False):
     return omegas_out, a[:,0,0]
 
 
-def spectrum(omega, measurement, components = False):
+def spectrum(omegas, measurement, components = False, plot = False):
 
     omega_d = measurement.omega_d
 
 
-    omega = omega - omega_d
+    omegas = omegas - omega_d
     system = measurement.system
 
-    S1 = system.SMatrix(-omega)
+    S1 = system.SMatrix(-omegas)
     S2 = np.conjugate(S1) #system.SMatrix(omega)
 
     ni = int(S1.shape[1]/2)
 
-    lo = len(omega)
+    lo = len(omegas)
 
     Q = measurement.Q
 
@@ -104,7 +104,7 @@ def spectrum(omega, measurement, components = False):
             #classical term
             #spec[i, j] = Q[i,j] * np.array([S1[i,k] * S2[j,k] * system.inputs[int(k/2)].spectrum(omega) for k in range(2*ni)])
 
-            res += Q[i,j] * np.array([S1[:,i,k] * S2[:,j,k] * system.inputs[int(k/2)].spectrum(omega) for k in range(2*ni)]).T
+            res += Q[i,j] * np.array([S1[:,i,k] * S2[:,j,k] * system.inputs[int(k/2)].spectrum(omegas) for k in range(2*ni)]).T
 
             #spec[i, j] += Q[i,j] * np.array([S1[i,k] * S2[j,k] * (system.inputs[int(k/2)].spectrum(omega) - 0.25) for k in range(2*ni)])
             #quantum term
@@ -116,9 +116,16 @@ def spectrum(omega, measurement, components = False):
     #resQ = np.sum(np.sum(specQ))
     #res = np.append(res, resQ)
 
+
     if components:
-        return np.real (np.cumsum(res, axis = -1))
+        spec = np.real (np.cumsum(res, axis = -1))
 
-    return  np.real(np.sum(res, axis = -1)) #* hbar * (omega + output.input.omega_drive)
+    else:
+        spec = np.real(np.sum(res, axis = -1)) #* hbar * (omega + output.input.omega_drive)
 
+    if plot:
+        from plots import plot_spectrum
+        plot_spectrum(omegas, spec, components, system, )
+
+    return spec
 #spectrum = np.vectorize(spectrum)
