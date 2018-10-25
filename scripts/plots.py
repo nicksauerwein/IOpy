@@ -50,8 +50,8 @@ def plot_spectrum(omegas, spec, components, system):
     if components:
         plt.figure()
         for i, inp in enumerate(system.inputs):
-            plt.semilogy(omegas/2/np.pi, spec[:,2*i], label = str(inp) + ' Amp')
-            plt.semilogy(omegas/2/np.pi, spec[:,2*i + 1], label = str(inp) + ' Phase')
+            plt.plot(omegas/2/np.pi, spec[:,2*i], label = str(inp) + ' Amp')
+            plt.plot(omegas/2/np.pi, spec[:,2*i + 1], label = str(inp) + ' Phase')
             plt.xlabel('Frequency [Hz]')
             plt.ylabel(r'$S_{aa}/\hbar \omega$ [Hz$^{-1}$]')
         plt.gca().legend(loc='upper center', bbox_to_anchor=(0.5, 1.15),
@@ -59,19 +59,19 @@ def plot_spectrum(omegas, spec, components, system):
         plt.tight_layout()
         plt.grid()
 
-        plt.figure()
+        """plt.figure()
         plt.xlabel('Frequency [Hz]')
         plt.ylabel(r'$S_{aa}/\hbar \omega$ [Hz$^{-1}$]')
-        plt.semilogy(omegas/2/np.pi, spec[:,-1], label = 'Measureable Spectum');
+        plt.plot(omegas/2/np.pi, spec[:,-1], label = 'Measureable Spectum');
         plt.gca().legend(loc='upper center', bbox_to_anchor=(0.5, 1.15))
         plt.tight_layout()
-        plt.grid()
+        plt.grid()""";
 
     else:
         plt.figure()
         plt.xlabel('Frequency [Hz]')
         plt.ylabel(r'$S_{aa}/\hbar \omega$ [Hz$^{-1}$]')
-        plt.semilogy(omegas/2/np.pi, spec, label = 'Measureable Spectum');
+        plt.plot(omegas/2/np.pi, spec, label = 'Measureable Spectum');
         plt.gca().legend(loc='upper center', bbox_to_anchor=(0.5, 1.15))
         plt.tight_layout()
         plt.grid()

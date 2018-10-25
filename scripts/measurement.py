@@ -52,10 +52,10 @@ class HomodynMeasurement:
         self.Q[2*r+1, 2*r] = np.cos(theta)*np.sin(theta)
 
 
-def linear_response(omegas, system, output, input, plot = False):
+def linear_response(Omegas, system, output, input, plot = False):
     omega_d_in = input.mode.omega_d
 
-    omegas -= omega_d_in
+    omegas = Omegas - omega_d_in
 
     S = system.SMatrix(omegas)
 
@@ -78,7 +78,7 @@ def spectrum(omegas, measurement, components = False, plot = False):
 
     omega_d = measurement.omega_d
 
-
+    omegas_p = omegas
     omegas = omegas - omega_d
     system = measurement.system
 
@@ -125,7 +125,7 @@ def spectrum(omegas, measurement, components = False, plot = False):
 
     if plot:
         from plots import plot_spectrum
-        plot_spectrum(omegas, spec, components, system, )
+        plot_spectrum(omegas_p, spec, components, system, )
 
     return spec
 #spectrum = np.vectorize(spectrum)
