@@ -52,24 +52,26 @@ class HomodynMeasurement:
         self.Q[2*r+1, 2*r] = np.cos(theta)*np.sin(theta)
 
 
-def linear_response(Omegas, system, output, input, plot = False):
-    omega_d_in = input.mode.omega_d
+def linear_response(Omegas, system, output, Input, plot = False):
+    omega_d_in = Input.mode.omega_d
 
     omegas = Omegas - omega_d_in
 
     S = system.SMatrix(omegas)
 
     omega_d_out = output.mode.omega_d
-    i = np.argwhere(system.modes == input.mode)
-    j = np.argwhere(system.modes == output.mode)
+    i = np.argwhere(system.inputs == Input)
+    j = np.argwhere(system.inputs == output.input)
 
     omegas_out = omegas + omega_d_out
-
+    
+    #print (i, j)
+    
     a = S[:,2*j,2*i] + 1j * S[:,2*j+1,2*i]
-
+    #print (a)
     if plot:
         from plots import plot_linear_response
-        plot_linear_response(omegas_out, a[:,0,0], system, output, input)
+        plot_linear_response(omegas_out, a[:,0,0], system, output, Input)
 
     return omegas_out, a[:,0,0]
 

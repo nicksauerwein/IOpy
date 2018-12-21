@@ -2,9 +2,9 @@ import numpy as np
 from scipy.constants import epsilon_0, hbar, k
 import matplotlib.pyplot as plt
 
-def plot_linear_response(omegas, A, system, output, input):
+def plot_linear_response(omegas, A, system, output, Input):
     omegas -= output.mode.omega_d
-    Name = 'S_'+output.mode.name+input.mode.name
+    Name = 'S_'+output.mode.name+Input.mode.name
 
     plt.figure()
     plt.plot(np.real(A), np.imag(A), label = 'linear response in quadreture space')
@@ -25,7 +25,7 @@ def plot_linear_response(omegas, A, system, output, input):
     ax2 = ax1.twiny()
     ax2.set_xlabel('Input Frequency [Hz]')
     plt.xticks(color='r', alpha = 0.6)
-    ax2.set_xlim(min(omegas + input.mode.omega_d)/2/np.pi , max(omegas + input.mode.omega_d)/2/np.pi)
+    ax2.set_xlim(min(omegas + Input.mode.omega_d)/2/np.pi , max(omegas + Input.mode.omega_d)/2/np.pi)
     plt.tight_layout()
     plt.grid(color='r', alpha = 0.3)
 
@@ -40,7 +40,7 @@ def plot_linear_response(omegas, A, system, output, input):
     ax2 = ax1.twiny()
     ax2.set_xlabel('Input Frequency [Hz]')
     plt.xticks(color='r', alpha = 0.6)
-    ax2.set_xlim(min(omegas + input.mode.omega_d)/2/np.pi , max(omegas + input.mode.omega_d)/2/np.pi)
+    ax2.set_xlim(min(omegas + Input.mode.omega_d)/2/np.pi , max(omegas + Input.mode.omega_d)/2/np.pi)
     plt.tight_layout()
     plt.grid(color='r', alpha = 0.3)
 
@@ -48,7 +48,7 @@ def plot_linear_response(omegas, A, system, output, input):
 def plot_spectrum(omegas, spec, components, system):
 
     if components:
-        plt.figure()
+        #plt.figure()
         for i, inp in enumerate(system.inputs):
             plt.plot(omegas/2/np.pi, spec[:,2*i], label = str(inp) + ' Amp')
             plt.plot(omegas/2/np.pi, spec[:,2*i + 1], label = str(inp) + ' Phase')
@@ -68,7 +68,7 @@ def plot_spectrum(omegas, spec, components, system):
         plt.grid()""";
 
     else:
-        plt.figure()
+        #plt.figure()
         plt.xlabel('Frequency [Hz]')
         plt.ylabel(r'$S_{aa}/\hbar \omega$ [Hz$^{-1}$]')
         plt.plot(omegas/2/np.pi, spec, label = 'Measureable Spectum');

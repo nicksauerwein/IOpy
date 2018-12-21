@@ -4,14 +4,14 @@ from scipy.constants import epsilon_0, hbar, k
 class Mode:
     def __init__(self,name, omega):
         self.name = name
-        self.omega_rot = omega
-        self.omega = omega
-        self.kappa = 0
+        self.omega = omega      # resonance frequency of the mode
+        self.omega_rot = omega  # frequency at which the mode frame is rotating
+        self.kappa = 0          # mode total dissipation rate
 
-        self.driven = False
+        self.driven = False     # flag indicates whether the mode is driven or not
 
     @property
-    def omega_d(self):
+    def omega_d(self):          # returns the frequency of the field which is driving the mode
         return self.omega - self.omega_rot
 
     def __str__(self):
@@ -27,11 +27,12 @@ class Input:
             - bath: vacuum or thermal
         '''
         self.name = name
-        self.kappa = kappa
-        self.kind = kind
-        self.mode = mode
+        self.mode = mode        # the mode which the input is coupled to
+        self.kappa = kappa      # coupling rate to the mode
+        self.kind = kind        # a coherent dirve (pump) or a thermal bath
 
-        self.mode.kappa += kappa
+        # the total dissipation rate of the mode has to be added by the coupling rate value
+        self.mode.kappa += kappa 
 
         if kind == 'drive':
 

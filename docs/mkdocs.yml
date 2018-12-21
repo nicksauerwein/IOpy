@@ -1,0 +1,15 @@
+site_name: IOpy documentation
+pages:
+#    - Home: index.md
+    - About: about.md
+    - Theory: theory.md
+    - Library: Library.md
+    - Tests of IOpy: IOpyTests.md
+    - Outlook: outlook.md
+    - References: references.md
+
+# Enabling LaTeX math equations
+markdown_extensions: 
+    - mdx_math:
+        enable_dollar_delimiter: True
+extra_javascript: ['https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML']
