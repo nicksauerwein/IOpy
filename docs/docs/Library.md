@@ -129,13 +129,59 @@ Attributes:
     mode: the mode which these input and output fields are coupled.
 ```
 ## measurement
-
+Objects and functions in this script are used for measuring the output fields. Different measurement schemas can be used and linear response or spectrum of the output fields can be seen as results.
 #### Class `MeasurementOperator`
+(it seems this one is useless!)
 #### Class `PowerMeasurement`
+A power measurement scheme object. The correlator function and measurement matrix in this scheme are:
+$$ Q(\tau) = \langle q(0)q(\tau) + iq(0)p(\tau) - ip(0)q(\tau) + p(0)p(\tau) \rangle $$
+$$ [Q] = \begin{pmatrix} 1 &i \\ -i &1 \end{pmatrix} $$
+```python
+Attributes:
+    system: the system which the output field is coming from.
+    omega_d: the driving frequency of the mode which the output field is coming from.
+    Q: the measurment matrix.
+```
 #### Class `HomodynMeasurement`
+A Homodyn measurement scheme object with a theta phase.
+The correlator function and measurement matrix in this scheme are:
+$$ Q(\tau) = \langle \cos^2(\theta) q(0)q(\tau) + \sin(\theta)\cos(\theta) q(0)p(\tau) + \sin(\theta)\cos(\theta) p(0)q(\tau) + \sin^2(\theta) p(0)p(\tau) \rangle $$
+$$ [Q] = \begin{pmatrix} \cos^2(\theta) &\sin(\theta)\cos(\theta) \\ \sin(\theta)\cos(\theta) &\sin^2(\theta) \end{pmatrix} $$
+```python
+Attributes:
+    system: the system which the output field is coming from.
+    omega_d: the driving frequency of the mode which the output field is coming from.
+    Q: the measurment matrix.
+```
 #### Function `linear_response`
+The linear response (susceptibility) of the system from one specific input port to an output port in frequency domain:
+$$    a_{out} = \chi  a_{in} $$
+Refer to [Equation (7)](http://127.0.0.1:8000/theory/#measurements) for more about linear response. 
+    
+    Args:
+        Omegas: the frequencies vector we want to claculate the linear response for them, in frame of the input field (not a 
+                rotating frame)
+        system: the system which we want to measure its response.
+        output: the output port.
+        Input: the input port.
+        plot: flag, indicates to plot the susceptibilities or not.
+        
+    Returns:
+        omegas_out: the frequencies vector we want to claculate the linear response for them, in frame of the output field (not a 
+                rotating frame)
+        a: the susceptibility we want to measure.
 #### Function `spectrum`
-
+The spectrum of an output field. Refer to [spectra section](http://127.0.0.1:8000/theory/#spectra) for more about the spectra. 
+    
+    Args:
+        omegas: the frequencies vector we want to claculate the spectrum for them, in frame of the output field (not a 
+                rotating frame)
+        measurement: the measurement scheme, of kinds PowerMeasurement or HomodynMeasurement.
+        components: flag, indicates to calcuate different contributions of noise sources or just calculate the whole spectrum.
+        plot: flag, indicates to plot the spectra or not.
+        
+    Returns:
+        spec: the spectrum of the output field.
 ## DCnonlinearities
 
 #### Function `Kerr_effect_nbar`

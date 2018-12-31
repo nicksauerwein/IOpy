@@ -2,7 +2,9 @@ import numpy as np
 from scipy.constants import epsilon_0, hbar, k
 
 class MeasurementOperator:
-
+    '''
+    it seems this one is useless!
+    '''
     def __init__(self, Q, system, omega_d = 0):
 
         self.system = system
@@ -13,9 +15,23 @@ class MeasurementOperator:
 
 
 class PowerMeasurement:
-
+    '''
+    A power measurement scheme object.
+    The correlator function and measurement matrix in this scheme are:
+    Q(t) = <q(0)q(t) + iq(0)p(t) - ip(0)q(t) + p(0)p(t)>
+    [Q] = [ 1  i]
+          [-i  1]
+          
+    Attributes:
+        system: the system which the output field is coming from.
+        omega_d: the driving frequency of the mode which the output field is coming from.
+        Q: the measurment matrix.
+    '''
     def __init__(self, output):
-
+        '''
+        Args:
+            output: the output field we want to measure its spectrum.
+        '''
         self.system = output.system
 
         self.omega_d = output.mode.omega_d
@@ -33,9 +49,23 @@ class PowerMeasurement:
         self.Q[2*r + 1, 2*r] = -1j
 
 class HomodynMeasurement:
-
+    '''
+    A Homodyn measurement scheme object with a theta phase.
+    The correlator function and measurement matrix in this scheme are:
+    Q(t) = <cos^2(theta) q(0)q(t) + sin(theta)cos(theta) q(0)p(t) + sin(theta)cos(theta) p(0)q(t) + sin^2(theta) p(0)p(t)>
+    [Q] = [cos^2(theta)         sin(theta)cos(theta)]
+          [sin(theta)cos(theta)         sin^2(theta)]
+    Attributes:
+        system: the system which the output field is coming from.
+        omega_d: the driving frequency of the mode which the output field is coming from.
+        Q: the measurment matrix.
+    '''
     def __init__(self, output, theta):
-
+        '''
+        Args:
+            output: the output field we want to measure its spectrum.
+            theta: the phase of the Homodyne measurement in radians.
+        '''
         self.system = output.system
 
         self.omega_d = 0
@@ -53,8 +83,24 @@ class HomodynMeasurement:
 
 
 def linear_response(Omegas, system, output, Input, plot = False):
+    '''
+    The linear response (susceptibility) of the system from one specific input port to an output port in frequency domain:
+    a_out = X * a_in
+    
+    Args:
+        Omegas: the frequencies vector we want to claculate the linear response for them, in frame of the input field (not a 
+                rotating frame)
+        system: the system which we want to measure its response.
+        output: the output port.
+        Input: the input port.
+        plot: flag, indicates to plot the susceptibilities or not.
+        
+    Returns:
+        omegas_out: the frequencies vector we want to claculate the linear response for them, in frame of the output field (not a 
+                rotating frame)
+        a: the susceptibility we want to measure.
+    '''
     omega_d_in = Input.mode.omega_d
-
     omegas = Omegas - omega_d_in
 
     S = system.SMatrix(omegas)
@@ -64,11 +110,8 @@ def linear_response(Omegas, system, output, Input, plot = False):
     j = np.argwhere(system.inputs == output.input)
 
     omegas_out = omegas + omega_d_out
-    
-    #print (i, j)
-    
+       
     a = S[:,2*j,2*i] + 1j * S[:,2*j+1,2*i]
-    #print (a)
     if plot:
         from plots import plot_linear_response
         plot_linear_response(omegas_out, a[:,0,0], system, output, Input)
@@ -77,7 +120,19 @@ def linear_response(Omegas, system, output, Input, plot = False):
 
 
 def spectrum(omegas, measurement, components = False, plot = False):
-
+    '''
+    The spectrum of an output field.
+    
+    Args:
+        omegas: the frequencies vector we want to claculate the spectrum for them, in frame of the output field (not a 
+                rotating frame)
+        measurement: the measurement scheme, of kinds PowerMeasurement or HomodynMeasurement.
+        components: flag, indicates to calcuate different contributions of noise sources or just calculate the whole spectrum.
+        plot: flag, indicates to plot the spectra or not.
+        
+    Returns:
+        spec: the spectrum of the output field.
+    '''
     omega_d = measurement.omega_d
 
     omegas_p = omegas
