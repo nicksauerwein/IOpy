@@ -50,7 +50,7 @@ $$\textbf{S} = \mathbb{1} + \textbf{L}^T(i\omega+\textbf{M})^{-1}\textbf{L} \tag
 # Measurements
 In IOpy calculations there are two ways to measure the output fields, which are essentially same as what we do in practice. First is the linear response of the system, which is simillar to output of a VNA. And second is the spectrum of the output field, which is the same as the ouput of the spectrum analyser.
 ## Linear response
-According to the [equation (3)](http://127.0.0.1:8000/theory/#input-output-formalism), a quadrature pair of any output port $i$ can be related to the quadrature pair of any input port $j$ using a submatrix of the scattering matrix:
+According to the [Equation (3)](http://127.0.0.1:8000/theory/#input-output-formalism), a quadrature pair of any output port $i$ can be related to the quadrature pair of any input port $j$ using a submatrix of the scattering matrix:
 
 $$\begin{pmatrix}X_{out,i} \\ Y_{out,i}\end{pmatrix} = \textbf{S}^{(ij)} \begin{pmatrix}X_{in,j} \\ Y_{in,j}\end{pmatrix} \tag{5}$$
 Then the output field operator can be written as:
@@ -63,5 +63,5 @@ $X_{in,j}$ and $Y_{in,j}$ are cosine part and sine part of the input field. In m
 $$a_{out,i} = (\textbf{S}^{(ij)}_{11} + i\textbf{S}^{(ij)}_{21})a_{in,j}$$
 
 or in a more familiar notation:
-$$\chi^{(ij)}(\omega) = (\textbf{S}^{(ij)}_{11} + i\textbf{S}^{(ij)}_{21})$$
+$$\chi^{(ij)}(\omega) = \textbf{S}^{(ij)}_{11} + i\textbf{S}^{(ij)}_{21}$$
 ## Spectra

@@ -4,7 +4,7 @@ pages:
     - About: about.md
     - Theory: theory.md
     - Library: Library.md
-    - Tests of IOpy: IOpyTests.md
+    - Examples: Examples.md
     - Outlook: outlook.md
     - References: references.md
 

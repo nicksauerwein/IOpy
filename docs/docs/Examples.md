@@ -1,4 +1,4 @@
-# Tests of IOpy
+# Examples
 In this section a set famous phenomena in optomechanics context are presented. These calculations are first as examples of using IOpy in simulating Langevin equations, and second are benchmarks which results of IOpy can be compared against results which are theoretically developed.
 
 # Simple Cavity 
