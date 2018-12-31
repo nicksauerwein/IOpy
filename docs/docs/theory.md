@@ -60,8 +60,38 @@ In many cases the input field is a coherent drive with constant amplitude. There
 
 $X_{in,j}$ and $Y_{in,j}$ are cosine part and sine part of the input field. In many cases the input field is a coherent drive with constant amplitude. Therefore, choosing any arbitrary values for the quadratures, as long as they satisfy the identity $X_{in,j}^2+Y_{in,j}^2=1$, will only impose a total phase shift to the response. By choosing $Y_{in,j}$ to be zero, we consider this phase shift to be zero and $a_{in,j}=X_{in,j}/\sqrt2$. as a result, any phase response in the output is being calculated with respect to the input field.
 
-$$a_{out,i} = (\textbf{S}^{(ij)}_{11} + i\textbf{S}^{(ij)}_{21})a_{in,j}$$
+$$a_{out,i} = (\textbf{S}^{(ij)}_{11} + i\textbf{S}^{(ij)}_{21})a_{in,j} \tag{6}$$
 
 or in a more familiar notation:
-$$\chi^{(ij)}(\omega) = \textbf{S}^{(ij)}_{11} + i\textbf{S}^{(ij)}_{21}$$
+$$\chi^{(ij)}(\omega) = \textbf{S}^{(ij)}_{11} + i\textbf{S}^{(ij)}_{21} \tag{7}$$
 ## Spectra
+In general for analysing the specrum of some measured signals, we can define a correlator using a measurement matrix $Q_{ij}$:
+
+$$Q(\tau) = \langle Q_{ij}Z_{out,i}(0)Z_{out,j}(\tau)\rangle \tag{8}$$
+
+The Fourier transform of this correlator would be the spectral density or spectrum.
+
+$$S_{QQ}[\omega] = \int_{-\infty}^{\infty} Q(\tau) e^{i\omega\tau}d\tau \tag{9}$$
+
+It can be easily shown with a simple calculation the we can rewrite the spectrum in the following way:
+
+$$ S_{QQ}[\omega] = \frac{1}{2\pi} Q_{ij}\int_{-\infty}^{\infty} \langle Z_{out,i}(\omega_1)Z_{out,j}(\omega) \rangle d\omega_1$$
+
+According to [Equation (3)](http://127.0.0.1:8000/theory/#input-output-formalism), we can write the output signals in terms of input signals:
+
+$$Z_{out,i}(\omega) = S_{ik}(\omega)Z_{in,k}(\omega)$$
+$$S_{QQ}[\omega] = \frac{1}{2\pi} Q_{ij}\int_{-\infty}^{\infty}S_{ik}(\omega_1)S_{jl}(\omega) \langle Z_{in,k}(\omega_1)Z_{in,l}(\omega) \rangle d\omega_1 \tag{10}$$
+
+In general, the input signals can be correlated to each other and have complecated statistical behaviours, but based on what realy happens in experiments it's a good approximation to (1) consider different sources to be uncorrelated and (2) consider each input source a white noise source. More precisely:
+
+$$\langle Z_{in,k}(\omega_1)Z_{in,l}(\omega) \rangle = 2\pi\delta_{kl}\mathcal{S}_k^{in}(\omega)\delta(\omega_1+\omega) \tag{11}$$
+
+Where $\mathcal{S}_k^{in}(\omega)$ is the spectral density of the kth input signal. Now we can simplify Equation (10) :
+
+$$S_{QQ}[\omega] = Q_{ij}S_{ik}(-\omega)S_{jk}(\omega)\mathcal{S}_k^{in}(\omega) \tag{12}$$
+
+This is the final result that we use in our calculations. Here we make a remark on the summations by rearanging the terms in the following way:
+
+$$S_{QQ}[\omega] = \sum_k \mathcal{S}_k^{in}(\omega) (\sum_{i,j} Q_{ij}S_{ik}(-\omega)S_{jk}(\omega)) = \sum_k c_k(\omega)\mathcal{S}_k^{in}(\omega)$$
+
+In this way, the measured spectrum can be seen as summation of different contributions from different noise sources.
