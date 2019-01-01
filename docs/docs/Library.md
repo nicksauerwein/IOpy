@@ -183,11 +183,60 @@ The spectrum of an output field. Refer to [spectra section](http://127.0.0.1:800
     Returns:
         spec: the spectrum of the output field.
 ## DCnonlinearities
-
+Functions in this script are used for calculating the DC shifts resulting form nonlinear effects.
 #### Function `Kerr_effect_nbar`
+This function findes the steady state average number of photons in an optical cavity with kerr type nonlinearity. It findes the smallest real route of a third order polynomial equation:
+
+$$ (\frac{- \kappa_{ex}P_{in}}{\hbar\omega_{drive}})\bar n^3 + 
+   (\Delta^2 + (\frac{\kappa}{2})^2)\bar n^2 + 
+   (2K\Delta) \bar n +
+   (K^2) = 0$$
+   
+    Args:
+        P_in: input power in Watts.
+        kappa_0 = cavity intrinsic dissipation rate in rad/sec.
+        kappa_ex = input coupling rate in rad/sec.
+        omega_c = cavity resonance frequency in rad/sec.
+        omega_drive = frequency of the input field in rad/sec.
+        K = nonlinearity coefficient in rad/sec.
+        
+    returns:
+        smallest real route of the third order polynomial equation.
 #### Function `optomechanics`
-
+This function findes the steady state average number of photons in an optomechanical cavity and also finds the DC shift cavity 
+resonance frequency. It uses the `Kerr_effect_nbar()` function to solve the third order equation:
+    
+$$\bar n ( \frac{\kappa^2}{4} + (\Delta - (\frac{2g_0^2}{\Omega_m})\bar n)^2 ) = \kappa_{ext} \frac{P_{in}}{\hbar\omega_{drive}}$$
+    
+    Args:
+        P_in: input power in Watts.
+        kappa_0 = cavity intrinsic dissipation rate in rad/sec.
+        kappa_ex = input coupling rate in rad/sec.
+        omega_c = cavity resonance frequency in rad/sec.
+        omega_drive = frequency of the input field in rad/sec.
+        omega_m = resonance frequency of the mechanical oscillator in rad/sec.
+        g_0 =  vacuum optomechanical coupling rate in rad/sec.
+        
+    returns:
+        omega_c = modified cavity resonance frequency in rad/sec.
+        g = optomechanical coupling rate in rad/sec.
 ## plots
-
+Functions in this script are for plotting the linear responses and spectrums.
 #### Function `plot_linear_response`
+This function is for plotting the linear response functions. It plots the absolute value and phase of the linear response as well as plotting the linear response in complex space.
+        
+        Args:
+            omegas: the vector containing the frequecnies in rad/sec (not in a rotating frame).
+            A: the linear response function.
+            system: the system which the linear response is from.
+            output: the output field we that the linear response is calculated for.
+            input: the input field we that the linear response is calculated for.
 #### Function `plot_spectrum`
+This function is for plotting the spectra.
+        
+        Args:
+            omegas: the vector containing the frequecnies in rad/sec (not in a rotating frame).
+            spec: the spectrum.
+            componenets: flag, indicates to plot different contributions of noise sources in the spectrum or just plot the whole 
+            spectrum.
+            system: the system which the spectrum is from.

@@ -3,6 +3,17 @@ from scipy.constants import epsilon_0, hbar, k
 import matplotlib.pyplot as plt
 
 def plot_linear_response(omegas, A, system, output, Input):
+    '''
+        This function is for plotting the linear response functions. It plots the absolute value and phase of the linear response 
+        as well as plotting the linear response in complex space.
+        
+        Args:
+            omegas: the vector containing the frequecnies in rad/sec (not in a rotating frame).
+            A: the linear response function.
+            system: the system which the linear response is from.
+            output: the output field we that the linear response is calculated for.
+            input: the input field we that the linear response is calculated for.
+    '''
     omegas -= output.mode.omega_d
     Name = 'S_'+output.mode.name+Input.mode.name
 
@@ -46,7 +57,16 @@ def plot_linear_response(omegas, A, system, output, Input):
 
 
 def plot_spectrum(omegas, spec, components, system):
-
+    '''
+        This function is for plotting the spectra.
+        
+        Args:
+            omegas: the vector containing the frequecnies in rad/sec (not in a rotating frame).
+            spec: the spectrum.
+            componenets: flag, indicates to plot different contributions of noise sources in the spectrum or just plot the whole 
+            spectrum.
+            system: the system which the spectrum is from.
+    '''
     if components:
         #plt.figure()
         for i, inp in enumerate(system.inputs):
