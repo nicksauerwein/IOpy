@@ -28,6 +28,7 @@ And the result would be:
 <p align="left">
   <img width="460" src="\simple_cavity_spectrum.png">
 </p>
+
 A more detailed explenation of this example as well as more examples for optomechanics are availabe on the [Examples](http://127.0.0.1:8000/Examples/) page.
 
 

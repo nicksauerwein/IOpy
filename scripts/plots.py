@@ -68,7 +68,7 @@ def plot_spectrum(omegas, spec, components, system):
             system: the system which the spectrum is from.
     '''
     if components:
-        #plt.figure()
+        plt.figure()
         for i, inp in enumerate(system.inputs):
             plt.plot(omegas/2/np.pi, spec[:,2*i], label = str(inp) + ' Amp')
             plt.plot(omegas/2/np.pi, spec[:,2*i + 1], label = str(inp) + ' Phase')
@@ -88,7 +88,7 @@ def plot_spectrum(omegas, spec, components, system):
         plt.grid()""";
 
     else:
-        #plt.figure()
+        plt.figure()
         plt.xlabel('Frequency [Hz]')
         plt.ylabel(r'$S_{aa}/\hbar \omega$ [Hz$^{-1}$]')
         plt.plot(omegas/2/np.pi, spec, label = 'Measureable Spectum');
