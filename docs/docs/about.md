@@ -13,8 +13,11 @@ a = Mode(name = 'a', omega = 5e9 *2*np.pi)
 And then defining the thermal bath and the driving field each in a single line:
 
 ```python
-a_inex = Input(name = 'ex', a, kappa = 0.2e6 *2*np.pi, kind = 'drive', omega_drive = 5e9 *2*np.pi, bath_temp = 2e-5)
-a_in0 = Input('0', a, kappa = 0.3e6 *2*np.pi, kind = 'bath', bath_temp = 10e-3)
+a_inex = Input(name = 'ex', a, kappa = 0.2e6 *2*np.pi,
+               kind = 'drive', omega_drive = 5e9 *2*np.pi,
+               bath_temp = 2e-5)
+a_in0 = Input('0', a, kappa = 0.3e6 *2*np.pi, kind = 'bath',
+              bath_temp = 10e-3)
 ```
 
 And finally defining the system, output port and the spectrum:
@@ -22,17 +25,24 @@ And finally defining the system, output port and the spectrum:
 ```python
 sys_cav = System([a], [a_in0,  a_inex], [])
 a_outex = Output(sys_cav, a_inex)
-spec = me.spectrum(omegas, me.PowerMeasurement(a_outex), components = False, plot = True)
+spec = me.spectrum(omegas, me.PowerMeasurement(a_outex),
+                   components = False, plot = True)
 ```
 And the result would be:
-<p align="left">
-  <img width="460" src="\simple_cavity_spectrum.png">
+<!--
+![Simple Cavity Spectrum](Simple Cavity/simple_cavity_spectrum.png){width=460 .center}
+\begin{figure}[!h]
+\caption{Simple cavity output spectrum}
+\end{figure}
+-->
+<p align="center">
+  <img width="460" src="\Simple Cavity\simple_cavity_spectrum.png">
 </p>
+
 
 A more detailed explenation of this example as well as more examples for optomechanics are availabe on the [Examples](http://127.0.0.1:8000/Examples/) page.
 
-
-## Structure of IOpy
+# Structure of IOpy
 IOpy is made of four scripts which each of them has a special purpose:
 
 `elements`: For defining different components of the physical system (modes, couplings, input-output field etc.)
@@ -43,11 +53,8 @@ IOpy is made of four scripts which each of them has a special purpose:
 
 `plots`: For visualising the measurements results on graphs.
 
-## Installation
 
-
-
-<!---
+<!--
 ## Comments of Nick
 In general I would try to make a story around these two usecases.
 IOpy aims for:
@@ -61,3 +68,4 @@ Installation:
 git pull
 and also name all the packages that have to installed to use iopy:
 numpy, scipy, matplotlib (These are all the classics)
+-->

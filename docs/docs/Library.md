@@ -1,7 +1,8 @@
-# Library
 In this section different classes, functions and other commands of IOpy are introduced. IOpy has 4 main scripts including `elements`, `measurement`, `DCnonlinearaity` and `plots`.
-## elements
+
+# elements
 Objects and functions in this script are used for defining the oscillating modes, input-output ports, couplings between different modes and finally the whole system of coupled oscillators.
+
 #### Class `Mode`
 Harmonic oscillators of any kind can be defined using this class.
 ```python
@@ -9,21 +10,24 @@ Attributes:
     name: name of the mode.
     omega: resonance frequency of the mode in rad/sec.
     kappa: mode total dissipation rate in rad/sec.
-    omega_rot: frequency at which the mode frame is rotating in rad/sec.
+    omega_rot: frequency at which the mode frame is
+               rotating in rad/sec.
     driven: flag indicates whether the mode is driven or not.   
 
 Properties:
     omega_d():
-       returns the frequency of the field which is driving the mode in rad/sec.
+       returns the frequency of the field which is driving
+       the mode in rad/sec.
 ```
+
 #### Class `Input`
 Input field coupled to a `Mode`. Inputs can be coherent drives (pumps) or thermal baths.
 ```python
 Attributes:
     name: name of the input field.
     mode: the mode which the input is coupled to.
-    kind: flag which indicates the input is a pump or a thermal bath.
-          'drive' for a pump and 'bath' for a thermal bath.
+    kind: flag which indicates the input is a pump or a thermal
+          bath. 'drive' for a pump and 'bath' for a thermal bath.
     kappa: coupling rate to the mode in rad/sec.
     omega_drive: frequency of the pump fields in rad/sec.
     bath_temp: tempreture of the bath or the pump in Kelvins.
@@ -36,13 +40,17 @@ $$\bar n =\frac{1}{e^{\frac{\hbar\omega}{kT}}-1}$$
 Methods:
 ```python
 spectrum(self, omegas):
-    spectrum of the input field. Here we approximatley take the thermal spectrum to be flat near the mode frequency.
+    spectrum of the input field. Here we approximatley take
+    the thermal spectrum to be flat near the mode frequency.
     Args:
-        omegas: the frequencies vector at which we want to calculate the spectrum.
+        omegas: the frequencies vector at which we want to
+                calculate the spectrum.
         
     Returns:
-            spectrum of the input field in units of number of photons.
+            spectrum of the input field in units of number
+            of photons.
 ```
+
 #### Class `Coupling`
 Couplings between two `Mode`s using the coupling vector. The coupling vector, $V_g$, is a 4-dimensional vector which is defined in a way that the interaction Hamiltonian for two coupled modes would be:
 
@@ -66,8 +74,9 @@ contains_mode(self, mode):
         mode: the mode we want to look for.
 
     Returns:
-        'True' if the mode is involved and 'False' for other wise.
+       'True' if the mode is involved and 'False' for other wise.
 ```
+
 #### Class `System`
 Defines the complex system made of coupled `Mode`s and `Input`s. It's most important purpose of it is for calculating the scattering matrix.
 ```python
@@ -111,7 +120,8 @@ make_ML(self):
 ```
 ```python
 SMatrix(self, omegas):
-    Constructing the scattering matrix of the system for a frequency range.
+    Constructing the scattering matrix of the system for a
+    frequency range.
     
     Args:
         omegas: frequencies vector in rad/sec.
@@ -120,18 +130,23 @@ SMatrix(self, omegas):
         Ss: the scattering matrix.
 ```
 Refer to [Equation (4)](http://127.0.0.1:8000/theory/#input-output-formalism) for more about scattering matrix.
+
 #### Class `Output`
 The output field of the system with respect to an input field (in terms of input-output formalism).
 ```python
 Attributes:
     system: the complex system of coupled modes and inputs.
-    input: the input field which we want to define its output field (in terms of input-output formalism).
+    input: the input field which we want to define its
+           output field (in terms of input-output formalism).
     mode: the mode which these input and output fields are coupled.
 ```
-## measurement
+
+# measurement
 Objects and functions in this script are used for measuring the output fields. Different measurement schemas can be used and linear response or spectrum of the output fields can be seen as results.
+
 #### Class `MeasurementOperator`
 (it seems this one is useless!)
+
 #### Class `PowerMeasurement`
 A power measurement scheme object. The correlator function and measurement matrix in this scheme are:
 $$ Q(\tau) = \langle q(0)q(\tau) + iq(0)p(\tau) - ip(0)q(\tau) + p(0)p(\tau) \rangle $$
@@ -139,9 +154,11 @@ $$ [Q] = \begin{pmatrix} 1 &i \\ -i &1 \end{pmatrix} $$
 ```python
 Attributes:
     system: the system which the output field is coming from.
-    omega_d: the driving frequency of the mode which the output field is coming from.
+    omega_d: the driving frequency of the mode which the
+             output field is coming from.
     Q: the measurment matrix.
 ```
+
 #### Class `HomodynMeasurement`
 A Homodyn measurement scheme object with a theta phase.
 The correlator function and measurement matrix in this scheme are:
@@ -150,40 +167,50 @@ $$ [Q] = \begin{pmatrix} \cos^2(\theta) &\sin(\theta)\cos(\theta) \\ \sin(\theta
 ```python
 Attributes:
     system: the system which the output field is coming from.
-    omega_d: the driving frequency of the mode which the output field is coming from.
+    omega_d: the driving frequency of the mode which the
+             output field is coming from.
     Q: the measurment matrix.
 ```
+
 #### Function `linear_response`
 The linear response (susceptibility) of the system from one specific input port to an output port in frequency domain:
 $$    a_{out} = \chi  a_{in} $$
 Refer to [Equation (7)](http://127.0.0.1:8000/theory/#measurements) for more about linear response. 
     
     Args:
-        Omegas: the frequencies vector we want to claculate the linear response for them, in frame of the input field (not a 
-                rotating frame)
+        Omegas: the frequencies vector we want to claculate
+                the linear response for them, in frame of the
+                input field (not a rotating frame)
         system: the system which we want to measure its response.
         output: the output port.
         Input: the input port.
         plot: flag, indicates to plot the susceptibilities or not.
         
     Returns:
-        omegas_out: the frequencies vector we want to claculate the linear response for them, in frame of the output field (not a 
-                rotating frame)
+        omegas_out: the frequencies vector we want to claculate
+                    the linear response for them, in frame of the
+                    output field (not a rotating frame)
         a: the susceptibility we want to measure.
+
 #### Function `spectrum`
 The spectrum of an output field. Refer to [spectra section](http://127.0.0.1:8000/theory/#spectra) for more about the spectra. 
     
     Args:
-        omegas: the frequencies vector we want to claculate the spectrum for them, in frame of the output field (not a 
-                rotating frame)
-        measurement: the measurement scheme, of kinds PowerMeasurement or HomodynMeasurement.
-        components: flag, indicates to calcuate different contributions of noise sources or just calculate the whole spectrum.
+        omegas: the frequencies vector we want to claculate the
+                spectrum for them, in frame of the output field
+                (not a rotating frame)
+        measurement: the measurement scheme, of kinds PowerMeasurement
+                     or HomodynMeasurement.
+        components: flag, indicates to calcuate different contributions
+                    of noise sources or just calculate the whole spectrum.
         plot: flag, indicates to plot the spectra or not.
         
     Returns:
         spec: the spectrum of the output field.
-## DCnonlinearities
+
+# DCnonlinearities
 Functions in this script are used for calculating the DC shifts resulting form nonlinear effects.
+
 #### Function `Kerr_effect_nbar`
 This function findes the steady state average number of photons in an optical cavity with kerr type nonlinearity. It findes the smallest real route of a third order polynomial equation:
 
@@ -202,6 +229,7 @@ $$ (\frac{- \kappa_{ex}P_{in}}{\hbar\omega_{drive}})\bar n^3 +
         
     returns:
         smallest real route of the third order polynomial equation.
+
 #### Function `optomechanics`
 This function findes the steady state average number of photons in an optomechanical cavity and also finds the DC shift cavity 
 resonance frequency. It uses the `Kerr_effect_nbar()` function to solve the third order equation:
@@ -220,23 +248,31 @@ $$\bar n ( \frac{\kappa^2}{4} + (\Delta - (\frac{2g_0^2}{\Omega_m})\bar n)^2 ) =
     returns:
         omega_c = modified cavity resonance frequency in rad/sec.
         g = optomechanical coupling rate in rad/sec.
-## plots
+
+# plots
 Functions in this script are for plotting the linear responses and spectrums.
+
 #### Function `plot_linear_response`
 This function is for plotting the linear response functions. It plots the absolute value and phase of the linear response as well as plotting the linear response in complex space.
         
         Args:
-            omegas: the vector containing the frequecnies in rad/sec (not in a rotating frame).
+            omegas: the vector containing the frequecnies
+                    in rad/sec (not in a rotating frame).
             A: the linear response function.
             system: the system which the linear response is from.
-            output: the output field we that the linear response is calculated for.
-            input: the input field we that the linear response is calculated for.
+            output: the output field we that the linear response
+                    is calculated for.
+            input: the input field we that the linear response
+                   is calculated for.
+
 #### Function `plot_spectrum`
 This function is for plotting the spectra.
         
         Args:
-            omegas: the vector containing the frequecnies in rad/sec (not in a rotating frame).
+            omegas: the vector containing the frequecnies
+                    in rad/sec (not in a rotating frame).
             spec: the spectrum.
-            componenets: flag, indicates to plot different contributions of noise sources in the spectrum or just plot the whole 
-            spectrum.
+            componenets: flag, indicates to plot different contributions
+                         of noise sources in the spectrum or just
+                         plot the whole spectrum.
             system: the system which the spectrum is from.

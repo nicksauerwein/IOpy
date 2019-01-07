@@ -1,6 +1,6 @@
 # Input-output formalism
 In this section, the theory behind the IOpy calculations is introduced.
-<br />There are essentially two main approaches through modeling of open quantum systems. First is density matrix approach and using master equations and second is using the Langevin equations, which is also known as input-output theory. Input-output theory allows us to directly model the quatum fluctuations injected from any couplings port into the system. Quantum Langeving equations are formulated on the level of Heisenberg equations of motion describing the time evolution of any operator of the system. Moreover, in case of optical cavities any coherent laser drive that may be present can be taken into account. For more details see [Gardiner and Zoller (2004)](https://www.google.com) and [Clerk et al. (2010)](http://dx.doi.org/10.1103/RevModPhys.82.1155).
+<br />There are essentially two main approaches through modeling of open quantum systems. First is density matrix approach and using master equations and second is using the Langevin equations, which is also known as input-output theory. Input-output theory allows us to directly model the quatum fluctuations injected from any couplings port into the system. Quantum Langeving equations are formulated on the level of Heisenberg equations of motion describing the time evolution of any operator of the system. Moreover, in case of optical cavities any coherent laser drive that may be present can be taken into account. For more details see [Gardiner and Zoller (2004)](https://www.springer.com/de/book/9783540223016) and [Clerk et al. (2010)](http://dx.doi.org/10.1103/RevModPhys.82.1155).
 
 <br />For example for an optical cavity which is driven by a coherent laser field with the detuning $\Delta$ from the cavity resonance frequency, via a coupling of $\kappa_{ex}$ and is also coupled to the enviroment through the dissipation rate of $\kappa_0$ the equations of motion can be written as:
 
@@ -49,6 +49,7 @@ $$\textbf{S} = \mathbb{1} + \textbf{L}^T(i\omega+\textbf{M})^{-1}\textbf{L} \tag
 
 # Measurements
 In IOpy calculations there are two ways to measure the output fields, which are essentially same as what we do in practice. First is the linear response of the system, which is simillar to output of a VNA. And second is the spectrum of the output field, which is the same as the ouput of the spectrum analyser.
+
 ## Linear response
 According to the [Equation (3)](http://127.0.0.1:8000/theory/#input-output-formalism), a quadrature pair of any output port $i$ can be related to the quadrature pair of any input port $j$ using a submatrix of the scattering matrix:
 
@@ -64,6 +65,7 @@ $$a_{out,i} = (\textbf{S}^{(ij)}_{11} + i\textbf{S}^{(ij)}_{21})a_{in,j} \tag{6}
 
 or in a more familiar notation:
 $$\chi^{(ij)}(\omega) = \textbf{S}^{(ij)}_{11} + i\textbf{S}^{(ij)}_{21} \tag{7}$$
+
 ## Spectra
 In general for analysing the specrum of some measured signals, we can define a correlator using a measurement matrix $Q_{ij}$:
 

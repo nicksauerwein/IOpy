@@ -1,7 +1,6 @@
-# Examples
 In this section a set famous phenomena in optomechanics context are presented. These calculations are first as examples of using IOpy in simulating Langevin equations, and second are benchmarks which results of IOpy can be compared against results which are theoretically developed.
 
-## Simple Cavity 
+# Simple Cavity 
 
 <p align="left">
   <img width="260" src="\LC.png">
@@ -22,7 +21,8 @@ kappa = kappa_ex + kappa_0
 T_drive = 2e-5
 T_bath = 10e-3
 
-a_inex = Input('ex', a, kappa_ex, kind = 'drive', omega_drive = omega_c, bath_temp=T_drive)
+a_inex = Input('ex', a, kappa_ex, kind = 'drive',
+                omega_drive = omega_c, bath_temp=T_drive)
 a_in0 = Input('0', a, kappa_0, kind = 'bath', bath_temp=T_bath)
 ```
 And finally the system object and the output field.
@@ -34,9 +34,17 @@ a_outex = Output(sys_cav, a_inex)
 ```
 Now for measuring the spectrum  of the output field, we have to use the `spectrum` function:
 ```python
-omegas = np.linspace( omega_c - 15*kappa, omega_c +  15*kappa, 1001)
-spec = me.spectrum(omegas, me.PowerMeasurement(a_outex), components = False, plot = True)
+omegas = np.linspace(omega_c - 15*kappa, omega_c + 15*kappa, 1001)
+spec = me.spectrum(omegas, me.PowerMeasurement(a_outex),
+                   components = False, plot = True)
 ```
+<!--
+![Simple Cavity Spectrum](Simple Cavity/simple_cavity_spectrum.png){width=460 .center}
+\begin{figure}[!h]
+\caption{Simple cavity output spectrum}
+\end{figure}
+-->
+
 
 <p align="center">
   <img width="460" src="\Simple Cavity\simple_cavity_spectrum.png">
@@ -45,12 +53,29 @@ spec = me.spectrum(omegas, me.PowerMeasurement(a_outex), components = False, plo
     </p>
 </p>
 
+
 As we expect, we can see a Lorentzian in the spectrum. If the tempreture of the driving field was higher than the thermal bath, we would see a deep instead of a peak.
 
 The linear response of the system to driving can also be measured with the `linear_response` function:
 ```python
 omegas_newex, S_ex = me.linear_response(omegas, sys_cav, a_outex, a_inex, plot = 1)
 ```
+<!--
+![cavity linear response in complex space](Simple Cavity/linear_response_comp.png){width=460 .center}
+\begin{figure}[!h]
+\caption{cavity linear response in complex space}
+\end{figure}
+
+![cavity linear response amplitude](Simple Cavity/linear_response_amp.png){width=460 .center}
+\begin{figure}[!h]
+\caption{cavity linear response amplitude}
+\end{figure}
+
+![cavity linear response phase](Simple Cavity/linear_response_phase.png){width=460 .center}
+\begin{figure}[!h]
+\caption{cavity linear response phase}
+\end{figure}
+-->
 
 <p align="center">
   <img width="460" src="\Simple Cavity\linear_response_comp.png">
@@ -72,12 +97,24 @@ omegas_newex, S_ex = me.linear_response(omegas, sys_cav, a_outex, a_inex, plot =
   </p>
 </p>
 
+
 The results can also be compared to the theory. For example in this case the linear response of the system to the drive field is:
 
 $$ S_{aa} = 1 - \frac{\kappa_{ex}}{\frac{\kappa}{2} - i(\omega-\omega_c)} $$
 
 The graphs below show the comparison between this equation and IOpy results.
 
+<!--
+![cavity linear response amplitude](Simple Cavity/comparison_amp.png){width=460 .center}
+\begin{figure}[!h]
+\caption{cavity linear response amplitude}
+\end{figure}
+
+![cavity linear response phase](Simple Cavity/comparison_phase.png){width=460 .center}
+\begin{figure}[!h]
+\caption{cavity linear response phase}
+\end{figure}
+-->
 
 <p align="center">
   <img width="460" src="\Simple Cavity\comparison_amp.png">
@@ -93,7 +130,8 @@ The graphs below show the comparison between this equation and IOpy results.
 </p>
 
 
-## Basic optomechanics and cooling
+
+# Basic optomechanics and cooling
 <p align="left">
   <img width="260" src="\drum.png">
 </p>
@@ -123,9 +161,10 @@ omega_drive = omega_c - 1* omega_m
 
 from DCnonlinearities import optomechanics
 
-omdir = optomechanics(P_in, kappa_0, kappa_ex, omega_c, omega_drive, omega_m, g_0)
+omdir = optomechanics(P_in, kappa_0, kappa_ex, omega_c,
+                      omega_drive, omega_m, g_0)
 
-g= omdir['g']                # optomechanical coupling rate = sqrt(nbar) * g_0
+g= omdir['g']  # optomechanical coupling rate = sqrt(nbar)*g_0
 omega_c = omdir['omega_c']   # new cavity resonance frequency
 ```
 Now we can define the modes, as well as input fields including thermal baths coupled to optics and mechanics and the optical driving field.
@@ -134,7 +173,8 @@ Now we can define the modes, as well as input fields including thermal baths cou
 a = Mode('a', omega_c)
 b = Mode('b', omega_m)
 
-a_inex = Input('ex', a, kappa_ex, kind = 'drive', omega_drive = omega_drive, bath_temp=10e-3)
+a_inex = Input('ex', a, kappa_ex, kind = 'drive',
+                omega_drive = omega_drive, bath_temp=10e-3)
 a_in0 = Input('0', a, kappa_0, kind = 'bath', bath_temp=10e-3)
 
 b_in0 = Input('0', b, gamma_m, kind = 'bath', bath_temp=10e-3)
@@ -152,6 +192,12 @@ sys_om = System([a, b], [a_in0,b_in0 , a_inex], [g_ab])
 ```
 
 Now just like the previous example we can measure the spectrum of the output field.
+<!--
+![optomechanical cavity output spectrum](Basic OM/spec.png){width=460 .center}
+\begin{figure}[!h]
+\caption{optomechanical cavity output spectrum}
+\end{figure}
+-->
 
 <p align="center">
   <img width="460" src="\Basic OM\spec.png">
@@ -162,6 +208,13 @@ Now just like the previous example we can measure the spectrum of the output fie
 
 The peak that can be seen is because of low sampling rate of the calculations. To have a better precission we zoom on the neighbourhood of the cavity resonance frequency.
 
+<!--
+![optomechanical cavity output spectrum](Basic OM/spec_zoom.png){width=460 .center}
+\begin{figure}[!h]
+\caption{optomechanical cavity output spectrum}
+\end{figure}
+-->
+
 <p align="center">
   <img width="460" src="\Basic OM\spec_zoom.png">
     <p align = "center">
@@ -169,10 +222,11 @@ The peak that can be seen is because of low sampling rate of the calculations. T
     </p>
 </p>
 
+
 Here we can clearly see different contribuitions to the spectrum. In addition the width of the spectrum is equal to the theory value $\Gamma_{eff} = \Gamma_m (1 + C)$ (with $C$ as the cooperativity equal to $\frac{4g^2}{\kappa\Gamma_m}$) which results to cooling.
 
 
-## Strong coupling regime
+# Strong coupling regime
 <p align="left">
   <img width="260" src="\Strong.png">
 </p>
@@ -189,13 +243,31 @@ To this end, the code is exactly the same as the previous example but with a dif
 P_in = 5e-9
 ```
 By measuring the output filed spectrum we can clearly see this mode splitting:
+
+<!--
+![optomechanical cavity output spectrum](Strong coupling/spec0.png){width=460 .center}
+\begin{figure}[!h]
+\caption{optomechanical cavity output spectrum}
+\end{figure}
+-->
+
 <p align="center">
   <img width="460" src="\Strong coupling\spec0.png">
     <p align = "center">
         optomechanical cavity output spectrum
     </p>
 </p>
+
+
 To see better the splitting we change the measurement frequencies:
+
+<!--
+![optomechanical cavity output spectrum](Strong coupling/spec.png){width=460 .center}
+\begin{figure}[!h]
+\caption{optomechanical cavity output spectrum}
+\end{figure}
+-->
+
 <p align="center">
   <img width="460" src="\Strong coupling\spec.png">
     <p align = "center">
@@ -203,11 +275,12 @@ To see better the splitting we change the measurement frequencies:
     </p>
 </p>
 
-## Optomechanically induced transparency
+
+# Optomechanically induced transparency
 <p align="left">
   <img width="260" src="\omit.png">
 </p>
-This is example is about the optomechanically induced transparency also known as OMIT. This effect was observed in atoms (electromagnetically induced transparency [Fleischhauer, Imamoglu, and Marangos, 2005](https://journals.aps.org/rmp/abstract/10.1103/RevModPhys.77.633)) as the cancellation of absorbtion in the presence of an auxiliary laser field. OMIT was predicted theoritcally by [Schliesser, 2009]() and [Agarwal and Huang 2010](https://journals.aps.org/pra/abstract/10.1103/PhysRevA.81.041803). When the optical cavity is pumped on the red sideband, if we inject a weak probe field into the cavity the optomechanical interaction causes the cavity to be seen transparent by this weak field.
+This is example is about the optomechanically induced transparency also known as OMIT. This effect was observed in atoms (electromagnetically induced transparency [Fleischhauer, Imamoglu, and Marangos, 2005](https://journals.aps.org/rmp/abstract/10.1103/RevModPhys.77.633)) as the cancellation of absorbtion in the presence of an auxiliary laser field. OMIT was predicted theoritcally by Schliesser, 2009 and [Agarwal and Huang 2010](https://journals.aps.org/pra/abstract/10.1103/PhysRevA.81.041803). When the optical cavity is pumped on the red sideband, if we inject a weak probe field into the cavity the optomechanical interaction causes the cavity to be seen transparent by this weak field.
 
 To simulate this phenomenan in IOpy, the setup is again simillar to the Basic optomechanics example. The difference here is that we set the driving field (control field, in this context) to be a high tempreture source. In this way, the noise around this control field play the roll of the weak probe field for us, so we can see the OMIT effect in the spectrum, as well as the linear response. To see the full code go to [OMIT](http://localhost:8888/notebooks/IOpy/iopy/examples/OMIT.ipynb) example.
 
@@ -215,13 +288,32 @@ To simulate this phenomenan in IOpy, the setup is again simillar to the Basic op
 T_cont = 1
 T_bath = 10e-3
 
-a_cont = Input('ex', a, kappa_ex, kind = 'drive', omega_drive = omega_cont, bath_temp = T_cont)
+a_cont = Input('ex', a, kappa_ex, kind = 'drive',
+               omega_drive = omega_cont, bath_temp = T_cont)
 a_in0 = Input('0', a, kappa_0, kind = 'bath', bath_temp = T_bath)
 
 b_in0 = Input('0', b, gamma_m, kind = 'bath', bath_temp = T_bath)
 ```
 
 And now we measure the spectrum and the linear response.
+
+<!--
+![optomechanical cavity output spectrum](omit/spec.png){width=460 .center}
+\begin{figure}[!h]
+\caption{optomechanical cavity output spectrum}
+\end{figure}
+
+![cavity linear response amplitude](omit/LR_amp.png){width=460 .center}
+\begin{figure}[!h]
+\caption{cavity linear response amplitude}
+\end{figure}
+
+![cavity linear response phase](omit/LR_phase.png){width=460 .center}
+\begin{figure}[!h]
+\caption{cavity linear response phase}
+\end{figure}
+-->
+
 
 <p align="center">
   <img width="460" src="\omit\spec.png">
@@ -244,6 +336,7 @@ And now we measure the spectrum and the linear response.
   </p>
 </p>
 
+
 These results can also be compared to theory. To see the details go to [OMIT Test](http://localhost:8888/notebooks/IOpy/iopy/Tests/OMIT%20Test.ipynb) notebook. By a calculation we can show for the transmission window:
 
 
@@ -257,6 +350,20 @@ With:
 $$\Delta = \omega_{cont} - \omega_{cav},\quad \Omega = \omega_p - \omega_{cont}$$
 
 And the linear response from IOpy can be compared with this results:
+
+<!--
+![cavity linear response amplitude](omit/test_amp.png){width=460 .center}
+\begin{figure}[!h]
+\caption{cavity linear response amplitude}
+\end{figure}
+
+![cavity linear response phase](omit/test_phase.png){width=460 .center}
+\begin{figure}[!h]
+\caption{cavity linear response phase}
+\end{figure}
+-->
+
+
 <p align="center">
   <img width="460" src="\omit\test_amp.png">
   <p align = "center">
@@ -271,7 +378,8 @@ And the linear response from IOpy can be compared with this results:
   </p>
 </p>
 
-## Frequency conversion using OMIT
+
+# Frequency conversion using OMIT
 <p align="left">
   <img width="210" src="\conv.png">
 </p>
@@ -309,11 +417,13 @@ bath_temp2 = 10e-3
 
 from DCnonlinearities import optomechanics
 
-omdir1 = optomechanics(P_in1, kappa_01, kappa_ex1, omega_cav1, omega_cont1, omega_m, g_01)
+omdir1 = optomechanics(P_in1, kappa_01, kappa_ex1,
+                       omega_cav1, omega_cont1, omega_m, g_01)
 g1= omdir1['g']
 omega_cav1 = omdir1['omega_c']
 
-omdir2 = optomechanics(P_in2, kappa_02, kappa_ex2, omega_cav2, omega_cont2, omega_m, g_02)
+omdir2 = optomechanics(P_in2, kappa_02, kappa_ex2,
+                       omega_cav2, omega_cont2, omega_m, g_02)
 g2= omdir2['g']
 omega_cav2 = omdir2['omega_c']
 
@@ -323,10 +433,12 @@ a1 = Mode('a1', omega_cav1)
 a2 = Mode('a2', omega_cav2)
 b = Mode('b', omega_m)
 
-a_cont1 = Input('ex', a1, kappa_ex1, kind = 'drive', omega_drive = omega_cont1, bath_temp = T_cont1)
+a_cont1 = Input('ex', a1, kappa_ex1, kind = 'drive',
+                omega_drive = omega_cont1, bath_temp = T_cont1)
 a_in01 = Input('0', a1, kappa_01, kind = 'bath', bath_temp = bath_temp1)
 
-a_cont2 = Input('ex', a2, kappa_ex2, kind = 'drive', omega_drive = omega_cont2, bath_temp = T_cont2)
+a_cont2 = Input('ex', a2, kappa_ex2, kind = 'drive',
+                omega_drive = omega_cont2, bath_temp = T_cont2)
 a_in02 = Input('0', a2, kappa_02, kind = 'bath', bath_temp = bath_temp2)
 
 b_in0 = Input('0', b, gamma_m, kind = 'bath', bath_temp=10e-3)
@@ -334,7 +446,8 @@ b_in0 = Input('0', b, gamma_m, kind = 'bath', bath_temp=10e-3)
 g_a1b = Coupling(a1, b, g1 * np.array([1,0,1,0]))
 g_a2b = Coupling(a2, b, g2 * np.array([1,0,0,0]))
 
-sys_om = System([a1, a2, b], [a_in01, a_in02, b_in0, a_cont1, a_cont2], [g_a1b, g_a2b])
+sys_om = System([a1, a2, b], [a_in01, a_in02, b_in0, a_cont1, a_cont2],
+                [g_a1b, g_a2b])
 ```
 
 Then we have to define the output ports and then measure the linear response from the input drives port of first cavity to the output port of the second cavity.
@@ -348,11 +461,21 @@ omegas_new, A = me.linear_response(omegas, sys_om, a_outex2, a_cont1, plot = Tru
 ```
 
 And the result would be:
+
+<!--
+![Frequency conversion linear response amplitude](conv/LR_amp.png){width=460 .center}
+\begin{figure}[!h]
+\caption{Frequency conversion linear response amplitude}
+\end{figure}
+-->
+
+
 <p align="center">
   <img width="460" src="\conv\LR_amp.png">
   <p align = "center">
         Frequency conversion linear response amplitude
   </p>
 </p>
+
 
 Both the input field and output field frequencies are shown on the graph. This means every point on this curve is the amplitude of the output field at the "output frequency", when the input probe is at the corresponding "input frequency".
