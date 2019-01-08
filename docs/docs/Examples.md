@@ -1,13 +1,18 @@
-In this section a set famous phenomena in optomechanics context are presented. These calculations are first as examples of using IOpy in simulating Langevin equations, and second are benchmarks which results of IOpy can be compared against results which are theoretically developed.
+In this section a set of famous phenomena in optomechanics is presented. These calculations serve first as examples of using IOpy in simulating Langevin equations, and second are benchmarks of IOpy which can be compared to the known theoretical models.
 
 # Simple Cavity 
 
-<p align="left">
+<p align="center">
   <img width="260" src="\LC.png">
+    <p align = "center">
+        False-colour optical micrograph of the microwave resonator formed by a spiral inductor shunted by a parallel-plate capacitor (Teufel, Li et al., 2011)
+    </p>
 </p>
 
+
 The first example is simulating a hot microwave resonator. Here the temperature of the bath is higher than the temperature of the drive and therefore we would expect to see an emmition shaped like a Lorenzian. To see the fool written example, go to [Simple cavity example](http://localhost:8888/notebooks/IOpy/iopy/examples/Simple%20Cavity.ipynb).
-<br />first we have to define the cavity mode:
+
+First we have to define the cavity mode:
 ```python
 omega_c = 5e9*np.pi*2
 a = Mode('a', omega_c)
@@ -32,7 +37,7 @@ sys_cav = System([a], [a_in0,  a_inex], [])
 ```python
 a_outex = Output(sys_cav, a_inex)
 ```
-Now for measuring the spectrum  of the output field, we have to use the `spectrum` function:
+Now for measuring the spectrum of the output field, we have to use the `spectrum` function:
 ```python
 omegas = np.linspace(omega_c - 15*kappa, omega_c + 15*kappa, 1001)
 spec = me.spectrum(omegas, me.PowerMeasurement(a_outex),
@@ -98,9 +103,9 @@ omegas_newex, S_ex = me.linear_response(omegas, sys_cav, a_outex, a_inex, plot =
 </p>
 
 
-The results can also be compared to the theory. For example in this case the linear response of the system to the drive field is:
+The results can also be compared to the theory. For example in this case the linear response of the system to the drive field is
 
-$$ S_{aa} = 1 - \frac{\kappa_{ex}}{\frac{\kappa}{2} - i(\omega-\omega_c)} $$
+$$ S_{aa} = 1 - \frac{\kappa_{ex}}{\frac{\kappa}{2} - i(\omega-\omega_c)}.$$
 
 The graphs below show the comparison between this equation and IOpy results.
 
@@ -132,14 +137,17 @@ The graphs below show the comparison between this equation and IOpy results.
 
 
 # Basic optomechanics and cooling
-<p align="left">
+<p align="center">
   <img width="260" src="\drum.png">
+    <p align = "center">
+        False-colour scanning electron micrograph showing the upper plate of the capacitor suspended ,50 nm above the lower plate and free to vibrate like a taut, circular drum.  (Teufel, Li et al., 2011)
+    </p>
 </p>
 
           
-In this example we simulate an optomechanical system with a weak drive. Here we want to see the optomechanical cooling due to increase in optomechanical damping rate. To see the fool written example, go to [Basic optomechanics](http://localhost:8888/notebooks/IOpy/iopy/examples/Basic%20Optomechanics.ipynb).
+In this example we simulate an optomechanical system with a weak drive. Here we want to see the optomechanical cooling due to the increase in optomechanical damping rate. To see the fool written example, go to [Basic optomechanics](http://localhost:8888/notebooks/IOpy/iopy/examples/Basic%20Optomechanics.ipynb).
 
-In the basic optomechanical interaction, the cavity resonance frequency shift by a constant value due to DC nonlinearity. Therefore, before difining the modes we have to calculate this DC shift.
+In the basic optomechanical interaction, the cavity resonance frequency shifts by a constant value due to the DC nonlinearity. Therefore, before difining the modes we have to calculate this DC shift.
 
 ```python
 omega_c = 5e9*np.pi*2     # cavity resonance frequency
@@ -223,18 +231,21 @@ The peak that can be seen is because of low sampling rate of the calculations. T
 </p>
 
 
-Here we can clearly see different contribuitions to the spectrum. In addition the width of the spectrum is equal to the theory value $\Gamma_{eff} = \Gamma_m (1 + C)$ (with $C$ as the cooperativity equal to $\frac{4g^2}{\kappa\Gamma_m}$) which results to cooling.
+Here we can clearly see different contribuitions to the spectrum. In addition the width of the spectrum is equal to the theory value $\Gamma_{eff} = \Gamma_m (1 + C)$ (with $C$ as the cooperativity equal to $\frac{4g^2}{\kappa\Gamma_m}$) which results in cooling.
 
 
 # Strong coupling regime
-<p align="left">
+<p align="center">
   <img width="260" src="\Strong.png">
+    <p align = "center">
+        Mechanical frequency spectrum (fre- quency on vertical axis) as a function of laser detuning, for a strongly coupled optomechanical system. (Aspelmeyer, Kippenberg, Marquardt 2014)
+    </p>
 </p>
 
 
-In this example we show the effect of increasing of the laser input power ($P_{in}$). For the details on the theory see [(Aspelmeyer, Kippenberg, Marquardt (2014))](https://journals.aps.org/rmp/abstract/10.1103/RevModPhys.86.1391), section VII.C. By increasing the input power, at the beginning will only see an imporevement in the cooling, but as we continue with increasing the power the optical and mechanical modes hybridize to form two new modes with the eigenfrequencies:
+In this example we show the effect of increasing of the laser input power ($P_{in}$). For the details on the theory see [(Aspelmeyer, Kippenberg, Marquardt (2014))](https://journals.aps.org/rmp/abstract/10.1103/RevModPhys.86.1391), section VII.C. By increasing the input power, at the beginning we will only see an imporevement in the cooling, but as we continue with increasing the power the optical and mechanical modes hybridize to form two new modes with the eigenfrequencies
 
-$$ \omega_{\pm} = \frac{\Omega_m-\Delta}{2} \pm \sqrt{g^2 + (\frac{\Omega_m+\Delta}{2})^2}$$
+$$ \omega_{\pm} = \frac{\Omega_m-\Delta}{2} \pm \sqrt{g^2 + (\frac{\Omega_m+\Delta}{2})^2}.$$
 
 When the driving laser is exactly detuned on the red sideband ($\Delta=-\Omega_m$) the splitting of these two modes is equal to $2g$. In this example we want to show this splitting on the spectrum.
 
@@ -277,8 +288,11 @@ To see better the splitting we change the measurement frequencies:
 
 
 # Optomechanically induced transparency
-<p align="left">
+<p align="center">
   <img width="260" src="\omit.png">
+    <p align = "center">
+        Transmission of the probe laser power through the optomechanical system in the case of a critically coupled cavity k0 = kex as a function of normalized probe laser frequency offset, when the control field is off (blue lines) and on (green lines) (Weis et al., 2010).
+    </p>
 </p>
 This is example is about the optomechanically induced transparency also known as OMIT. This effect was observed in atoms (electromagnetically induced transparency [Fleischhauer, Imamoglu, and Marangos, 2005](https://journals.aps.org/rmp/abstract/10.1103/RevModPhys.77.633)) as the cancellation of absorbtion in the presence of an auxiliary laser field. OMIT was predicted theoritcally by Schliesser, 2009 and [Agarwal and Huang 2010](https://journals.aps.org/pra/abstract/10.1103/PhysRevA.81.041803). When the optical cavity is pumped on the red sideband, if we inject a weak probe field into the cavity the optomechanical interaction causes the cavity to be seen transparent by this weak field.
 
@@ -380,8 +394,11 @@ And the linear response from IOpy can be compared with this results:
 
 
 # Frequency conversion using OMIT
-<p align="left">
+<p align="center">
   <img width="210" src="\conv.png">
+    <p align = "center">
+        Reciprocal mechanically-mediated frequency conversion (adapted from Peterson et. al. 2018).
+    </p>
 </p>
 The last example is about the Frequency Conversion using OMIT effect, which is a step through multimode calculations. In this scenario, two optical modes with different resonance frequencies are two the same mechanical mode and the optical modes are pumped on their red sidebands. If we inject a weak probe to one of the cavities, when this probe is around resonance with this cavity there will be an emission from the other cavity, around its resonance frequency. The qualitative explanation is that when probe field is on resonance with the first cavity, it will beat with the pump and excite the mechanics. Then on the other cavitu beatting of the mechanics and the pump will excite a field which it's frequency is spaced from the second pump by the value of the mechanical resonance frequencies. These excitations are both at red and blue sides of the pump, which the blue side would be the resonance frequency of the second cavity.
 

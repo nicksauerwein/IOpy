@@ -1,7 +1,6 @@
 site_name: IOpy documentation
 pages:
-#    - Home: index.md
-    - About: about.md
+    - About: index.md
     - Theory: theory.md
     - Library: Library.md
     - Examples: Examples.md

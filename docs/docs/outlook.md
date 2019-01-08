@@ -19,7 +19,7 @@ However, there are some approaches to resolve the problem still in frequency dom
 <p align="center">
   <img width="460" src="\auxmodes.png">
     <p align = "center">
-        The idea of the expanded mode basis for the four-mode isolator
+        The idea of the expanded mode basis for the four-mode isolator (Peterson et. al., 2018)
     </p>
 </p>
 

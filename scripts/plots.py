@@ -2,14 +2,14 @@ import numpy as np
 from scipy.constants import epsilon_0, hbar, k
 import matplotlib.pyplot as plt
 
-def plot_linear_response(omegas, A, system, output, Input):
+def plot_linear_response(omegas, chi, system, output, Input):
     '''
         This function is for plotting the linear response functions. It plots the absolute value and phase of the linear response 
         as well as plotting the linear response in complex space.
         
         Args:
             omegas: the vector containing the frequecnies in rad/sec (not in a rotating frame).
-            A: the linear response function.
+            chi: the linear response function.
             system: the system which the linear response is from.
             output: the output field we that the linear response is calculated for.
             input: the input field we that the linear response is calculated for.
@@ -18,7 +18,7 @@ def plot_linear_response(omegas, A, system, output, Input):
     Name = 'S_'+output.mode.name+Input.mode.name
 
     plt.figure()
-    plt.plot(np.real(A), np.imag(A), label = 'linear response in quadreture space')
+    plt.plot(np.real(chi), np.imag(chi), label = 'linear response in quadreture space')
     ax = plt.gca()
     ax.set_aspect('equal')
     plt.xlabel('Real{' + Name + '}')
@@ -27,7 +27,7 @@ def plot_linear_response(omegas, A, system, output, Input):
     plt.grid()
 
     plt.figure()
-    plt.plot((omegas + output.mode.omega_d)/2/np.pi, np.abs(A))
+    plt.plot((omegas + output.mode.omega_d)/2/np.pi, np.abs(chi))
     plt.xlabel('Output Frequency [Hz]')
     plt.ylabel('|' + Name + '|')
     ax1 = plt.gca()
@@ -41,7 +41,7 @@ def plot_linear_response(omegas, A, system, output, Input):
     plt.grid(color='r', alpha = 0.3)
 
     plt.figure()
-    plt.plot((omegas + output.mode.omega_d)/2/np.pi, np.angle(A))
+    plt.plot((omegas + output.mode.omega_d)/2/np.pi, np.angle(chi))
     plt.xlabel('Output Frequency [Hz]')
     plt.ylabel('<' + Name)
     plt.yticks([-np.pi, -np.pi/2, 0, np.pi/2, np.pi], [r'$-\pi$', r'$-\pi/2$', r'$0$', r'$+\pi/2$', r'$+\pi$'])

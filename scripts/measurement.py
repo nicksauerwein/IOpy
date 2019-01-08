@@ -3,7 +3,11 @@ from scipy.constants import epsilon_0, hbar, k
 
 class MeasurementOperator:
     '''
-    it seems this one is useless!
+    This class represents a general measurment with a measurement operator for defining a correlator.
+    
+    Q(t) = <Q_ij * Z_out,i(0) * Z_out,j(t)>
+    
+    Where Q_ij is the ij-th element of the measurement operator.
     '''
     def __init__(self, Q, system, omega_d = 0):
 
@@ -98,7 +102,7 @@ def linear_response(Omegas, system, output, Input, plot = False):
     Returns:
         omegas_out: the frequencies vector we want to claculate the linear response for them, in frame of the output field (not a 
                 rotating frame)
-        a: the susceptibility we want to measure.
+        chi: the susceptibility we want to measure.
     '''
     omega_d_in = Input.mode.omega_d
     omegas = Omegas - omega_d_in
@@ -111,12 +115,12 @@ def linear_response(Omegas, system, output, Input, plot = False):
 
     omegas_out = omegas + omega_d_out
        
-    a = S[:,2*j,2*i] + 1j * S[:,2*j+1,2*i]
+    chi = S[:,2*j,2*i] + 1j * S[:,2*j+1,2*i]
     if plot:
         from plots import plot_linear_response
-        plot_linear_response(omegas_out, a[:,0,0], system, output, Input)
+        plot_linear_response(omegas_out, chi[:,0,0], system, output, Input)
 
-    return omegas_out, a[:,0,0]
+    return omegas_out, chi[:,0,0]
 
 
 def spectrum(omegas, measurement, components = False, plot = False):

@@ -14,3 +14,7 @@ Peterson, G.A., F. Lecocq, K. Cicak, R.W. Simmonds, J. Aumentado, and J.D. Teufe
 
 Schliesser, A., 2009, “Cavity optomechanics and optical frequency comb generation with silica whispering-gallery-mode resonators,”
 Ph.D.thesis(Ludwig-Maximilians-UniversitatMunchen).
+
+Teufel, J. D., D. Li, M. S. Allman, K. Cicak, A. J. Sirois, J.D. Whittaker, and R.W. Simmonds, 2011, Nature (London) 471, 204.
+
+Weis, S., R. Riviere, S. Deleglise, E. Gavartin, O. Arcizet, A. Schliesser, and T. J. Kippenberg, 2010, Science 330, 1520.
