@@ -1,16 +1,16 @@
-# What is IOpy?
+# What Is IOpy?
 
-IOpy is a python-based package for solving the equations of motion of coupled oscillators which are in contact with thermal baths. These equations which are in the form of Langevin equations (or quantum Langevin equations in quantum limit) appear in many research areas in physics. Specifically, in optomechanics, which is the study of interaction of light with mechanical oscillators, this problem forms the essence of the theory. Finding the solutions of Langevin equations in different optomechanical system can result in discovering novel phenomena. However, the procedure to find these solutions is similar in most of the cases ([input-output formalism](http://127.0.0.1:8000/theory/#input-output-formalism), which the name IOpy is also coming from) and the essential difference between them is the difference between the physical setups. Moreover, in complex setups the calculations for finding the solutions can be really hard and tedious to do by hand (for example inverting matrices with large dimensions).
+IOpy is a python-based package for solving the equations of motion of coupled oscillators which are in contact with thermal baths. These equations which are in the form of Langevin equations (or quantum Langevin equations in quantum limit) appear in many research areas in physics. Specifically, in optomechanics, which is the study of interaction of light with mechanical oscillators, this problem forms the essence of the theory. Finding the solutions of Langevin equations in different optomechanical systems can help with discovering and understanding novel phenomena. However, the procedure of finding these solutions is similar in many cases ([input-output formalism](http://127.0.0.1:8000/theory/#input-output-formalism), which is where the name IOpy is coming from) and the essential difference between them is the difference between the physical setups. Moreover, in complex setups the calculations necessary to find the solutions can be hard and tedious to do by hand (for example inverting matrices with large dimensions).
 
-On the other hand, in many problems in optomechanics there are a lot of physical phenomena which are involved in the dynamics. For newcomers in the field, like students who want to learn optomechanics, it can be confusing for them to distinguish different effects of different physical phenomena involved in the dynamics. Looking for a solution to resolve the two mentioned issues was the motivation for writing this code.
+On the other hand, in many problems in optomechanics there are a lot of physical phenomena which are involved in the dynamics. For newcomers to the field, like students who want to learn optomechanics, it can be confusing to distinguish between the different effects involved in the dynamics. Looking for a solution to resolve the two mentioned issues was the motivation to write this code.
 
-With IOpy, you can define your physical setup very fast and without the need for going through the details. Further more you can visualise the results in a way which can help people to test their theoretical results and also help newcomers to grasp the elements of the optomechanics. For example to see the emission spectrum of a hot optical resonator you can define your optical mode in a single line:
+With IOpy, you can define your physical setup very fast and without the need for going through the details. Further more you can visualize the results in a way which can help people to test their theoretical results and also help newcomers to grasp the elements of the optomechanics. For example to see the emission spectrum of a hot optical resonator you can define your optical mode in a single line:
 
 ```python
 a = Mode(name = 'a', omega = 5e9 *2*np.pi)
 ```
 
-And then defining the thermal bath and the driving field each in a single line:
+And then defining the thermal bath and the driving field can be done each in a single line:
 
 ```python
 a_inex = Input(name = 'ex', a, kappa = 0.2e6 *2*np.pi,
@@ -20,7 +20,7 @@ a_in0 = Input('0', a, kappa = 0.3e6 *2*np.pi, kind = 'bath',
               bath_temp = 10e-3)
 ```
 
-And finally defining the system, output port and the spectrum:
+And finally defining the system, the output port and the spectrum:
 
 ```python
 sys_cav = System([a], [a_in0,  a_inex], [])
@@ -35,12 +35,13 @@ And the result would be:
 \caption{Simple cavity output spectrum}
 \end{figure}
 -->
+
 <p align="center">
   <img width="460" src="\Simple Cavity\simple_cavity_spectrum.png">
 </p>
 
 
-A more detailed explanation of this example as well as more examples for optomechanics are availabe on the [Examples](http://127.0.0.1:8000/Examples/) page.
+A more detailed explanation of this example as well as more examples with respect to optomechanics are available on the [Examples](http://127.0.0.1:8000/Examples/) page.
 
 # Structure of IOpy
 IOpy consists out of four scripts which each serving a special purpose:
@@ -51,9 +52,10 @@ IOpy consists out of four scripts which each serving a special purpose:
 
 `measurement`: For calculating linear responses and power spectral densities.
 
-`plots`: For visualising the measurements' results in graphs.
+`plots`: For visualizing the measurements' results in graphs.
 
 # Installation
+To install IOpy you have to clone the IOpy repository on your local computer. The packages you need for using IOpy are `numpy`, `scipy` and `matplotlib`.
 
 <!--
 ## Comments of Nick

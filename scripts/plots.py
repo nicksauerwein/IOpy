@@ -15,26 +15,26 @@ def plot_linear_response(omegas, chi, system, output, Input):
             input: the input field we that the linear response is calculated for.
     '''
     omegas -= output.mode.omega_d
-    Name = 'S_'+output.mode.name+Input.mode.name
+    Name = r'$\chi$_'+output.mode.name+Input.mode.name
 
     plt.figure()
     plt.plot(np.real(chi), np.imag(chi), label = 'linear response in quadreture space')
     ax = plt.gca()
     ax.set_aspect('equal')
-    plt.xlabel('Real{' + Name + '}')
-    plt.ylabel('Imag{' + Name + '}')
+    plt.xlabel('Real{' + Name + '}', fontsize=15)
+    plt.ylabel('Imag{' + Name + '}', fontsize=15)
     plt.tight_layout()
     plt.grid()
 
     plt.figure()
     plt.plot((omegas + output.mode.omega_d)/2/np.pi, np.abs(chi))
-    plt.xlabel('Output Frequency [Hz]')
-    plt.ylabel('|' + Name + '|')
+    plt.xlabel('Output Frequency [Hz]', fontsize=15)
+    plt.ylabel('|' + Name + '|', fontsize=15)
     ax1 = plt.gca()
     ax1.set_xlim(min(omegas + output.mode.omega_d)/2/np.pi , max(omegas + output.mode.omega_d)/2/np.pi)
     plt.grid()
     ax2 = ax1.twiny()
-    ax2.set_xlabel('Input Frequency [Hz]')
+    ax2.set_xlabel('Input Frequency [Hz]', fontsize=15)
     plt.xticks(color='r', alpha = 0.6)
     ax2.set_xlim(min(omegas + Input.mode.omega_d)/2/np.pi , max(omegas + Input.mode.omega_d)/2/np.pi)
     plt.tight_layout()
@@ -42,14 +42,14 @@ def plot_linear_response(omegas, chi, system, output, Input):
 
     plt.figure()
     plt.plot((omegas + output.mode.omega_d)/2/np.pi, np.angle(chi))
-    plt.xlabel('Output Frequency [Hz]')
-    plt.ylabel('<' + Name)
+    plt.xlabel('Output Frequency [Hz]', fontsize=15)
+    plt.ylabel('<' + Name, fontsize=15)
     plt.yticks([-np.pi, -np.pi/2, 0, np.pi/2, np.pi], [r'$-\pi$', r'$-\pi/2$', r'$0$', r'$+\pi/2$', r'$+\pi$'])
     ax1 = plt.gca()
     ax1.set_xlim(min(omegas + output.mode.omega_d)/2/np.pi , max(omegas + output.mode.omega_d)/2/np.pi)
     plt.grid()
     ax2 = ax1.twiny()
-    ax2.set_xlabel('Input Frequency [Hz]')
+    ax2.set_xlabel('Input Frequency [Hz]', fontsize=15)
     plt.xticks(color='r', alpha = 0.6)
     ax2.set_xlim(min(omegas + Input.mode.omega_d)/2/np.pi , max(omegas + Input.mode.omega_d)/2/np.pi)
     plt.tight_layout()
@@ -72,10 +72,10 @@ def plot_spectrum(omegas, spec, components, system):
         for i, inp in enumerate(system.inputs):
             plt.plot(omegas/2/np.pi, spec[:,2*i], label = str(inp) + ' Amp')
             plt.plot(omegas/2/np.pi, spec[:,2*i + 1], label = str(inp) + ' Phase')
-            plt.xlabel('Frequency [Hz]')
-            plt.ylabel(r'$S_{aa}/\hbar \omega$ [Hz$^{-1}$]')
+            plt.xlabel('Frequency [Hz]', fontsize=13)
+            plt.ylabel(r'$S_{aa}/\hbar \omega$ [Hz$^{-1}$]', fontsize=13)
         plt.gca().legend(loc='upper center', bbox_to_anchor=(0.5, 1.15),
-            ncol= len(system.inputs))
+            ncol= len(system.inputs), prop={'size': 12})
         plt.tight_layout()
         plt.grid()
 
@@ -89,9 +89,9 @@ def plot_spectrum(omegas, spec, components, system):
 
     else:
         plt.figure()
-        plt.xlabel('Frequency [Hz]')
-        plt.ylabel(r'$S_{aa}/\hbar \omega$ [Hz$^{-1}$]')
+        plt.xlabel('Frequency [Hz]', fontsize=13)
+        plt.ylabel(r'$S_{aa}/\hbar \omega$ [Hz$^{-1}$]', fontsize=13)
         plt.plot(omegas/2/np.pi, spec, label = 'Measureable Spectum');
-        plt.gca().legend(loc='upper center', bbox_to_anchor=(0.5, 1.15))
+        plt.gca().legend(loc='upper center', bbox_to_anchor=(0.5, 1.15),  prop={'size': 15})
         plt.tight_layout()
         plt.grid()
