@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Examples - IOpy documentation</title>
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="..">IOpy documentation</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="..">About</a>
+                            </li>
+                            <li >
+                                <a href="../theory/">Theory</a>
+                            </li>
+                            <li >
+                                <a href="../Library/">Library</a>
+                            </li>
+                            <li class="active">
+                                <a href="./">Examples</a>
+                            </li>
+                            <li >
+                                <a href="../outlook/">Outlook</a>
+                            </li>
+                            <li >
+                                <a href="../references/">References</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li >
+                                <a rel="next" href="../Library/">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li >
+                                <a rel="prev" href="../outlook/">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#simple-cavity">Simple Cavity</a></li>
+        <li class="main "><a href="#basic-optomechanics-and-cooling">Basic Optomechanics and Cooling</a></li>
+        <li class="main "><a href="#strong-coupling-regime">Strong Coupling Regime</a></li>
+        <li class="main "><a href="#optomechanically-induced-transparency">Optomechanically Induced Transparency</a></li>
+        <li class="main "><a href="#frequency-conversion-using-omit">Frequency Conversion Using OMIT</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<p>In this section a set of famous phenomena in optomechanics is presented. These calculations serve first as examples of using IOpy in simulating Langevin equations, and second are benchmarks of IOpy by comparing it to known theoretical models.</p>
+<h1 id="simple-cavity">Simple Cavity</h1>
+<!--
+![Inverted-colour optical micrograph of the circuit consisting of two coupled LC resonators, one having a mechanically com- pliant capacitor (Toth et. al. 2017).](ExamplesImg/LC.png){width=260 .center}
+-->
+
+<p align="center">
+  <img width="260" src="\ExamplesImg\LC.png">
+    <p align = "center">
+        Inverted-colour optical micrograph of the circuit consisting of two coupled LC resonators, one having a mechanically com- pliant capacitor (Toth et. al. 2017).
+    </p>
+</p>
+
+<p>in the first example we illustrate how to simulate a hot microwave resonator. Here the temperature of the bath is higher than the temperature of the drive and therefore we expect to see an emission shaped like a Lorentzian. <!--To see the fool written example, go to <a href="http://localhost:8888/notebooks/IOpy/iopy/examples/Simple%20Cavity.ipynb">Simple cavity example</a>.--></p>
+<p>Let's start by defining the cavity mode</p>
+<pre><code class="python">omega_c = 5e9*np.pi*2
+a = Mode('a', omega_c)
+</code></pre>
+
+<p>Then we have to define input fields. In this example the cavity is driven by a coherent drive and it is coupled to a thermal bath.</p>
+<pre><code class="python">kappa_ex = 0.2e6*np.pi*2
+kappa_0 = 0.3e6*np.pi*2
+kappa = kappa_ex + kappa_0
+
+T_drive = 2e-5
+T_bath = 10e-3
+
+a_inex = Input('ex', a, kappa_ex, kind = 'drive',
+                omega_drive = omega_c, bath_temp=T_drive)
+a_in0 = Input('0', a, kappa_0, kind = 'bath', bath_temp=T_bath)
+</code></pre>
+
+<p>And finally we define the system object and the output field.</p>
+<pre><code class="python">sys_cav = System([a], [a_in0,  a_inex], [])
+</code></pre>
+
+<pre><code class="python">a_outex = Output(sys_cav, a_inex)
+</code></pre>
+
+<p>Now for measuring the spectrum of the output field, we have to use the <code>spectrum</code> function.</p>
+<pre><code class="python">omegas = np.linspace(omega_c - 15*kappa, omega_c + 15*kappa, 1001)
+spec = me.spectrum(omegas, me.PowerMeasurement(a_outex),
+                   components = False, plot = True)
+</code></pre>
+
+<!--
+![Simple Cavity Spectrum](Simple Cavity/simple_cavity_spectrum.png){width=460 .center}
+\begin{figure}[!h]
+\caption{Simple cavity output spectrum}
+\end{figure}
+-->
+
+<p align="center">
+  <img width="460" src="\Simple Cavity\simple_cavity_spectrum.png">
+    <p align = "center">
+        Simple cavity output spectrum
+    </p>
+</p>
+
+<p>As we expect, we can see a Lorentzian in the spectrum. If the temperature of the driving field was higher than the thermal bath, we would see a deep instead of a peak.</p>
+<p>The linear response of the system to driving can also be measured with the <code>linear_response</code> function</p>
+<pre><code class="python">omegas_newex, S_ex = me.linear_response(omegas, sys_cav, a_outex,
+                                        a_inex, plot = 1)
+</code></pre>
+
+<!--
+![Cavity linear response in complex space](Simple Cavity/linear_response_comp.png){width=460 .center}
+\begin{figure}[!h]
+\caption{Cavity linear response in complex space}
+\end{figure}
+
+![Cavity linear response amplitude](Simple Cavity/linear_response_amp.png){width=460 .center}
+\begin{figure}[!h]
+\caption{Cavity linear response amplitude}
+\end{figure}
+
+![Cavity linear response phase](Simple Cavity/linear_response_phase.png){width=460 .center}
+\begin{figure}[!h]
+\caption{Cavity linear response phase}
+\end{figure}
+-->
+
+<p align="center">
+  <img width="460" src="\Simple Cavity\linear_response_comp.png">
+    <p align = "center">
+        Cavity linear response in complex space
+    </p>
+</p>
+
+<p align="center">
+  <img width="460" src="\Simple Cavity\linear_response_amp.png">
+  <p align = "center">
+        Cavity linear response amplitude
+  </p>
+</p>
+
+<p align="center">
+  <img width="460" src="\Simple Cavity\linear_response_phase.png">
+  <p align = "center">
+        Cavity linear response phase
+  </p>
+</p>
+
+<p>The results can also be compared to the theory. For example in this case the linear response of the system to the drive field is</p>
+<p>
+<script type="math/tex; mode=display"> S_{aa} = 1 - \frac{\kappa_{ex}}{\frac{\kappa}{2} - i(\omega-\omega_c)}.</script>
+</p>
+<p>The graphs below show the comparison between this equation and IOpy results.</p>
+<!--
+![Cvity linear response amplitude calculated by theory (dashed) and IOpy (blue).](Simple Cavity/comparison_amp.png){width=460 .center}
+\begin{figure}[!h]
+\caption{Cvity linear response amplitude calculated by theory (dashed) and IOpy (blue)}
+\end{figure}
+
+![Cvity linear response phase calculated by theory (dashed) and IOpy (blue)](Simple Cavity/comparison_phase.png){width=460 .center}
+\begin{figure}[!h]
+\caption{Cvity linear response phase calculated by theory (dashed) and IOpy (blue)}
+\end{figure}
+-->
+
+<p align="center">
+  <img width="460" src="\Simple Cavity\comparison_amp.png">
+  <p align = "center">
+        Cavity linear response amplitude
+  </p>
+</p>
+
+<p align="center">
+  <img width="460" src="\Simple Cavity\comparison_phase.png">
+  <p align = "center">
+        Cavity linear response phase
+  </p>
+</p>
+
+<h1 id="basic-optomechanics-and-cooling">Basic Optomechanics and Cooling</h1>
+<!--
+<img alt="False-colour scanning electron micrograph of the mechanically compliant drum capacitor (Toth et. al. 2017)." src="ExamplesImg/drum.png" />{width=260 .center}
+-->
+
+<p align="center">
+  <img width="260" src="\ExamplesImg\drum.png">
+    <p align = "center">
+        False-colour scanning electron micrograph of the mechanically compliant drum capacitor (Toth et. al. 2017).
+    </p>
+</p>
+
+<p>In this example we simulate an optomechanical system with a weak drive. Here we want to see the optomechanical cooling due to the increase in optomechanical damping rate. <!--To see the fool written example, go to <a href="http://localhost:8888/notebooks/IOpy/iopy/examples/Basic%20Optomechanics.ipynb">Basic optomechanics</a>.--></p>
+<p>In the basic optomechanical interaction, the cavity resonance frequency shifts by a constant value due to the DC nonlinearity. Therefore, before defining the modes we have to calculate this DC shift.</p>
+<pre><code class="python">omega_c = 5e9*np.pi*2     # cavity resonance frequency
+
+kappa_0 = 0.3e6*np.pi*2
+kappa_ex = 0.4e6*np.pi*2
+
+kappa = kappa_0 + kappa_ex
+
+omega_m = 5e6*np.pi*2    # mechanical resonance frequency
+gamma_m = 100*np.pi*2
+
+P_in = 5e-12
+
+g_0 = 200*np.pi*2
+
+omega_drive = omega_c - 1* omega_m
+
+
+from DCnonlinearities import optomechanics
+
+omdir = optomechanics(P_in, kappa_0, kappa_ex, omega_c,
+                      omega_drive, omega_m, g_0)
+
+g= omdir['g']  # optomechanical coupling rate = sqrt(nbar)*g_0
+omega_c = omdir['omega_c']   # new cavity resonance frequency
+</code></pre>
+
+<p>Now we can define the modes, as well as input fields including thermal baths coupled to optics and mechanics and the optical driving field.</p>
+<pre><code class="python">a = Mode('a', omega_c)
+b = Mode('b', omega_m)
+
+a_inex = Input('ex', a, kappa_ex, kind = 'drive',
+                omega_drive = omega_drive, bath_temp=10e-3)
+a_in0 = Input('0', a, kappa_0, kind = 'bath', bath_temp=10e-3)
+
+b_in0 = Input('0', b, gamma_m, kind = 'bath', bath_temp=10e-3)
+</code></pre>
+
+<p>Then we should define the coupling between the optical and mechanical modes:</p>
+<pre><code class="python">g_ab = Coupling(a, b, g * np.array([1,0,0,0]))
+</code></pre>
+
+<p>And finally we define the whole optomechanical system:</p>
+<pre><code class="python">sys_om = System([a, b], [a_in0,b_in0 , a_inex], [g_ab])
+</code></pre>
+
+<p>Now just like the previous example we can measure the spectrum of the output field.
+<!--
+<img alt="Optomechanical cavity output spectrum" src="Basic OM/spec.png" />{width=460 .center}
+<script type="math/tex; mode=display">\begin{figure}[!h]
+\caption{Optomechanical cavity output spectrum}
+\end{figure}</script>
+--></p>
+<p align="center">
+  <img width="460" src="\Basic OM\spec.png">
+    <p align = "center">
+        Optomechanical cavity output spectrum
+    </p>
+</p>
+
+<p>The peak that can be seen is because of low sampling rate of the calculations. To have a better precision we zoom on the neighborhood of the cavity resonance frequency.</p>
+<!--
+![Optomechanical cavity output spectrum](Basic OM/spec_zoom.png){width=460 .center}
+\begin{figure}[!h]
+\caption{Optomechanical cavity output spectrum}
+\end{figure}
+-->
+
+<p align="center">
+  <img width="460" src="\Basic OM\spec_zoom.png">
+    <p align = "center">
+        Optomechanical cavity output spectrum
+    </p>
+</p>
+
+<p>Here we can clearly see different contributions to the spectrum. In addition the width of the spectrum is equal to the theory value <script type="math/tex">\Gamma_{\text{eff}} = \Gamma_m (1 + C)</script> (with <script type="math/tex">C</script> as the cooperativity equal to <script type="math/tex">\frac{4g^2}{\kappa\Gamma_m}</script>) which results in cooling.</p>
+<h1 id="strong-coupling-regime">Strong Coupling Regime</h1>
+<!--
+<img alt="Mechanical frequency spectrum (frequency on vertical axis) as a function of laser detuning, for a strongly coupled optomechanical system (Aspelmeyer, Kippenberg, Marquardt 2014)." src="ExamplesImg/Strong.png" />{width=260 .center}
+-->
+
+<p align="center">
+  <img width="260" src="\ExamplesImg\Strong.png">
+    <p align = "center">
+        Mechanical frequency spectrum (frequency on vertical axis) as a function of laser detuning, for a strongly coupled optomechanical system. (Aspelmeyer, Kippenberg, Marquardt 2014)
+    </p>
+</p>
+
+<p>In this example we show the effect of increasing of the laser input power (<script type="math/tex">P_{\text{in}}</script>). For the details on the theory see <a href="https://journals.aps.org/rmp/abstract/10.1103/RevModPhys.86.1391">(Aspelmeyer, Kippenberg, Marquardt (2014))</a>, Section VII.C. By increasing the input power, at the beginning we can observe an improvement in the cooling, but as we continue increasing the power, the optical and mechanical modes hybridize to form two new modes with the eigenfrequencies</p>
+<p>
+<script type="math/tex; mode=display"> \omega_{\pm} = \frac{\Omega_m-\Delta}{2} \pm \sqrt{g^2 + (\frac{\Omega_m+\Delta}{2})^2}.</script>
+</p>
+<p>When the driving laser is exactly detuned on the red sideband (<script type="math/tex">\Delta=-\Omega_m</script>) the splitting of these two modes is equal to <script type="math/tex">2g</script>. In this example we want to show this splitting on the spectrum.</p>
+<p>To simulate this phenomenon, the code is exactly the same as the previous example but with a different input power.<!-- To see the full code go to <a href="http://localhost:8888/notebooks/IOpy/iopy/examples/Strong%20Coupling%20Regime.ipynb">Strong coupling regime</a>. --></p>
+<pre><code class="python">P_in = 5e-9
+</code></pre>
+
+<p>By measuring the output filed spectrum we can clearly see this mode splitting.</p>
+<!--
+![Optomechanical cavity output spectrum. One can see both red and blue sidebands of the pump.](Strong coupling/spec0.png){width=460 .center}
+\begin{figure}[!h]
+\caption{Optomechanical cavity output spectrum. One can see both red and blue sidebands of the pump.}
+\end{figure}
+-->
+
+<p align="center">
+  <img width="460" src="\Strong coupling\spec0.png">
+    <p align = "center">
+        Optomechanical cavity output spectrum. One can see both red and blue sidebands of the pump.
+    </p>
+</p>
+
+<p>To see better the splitting we change the measurement frequencies.</p>
+<!--
+![Optomechanical cavity output spectrum](Strong coupling/spec.png){width=460 .center}
+\begin{figure}[!h]
+\caption{Optomechanical cavity output spectrum}
+\end{figure}
+-->
+
+<p align="center">
+  <img width="460" src="\Strong coupling\spec.png">
+    <p align = "center">
+        Optomechanical cavity output spectrum
+    </p>
+</p>
+
+<h1 id="optomechanically-induced-transparency">Optomechanically Induced Transparency</h1>
+<!--
+<img alt="Transmission of the probe laser power through the optomechanical system in the case of a critically coupled cavity as a function of normalized probe laser frequency offset, when the control field is off (blue lines) and on (green lines) (Weis et al., 2010)" src="ExamplesImg/omit.png" />{width=260 .center}
+-->
+
+<p align="center">
+  <img width="260" src="\ExamplesImg\omit.png">
+    <p align = "center">
+        Transmission of the probe laser power through the optomechanical system in the case of a critically coupled cavity k0 = kex as a function of normalized probe laser frequency offset, when the control field is off (blue lines) and on (green lines) (Weis et al., 2010).
+    </p>
+</p>
+
+<p>This example is about the optomechanically induced transparency effect also known as OMIT. This effect was observed in atoms (electromagnetically induced transparency <a href="https://journals.aps.org/rmp/abstract/10.1103/RevModPhys.77.633">Fleischhauer, Imamoglu, and Marangos, 2005</a>) as the cancellation of absorption in the presence of an auxiliary laser field. OMIT was predicted theoretically by Schliesser, 2009 and <a href="https://journals.aps.org/pra/abstract/10.1103/PhysRevA.81.041803">Agarwal and Huang 2010</a>. When the optical cavity is pumped on the red sideband and we inject a weak probe field into the cavity, the optomechanical interaction causes the cavity to be seen transparent by this weak field.</p>
+<p>To simulate this phenomenan in IOpy, the setup is again similar to the basic optomechanics example. The difference here is that we set the driving field (control field, in this context) to be a high temperature source. In this way, the noise around this control field play the role of the weak probe field for us, so we can see the OMIT effect in the spectrum, as well as the linear response. <!--To see the full code go to <a href="http://localhost:8888/notebooks/IOpy/iopy/examples/OMIT.ipynb">OMIT</a> example.--></p>
+<pre><code class="python">T_cont = 1
+T_bath = 10e-3
+
+a_cont = Input('ex', a, kappa_ex, kind = 'drive',
+               omega_drive = omega_cont, bath_temp = T_cont)
+a_in0 = Input('0', a, kappa_0, kind = 'bath', bath_temp = T_bath)
+
+b_in0 = Input('0', b, gamma_m, kind = 'bath', bath_temp = T_bath)
+</code></pre>
+
+<p>And now we measure the spectrum and the linear response.</p>
+<!--
+![Optomechanical cavity output spectrum](omit/spec.png){width=460 .center}
+\begin{figure}[!h]
+\caption{Optomechanical cavity output spectrum}
+\end{figure}
+
+![Optomechanical cavity linear response amplitude](omit/LR_amp.png){width=460 .center}
+\begin{figure}[!h]
+\caption{Optomechanical cavity linear response amplitude}
+\end{figure}
+
+![Optomechanical cavity linear response phase](omit/LR_phase.png){width=460 .center}
+\begin{figure}[!h]
+\caption{Optomechanical cavity linear response phase}
+\end{figure}
+-->
+
+<p align="center">
+  <img width="460" src="\omit\spec.png">
+    <p align = "center">
+        Optomechanical cavity output spectrum
+    </p>
+</p>
+
+<p align="center">
+  <img width="460" src="\omit\LR_amp.png">
+  <p align = "center">
+        Optomechanical cavity linear response amplitude
+  </p>
+</p>
+
+<p align="center">
+  <img width="460" src="\omit\LR_phase.png">
+  <p align = "center">
+        Optomechanical cavity linear response phase
+  </p>
+</p>
+
+<p>These results can also be compared to theory. To see the details go to <a href="http://localhost:8888/notebooks/IOpy/iopy/Tests/OMIT%20Test.ipynb">OMIT Test</a> notebook. We can show for the transmission window</p>
+<p>
+<script type="math/tex; mode=display">T = 1 - \kappa_{\text{ext}}\frac{\chi_{\text{opt}}(\Omega)}{1 + g^2\chi_{\text{mech}}(\Omega)\chi_{\text{opt}}(\Omega)},</script>
+</p>
+<p>where</p>
+<p>
+<script type="math/tex; mode=display">
+    \chi_{\text{opt}}(\Omega) = [-i(\Omega+\Delta)+\kappa/2]^{-1},\\
+    \chi_{\text{mech}}(\Omega) = [-i(\Omega-\Omega_m)+\Gamma_m/2]^{-1},
+</script>
+</p>
+<p>with</p>
+<p>
+<script type="math/tex; mode=display">\Delta = \omega_{\text{cont}} - \omega_{\text{cav}},\quad \Omega = \omega_p - \omega_{\text{cont}}.</script>
+</p>
+<p>And the linear response from IOpy can be compared with this results as shown in figures bellow.</p>
+<!--
+![Optomechanical cavity linear response amplitude](omit/test_amp.png){width=460 .center}
+\begin{figure}[!h]
+\caption{Optomechanical cavity linear response amplitude}
+\end{figure}
+
+![cavity linear response phase](omit/test_phase.png){width=460 .center}
+\begin{figure}[!h]
+\caption{Optomechanical cavity linear response phase}
+\end{figure}
+-->
+
+<p align="center">
+  <img width="460" src="\omit\test_amp.png">
+  <p align = "center">
+        Optomechanical cavity linear response amplitude
+  </p>
+</p>
+
+<p align="center">
+  <img width="460" src="\omit\test_phase.png">
+  <p align = "center">
+        Optomechanical cavity linear response phase
+  </p>
+</p>
+
+<h1 id="frequency-conversion-using-omit">Frequency Conversion Using OMIT</h1>
+<!--
+<img alt="Reciprocal mechanically-mediated frequency conversion (adapted from Peterson et. al. 2018)" src="ExamplesImg/conv.png" />{width=260 .center}
+-->
+
+<p align="center">
+  <img width="210" src="\ExamplesImg\conv.png">
+    <p align = "center">
+        Reciprocal mechanically-mediated frequency conversion (adapted from Peterson et. al. 2018).
+    </p>
+</p>
+
+<p>The last example is about the frequency conversion using the OMIT effect which is a step towards multimode calculations. In this scenario, two optical modes with different resonance frequencies are coupled to the same mechanical mode and the optical modes are each pumped on their red sidebands. If we inject a weak probe to one of the cavities, there will be an emission from the other cavity. The qualitative explanation is that when probe field is on resonance with the first cavity, it will beat with the pump and excite the mechanics. the excitation of the mechanics then phase modulates the second pump which creates sidebands. To see this effect in IOpy first we have to define the whole system as two optical modes each with one drive, tuned on their red sidebands and coupled to a shared mechanical mode.<!-- To see the full code, go to <a href="http://localhost:8888/notebooks/IOpy/iopy/examples/Frequency%20Conversion%20using%20OMIT.ipynb">Frequency Conversion using OMIT</a>.--></p>
+<pre><code class="python">omega_cav1 = 5e9*np.pi*2
+kappa_01 = 0.3e6*np.pi*2
+kappa_ex1 = 0.4e6*np.pi*2
+
+omega_cav2 = 6e9*np.pi*2
+kappa_02 = 0.3e6*np.pi*2
+kappa_ex2 = 0.4e6*np.pi*2
+
+
+omega_m = 5e6*np.pi*2
+gamma_m = 100*np.pi*2
+
+g_01 = 200*np.pi*2
+g_02= 200*np.pi*2
+
+
+P_in1 = 8e-10
+Delta1 = -omega_m
+omega_cont1 = omega_cav1 + Delta1
+T_cont1 = 2
+bath_temp1 = 10e-3
+
+P_in2 = 8e-10
+Delta2 = -omega_m
+omega_cont2 = omega_cav2 + Delta2
+T_cont2 = 2
+bath_temp2 = 10e-3
+
+from DCnonlinearities import optomechanics
+
+omdir1 = optomechanics(P_in1, kappa_01, kappa_ex1,
+                       omega_cav1, omega_cont1, omega_m, g_01)
+g1= omdir1['g']
+omega_cav1 = omdir1['omega_c']
+
+omdir2 = optomechanics(P_in2, kappa_02, kappa_ex2,
+                       omega_cav2, omega_cont2, omega_m, g_02)
+g2= omdir2['g']
+omega_cav2 = omdir2['omega_c']
+
+
+
+a1 = Mode('a1', omega_cav1)
+a2 = Mode('a2', omega_cav2)
+b = Mode('b', omega_m)
+
+a_cont1 = Input('ex', a1, kappa_ex1, kind = 'drive',
+                omega_drive = omega_cont1, bath_temp = T_cont1)
+a_in01 = Input('0', a1, kappa_01, kind = 'bath', bath_temp = bath_temp1)
+
+a_cont2 = Input('ex', a2, kappa_ex2, kind = 'drive',
+                omega_drive = omega_cont2, bath_temp = T_cont2)
+a_in02 = Input('0', a2, kappa_02, kind = 'bath', bath_temp = bath_temp2)
+
+b_in0 = Input('0', b, gamma_m, kind = 'bath', bath_temp=10e-3)
+
+g_a1b = Coupling(a1, b, g1 * np.array([1,0,1,0]))
+g_a2b = Coupling(a2, b, g2 * np.array([1,0,0,0]))
+
+sys_om = System([a1, a2, b], [a_in01, a_in02, b_in0, a_cont1, a_cont2],
+                [g_a1b, g_a2b])
+</code></pre>
+
+<p>Then we have to define the output ports and then measure the linear response from the input drives port of first cavity to the output port of the second cavity.</p>
+<pre><code class="python">a_outex1 = Output(sys_om, a_cont1)
+a_outex2 = Output(sys_om, a_cont2)
+
+omegas = np.linspace(omega_cav1 - 2.5* omega_m, omega_cav1 +  2.5 * omega_m, 10000)
+omegas_new, A = me.linear_response(omegas, sys_om, a_outex2, a_cont1, plot = True)
+</code></pre>
+
+<p>And the result, which is a measure of the frequency conversion efficiency, can be seen in the graph below.</p>
+<!--
+![Frequency conversion linear response amplitude](conv/LR_amp.png){width=460 .center}
+\begin{figure}[!h]
+\caption{Frequency conversion linear response amplitude}
+\end{figure}
+-->
+
+<p align="center">
+  <img width="460" src="\conv\LR_amp.png">
+  <p align = "center">
+        Frequency conversion linear response amplitude
+  </p>
+</p>
+
+<p>Both the input field and output field frequencies are shown on the graph. This means every point on this curve is the amplitude of the output field at the "output frequency", when the input probe is at the corresponding "input frequency".</p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" defer></script>
+        <script src="../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
