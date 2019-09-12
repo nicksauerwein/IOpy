@@ -6,7 +6,7 @@ pages:
     - Examples: Examples.md
     - Outlook: outlook.md
     - References: references.md
-
+    Simple Cavity/
 # Enabling LaTeX math equations
 markdown_extensions: 
     - mdx_math:
