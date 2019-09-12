@@ -203,7 +203,9 @@ spec = me.spectrum(omegas, me.PowerMeasurement(a_outex),
 </p>
 
 <p>The results can also be compared to the theory. For example in this case the linear response of the system to the drive field is</p>
-<p>$$ S_{aa} = 1 - \frac{\kappa_{ex}}{\frac{\kappa}{2} - i(\omega-\omega_c)}.$$</p>
+<p>
+<script type="math/tex; mode=display"> S_{aa} = 1 - \frac{\kappa_{ex}}{\frac{\kappa}{2} - i(\omega-\omega_c)}.</script>
+</p>
 <p>The graphs below show the comparison between this equation and IOpy results.</p>
 <!--
 ![Cvity linear response amplitude calculated by theory (dashed) and IOpy (blue).](Simple Cavity/comparison_amp.png){width=460 .center}
@@ -293,9 +295,9 @@ b_in0 = Input('0', b, gamma_m, kind = 'bath', bath_temp=10e-3)
 <p>Now just like the previous example we can measure the spectrum of the output field.
 <!--
 <img alt="Optomechanical cavity output spectrum" src="Basic OM/spec.png" />{width=460 .center}
-\begin{figure}[!h]
+<script type="math/tex; mode=display">\begin{figure}[!h]
 \caption{Optomechanical cavity output spectrum}
-\end{figure}
+\end{figure}</script>
 --></p>
 <p align="center">
   <img width="460" src="\Basic OM\spec.png">
@@ -333,7 +335,9 @@ b_in0 = Input('0', b, gamma_m, kind = 'bath', bath_temp=10e-3)
 </p>
 
 <p>In this example we show the effect of increasing of the laser input power ($P_{\text{in}}$). For the details on the theory see <a href="https://journals.aps.org/rmp/abstract/10.1103/RevModPhys.86.1391">(Aspelmeyer, Kippenberg, Marquardt (2014))</a>, Section VII.C. By increasing the input power, at the beginning we can observe an improvement in the cooling, but as we continue increasing the power, the optical and mechanical modes hybridize to form two new modes with the eigenfrequencies</p>
-<p>$$ \omega_{\pm} = \frac{\Omega_m-\Delta}{2} \pm \sqrt{g^2 + (\frac{\Omega_m+\Delta}{2})^2}.$$</p>
+<p>
+<script type="math/tex; mode=display"> \omega_{\pm} = \frac{\Omega_m-\Delta}{2} \pm \sqrt{g^2 + (\frac{\Omega_m+\Delta}{2})^2}.</script>
+</p>
 <p>When the driving laser is exactly detuned on the red sideband ($\Delta=-\Omega_m$) the splitting of these two modes is equal to $2g$. In this example we want to show this splitting on the spectrum.</p>
 <p>To simulate this phenomenon, the code is exactly the same as the previous example but with a different input power.<!-- To see the full code go to <a href="http://localhost:8888/notebooks/IOpy/iopy/examples/Strong%20Coupling%20Regime.ipynb">Strong coupling regime</a>. --></p>
 <pre><code class="python">P_in = 5e-9
@@ -433,14 +437,20 @@ b_in0 = Input('0', b, gamma_m, kind = 'bath', bath_temp = T_bath)
 </p>
 
 <p>These results can also be compared to theory. To see the details go to <a href="http://localhost:8888/notebooks/IOpy/iopy/Tests/OMIT%20Test.ipynb">OMIT Test</a> notebook. We can show for the transmission window</p>
-<p>$$T = 1 - \kappa_{\text{ext}}\frac{\chi_{\text{opt}}(\Omega)}{1 + g^2\chi_{\text{mech}}(\Omega)\chi_{\text{opt}}(\Omega)},$$</p>
+<p>
+<script type="math/tex; mode=display">T = 1 - \kappa_{\text{ext}}\frac{\chi_{\text{opt}}(\Omega)}{1 + g^2\chi_{\text{mech}}(\Omega)\chi_{\text{opt}}(\Omega)},</script>
+</p>
 <p>where</p>
-<p>$$
-    \chi_{\text{opt}}(\Omega) = [-i(\Omega+\Delta)+\kappa/2]^{-1},\
+<p>
+<script type="math/tex; mode=display">
+    \chi_{\text{opt}}(\Omega) = [-i(\Omega+\Delta)+\kappa/2]^{-1},\\
     \chi_{\text{mech}}(\Omega) = [-i(\Omega-\Omega_m)+\Gamma_m/2]^{-1},
-$$</p>
+</script>
+</p>
 <p>with</p>
-<p>$$\Delta = \omega_{\text{cont}} - \omega_{\text{cav}},\quad \Omega = \omega_p - \omega_{\text{cont}}.$$</p>
+<p>
+<script type="math/tex; mode=display">\Delta = \omega_{\text{cont}} - \omega_{\text{cav}},\quad \Omega = \omega_p - \omega_{\text{cont}}.</script>
+</p>
 <p>And the linear response from IOpy can be compared with this results as shown in figures bellow.</p>
 <!--
 ![Optomechanical cavity linear response amplitude](omit/test_amp.png){width=460 .center}
@@ -579,6 +589,7 @@ omegas_new, A = me.linear_response(omegas, sys_om, a_outex2, a_cont1, plot = Tru
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
         <script src="../js/base.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
         <script src="../search/main.js" defer></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
