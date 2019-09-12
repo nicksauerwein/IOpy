@@ -65,7 +65,7 @@ spec = me.spectrum(omegas, me.PowerMeasurement(a_outex),
 
 
 <p align="center">
-  <img width="460" src="\Simple Cavity\simple_cavity_spectrum.png">
+  <img width="460" src="https://github.com/nicksauerwein/IOpy/blob/master/docs/docs/Simple%20Cavity/simple_cavity_spectrum.png?raw=true">
     <p align = "center">
         Simple cavity output spectrum
     </p>
@@ -99,20 +99,20 @@ omegas_newex, S_ex = me.linear_response(omegas, sys_cav, a_outex,
 -->
 
 <p align="center">
-  <img width="460" src="\Simple Cavity\linear_response_comp.png">
+  <img width="460" src="https://github.com/nicksauerwein/IOpy/blob/master/docs/docs/Simple%20Cavity/linear_response_comp.png?raw=true">
     <p align = "center">
         Cavity linear response in complex space
     </p>
 </p>
 
 <p align="center">
-  <img width="460" src="\Simple Cavity\linear_response_amp.png">
+  <img width="460" src="https://github.com/nicksauerwein/IOpy/blob/master/docs/docs/Simple%20Cavity/linear_response_amp.png?raw=true">
   <p align = "center">
         Cavity linear response amplitude
   </p>
 </p>
 <p align="center">
-  <img width="460" src="\Simple Cavity\linear_response_phase.png">
+  <img width="460" src="https://github.com/nicksauerwein/IOpy/blob/master/docs/docs/Simple%20Cavity/linear_response_phase.png?raw=true">
   <p align = "center">
         Cavity linear response phase
   </p>
@@ -138,13 +138,13 @@ The graphs below show the comparison between this equation and IOpy results.
 -->
 
 <p align="center">
-  <img width="460" src="\Simple Cavity\comparison_amp.png">
+  <img width="460" src="https://github.com/nicksauerwein/IOpy/blob/master/docs/docs/Simple%20Cavity/comparison_amp.png?raw=true">
   <p align = "center">
         Cavity linear response amplitude
   </p>
 </p>
 <p align="center">
-  <img width="460" src="\Simple Cavity\comparison_phase.png">
+  <img width="460" src="https://github.com/nicksauerwein/IOpy/blob/master/docs/docs/Simple%20Cavity/comparison_phase.png?raw=true">
   <p align = "center">
         Cavity linear response phase
   </p>
@@ -159,7 +159,7 @@ The graphs below show the comparison between this equation and IOpy results.
 
 
 <p align="center">
-  <img width="260" src="\ExamplesImg\drum.png">
+  <img width="260" src="https://github.com/nicksauerwein/IOpy/blob/master/docs/docs/ExamplesImg/drum.png?raw=true">
     <p align = "center">
         False-colour scanning electron micrograph of the mechanically compliant drum capacitor (Toth et. al. 2017).
     </p>
@@ -229,7 +229,7 @@ Now just like the previous example we can measure the spectrum of the output fie
 -->
 
 <p align="center">
-  <img width="460" src="\Basic OM\spec.png">
+  <img width="460" src="https://github.com/nicksauerwein/IOpy/blob/master/docs/docs/Basic%20OM/spec.png?raw=true">
     <p align = "center">
         Optomechanical cavity output spectrum
     </p>
@@ -246,7 +246,7 @@ The peak that can be seen is because of low sampling rate of the calculations. T
 -->
 
 <p align="center">
-  <img width="460" src="\Basic OM\spec_zoom.png">
+  <img width="460" src="https://github.com/nicksauerwein/IOpy/blob/master/docs/docs/Basic%20OM/spec_zoom.png?raw=true">
     <p align = "center">
         Optomechanical cavity output spectrum
     </p>
@@ -262,7 +262,7 @@ Here we can clearly see different contributions to the spectrum. In addition the
 
 
 <p align="center">
-  <img width="260" src="\ExamplesImg\Strong.png">
+  <img width="260" src="https://github.com/nicksauerwein/IOpy/blob/master/docs/docs/ExamplesImg/Strong.png?raw=true">
     <p align = "center">
         Mechanical frequency spectrum (frequency on vertical axis) as a function of laser detuning, for a strongly coupled optomechanical system. (Aspelmeyer, Kippenberg, Marquardt 2014)
     </p>
@@ -290,7 +290,7 @@ By measuring the output filed spectrum we can clearly see this mode splitting.
 -->
 
 <p align="center">
-  <img width="460" src="\Strong coupling\spec0.png">
+  <img width="460" src="https://github.com/nicksauerwein/IOpy/blob/master/docs/docs/Strong%20coupling/spec0.png?raw=true">
     <p align = "center">
         Optomechanical cavity output spectrum. One can see both red and blue sidebands of the pump.
     </p>
@@ -307,7 +307,7 @@ To see better the splitting we change the measurement frequencies.
 -->
 
 <p align="center">
-  <img width="460" src="\Strong coupling\spec.png">
+  <img width="460" src="https://github.com/nicksauerwein/IOpy/blob/master/docs/docs/Strong%20coupling/spec.png?raw=true">
     <p align = "center">
         Optomechanical cavity output spectrum
     </p>
@@ -320,7 +320,7 @@ To see better the splitting we change the measurement frequencies.
 -->
 
 <p align="center">
-  <img width="260" src="\ExamplesImg\omit.png">
+  <img width="260" src="https://github.com/nicksauerwein/IOpy/blob/master/docs/docs/ExamplesImg/omit.png?raw=true">
     <p align = "center">
         Transmission of the probe laser power through the optomechanical system in the case of a critically coupled cavity k0 = kex as a function of normalized probe laser frequency offset, when the control field is off (blue lines) and on (green lines) (Weis et al., 2010).
     </p>
@@ -363,28 +363,28 @@ And now we measure the spectrum and the linear response.
 
 
 <p align="center">
-  <img width="460" src="\omit\spec.png">
+  <img width="460" src="https://github.com/nicksauerwein/IOpy/blob/master/docs/docs/omit/spec.png?raw=true">
     <p align = "center">
         Optomechanical cavity output spectrum
     </p>
 </p>
 
 <p align="center">
-  <img width="460" src="\omit\LR_amp.png">
+  <img width="460" src="https://github.com/nicksauerwein/IOpy/blob/master/docs/docs/omit/LR_amp.png?raw=true">
   <p align = "center">
         Optomechanical cavity linear response amplitude
   </p>
 </p>
 
 <p align="center">
-  <img width="460" src="\omit\LR_phase.png">
+  <img width="460" src="https://github.com/nicksauerwein/IOpy/blob/master/docs/docs/omit/LR_phase.png?raw=true">
   <p align = "center">
         Optomechanical cavity linear response phase
   </p>
 </p>
 
 
-These results can also be compared to theory. To see the details go to [OMIT Test](http://localhost:8888/notebooks/IOpy/iopy/Tests/OMIT%20Test.ipynb) notebook. We can show for the transmission window
+<!--These results can also be compared to theory. To see the details go to [OMIT Test](http://localhost:8888/notebooks/IOpy/iopy/Tests/OMIT%20Test.ipynb) notebook. We can show for the transmission window-->
 
 
 $$T = 1 - \kappa_{\text{ext}}\frac{\chi_{\text{opt}}(\Omega)}{1 + g^2\chi_{\text{mech}}(\Omega)\chi_{\text{opt}}(\Omega)},$$
@@ -416,14 +416,14 @@ And the linear response from IOpy can be compared with this results as shown in 
 
 
 <p align="center">
-  <img width="460" src="\omit\test_amp.png">
+  <img width="460" src="https://github.com/nicksauerwein/IOpy/blob/master/docs/docs/omit/test_amp.png?raw=true">
   <p align = "center">
         Optomechanical cavity linear response amplitude
   </p>
 </p>
 
 <p align="center">
-  <img width="460" src="\omit\test_phase.png">
+  <img width="460" src="https://github.com/nicksauerwein/IOpy/blob/master/docs/docs/omit/test_phase.png?raw=true">
   <p align = "center">
         Optomechanical cavity linear response phase
   </p>
@@ -438,7 +438,7 @@ And the linear response from IOpy can be compared with this results as shown in 
 
 
 <p align="center">
-  <img width="210" src="\ExamplesImg\conv.png">
+  <img width="210" src="https://github.com/nicksauerwein/IOpy/blob/master/docs/docs/ExamplesImg/conv.png?raw=true">
     <p align = "center">
         Reciprocal mechanically-mediated frequency conversion (adapted from Peterson et. al. 2018).
     </p>
@@ -532,7 +532,7 @@ And the result, which is a measure of the frequency conversion efficiency, can b
 
 
 <p align="center">
-  <img width="460" src="\conv\LR_amp.png">
+  <img width="460" src="https://github.com/nicksauerwein/IOpy/blob/master/docs/docs/conv/LR_amp.png?raw=true">
   <p align = "center">
         Frequency conversion linear response amplitude
   </p>

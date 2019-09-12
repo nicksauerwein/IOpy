@@ -209,7 +209,7 @@ Attributes:
 '''
 </code></pre>
 
-<p>Refer to <a href="http://127.0.0.1:8000/theory/#input-output-formalism">Equation (1)</a> on the Theory page for more information on $M$ and $L$ matrices.</p>
+<p>Refer to <a href="https://nicksauerwein.github.io/IOpy/theory/#input-output-formalism">Equation (1)</a> on the Theory page for more information on $M$ and $L$ matrices.</p>
 <p>Methods:</p>
 <pre><code class="python">'''
 add_mode(self, mode):
@@ -257,7 +257,7 @@ SMatrix(self, omegas):
 '''
 </code></pre>
 
-<p>Refer to <a href="http://127.0.0.1:8000/theory/#input-output-formalism">Equation (3)</a> on Theory page for more information about scattering matrix.</p>
+<p>Refer to <a href="https://nicksauerwein.github.io/IOpy/theory/#input-output-formalism">Equation (3)</a> on Theory page for more information about scattering matrix.</p>
 <h4 id="class-output">Class <code>Output</code></h4>
 <p>This class represents the output field of the system with respect to an input field (in terms of input-output formalism).</p>
 <pre><code class="python">'''
@@ -270,14 +270,14 @@ Attributes:
 </code></pre>
 
 <h1 id="measurement">measurement</h1>
-<p>Objects and functions in this script are used to perfom measurements on the output fields. The possible measurement schemes are linear response and spectrum. For more information on the definitions see Paragraph <a href="http://127.0.0.1:8000/theory/#measurements">measurements</a> on the theory Page.</p>
+<p>Objects and functions in this script are used to perfom measurements on the output fields. The possible measurement schemes are linear response and spectrum. For more information on the definitions see Paragraph <a href="https://nicksauerwein.github.io/IOpy/theory/#measurements">measurements</a> on the theory Page.</p>
 <h4 id="class-measurementoperator">Class <code>MeasurementOperator</code></h4>
 <p>This class represents a general measurement with a measurement matrix for defining a correlator</p>
 <p>
 <script type="math/tex; mode=display">Q(\tau) = \langle Q_{ij}Z_{\text{out},i}(0)Z_{\text{out},j}(\tau)\rangle,</script>
 </p>
 <p>where $Q_{ij}$ is the $ij^{th}$ element of the measurement matrix.</p>
-<p>Refer to the Paragraph <a href="http://127.0.0.1:8000/theory/#spectra">spectra</a> of the theory Page for more information on the measurement matrix.</p>
+<p>Refer to the Paragraph <a href="https://nicksauerwein.github.io/IOpy/theory/#spectra">spectra</a> of the theory Page for more information on the measurement matrix.</p>
 <pre><code class="python">'''
 Attributes:
     Q: the measurement matrix.
@@ -305,10 +305,10 @@ Attributes:
 <p>This class represents a Homodyn measurement scheme object with a homodyning angle.
 The correlator function and measurement matrix in this scheme are</p>
 <p>
-<script type="math/tex; mode=display"> 
+<script type="math/tex; mode=display">
 Q(\tau) = \langle \cos^2(\theta) X(0)X(\tau) + \sin(\theta)\cos(\theta) X(0)Y(\tau)
 </script>
-<script type="math/tex; mode=display">\quad\quad\quad + \sin(\theta)\cos(\theta) Y(0)X(\tau) + \sin^2(\theta) Y(0)Y(\tau) \rangle, 
+<script type="math/tex; mode=display">\quad\quad\quad + \sin(\theta)\cos(\theta) Y(0)X(\tau) + \sin^2(\theta) Y(0)Y(\tau) \rangle,
 </script>
 </p>
 <p>
@@ -326,7 +326,7 @@ Attributes:
 <h4 id="function-linear_response">Function <code>linear_response</code></h4>
 <p>This function calculates linear response (susceptibility) of the system from one specific input port to an output port in frequency domain
 <script type="math/tex; mode=display">    a_{\text{out}} = \chi  a_{\text{in}} .</script>
-Refer to <a href="http://127.0.0.1:8000/theory/#measurements">Equation (4)</a> of linear response Paragraph on the theory Page for more information on linear response. </p>
+Refer to <a href="https://nicksauerwein.github.io/IOpy/theory/#measurements">Equation (4)</a> of linear response Paragraph on the theory Page for more information on linear response.</p>
 <pre><code class="python">'''    
     Args:
         Omegas: the frequencies vector we want to calculate
@@ -346,7 +346,7 @@ Refer to <a href="http://127.0.0.1:8000/theory/#measurements">Equation (4)</a> o
 </code></pre>
 
 <h4 id="function-spectrum">Function <code>spectrum</code></h4>
-<p>The spectrum of an output field. Refer to <a href="http://127.0.0.1:8000/theory/#spectra">spectra</a> Paragraph on the theory Page for more information on the spectra. </p>
+<p>The spectrum of an output field. Refer to <a href="https://nicksauerwein.github.io/IOpy/theory/#spectra">spectra</a> Paragraph on the theory Page for more information on the spectra.</p>
 <pre><code class="python">'''
     Args:
         omegas: the frequencies vector we want to calculate the
@@ -371,8 +371,8 @@ Refer to <a href="http://127.0.0.1:8000/theory/#measurements">Equation (4)</a> o
 <h4 id="function-kerr_effect_nbar">Function <code>Kerr_effect_nbar</code></h4>
 <p>This function finds the steady state average photon number in an optical cavity with kerr type nonlinearity. It findes the smallest root of a third order polynomial equation:</p>
 <p>
-<script type="math/tex; mode=display"> [\frac{- \kappa_{\text{ex}}P_{\text{in}}}{\hbar\omega_{\text{drive}}}]\bar n^3 + 
-   (\Delta^2 + (\frac{\kappa}{2})^2)\bar n^2 + 
+<script type="math/tex; mode=display"> [\frac{- \kappa_{\text{ex}}P_{\text{in}}}{\hbar\omega_{\text{drive}}}]\bar n^3 +
+   (\Delta^2 + (\frac{\kappa}{2})^2)\bar n^2 +
    (2K\Delta) \bar n +
    (K^2) = 0</script>
 </p>
@@ -391,7 +391,7 @@ Refer to <a href="http://127.0.0.1:8000/theory/#measurements">Equation (4)</a> o
 </code></pre>
 
 <h4 id="function-optomechanics">Function <code>optomechanics</code></h4>
-<p>This function finds the steady state average photon number in an optomechanical cavity and also finds the DC shift cavity 
+<p>This function finds the steady state average photon number in an optomechanical cavity and also finds the DC shift cavity
 resonance frequency. It uses the <code>Kerr_effect_nbar()</code> function to solve the third order equation</p>
 <p>
 <script type="math/tex; mode=display">\bar n [ \frac{\kappa^2}{4} + (\Delta - (\frac{2g_0^2}{\Omega_m})\bar n)^2 ] = \kappa_{\text{ext}} \frac{P_{\text{in}}}{\hbar\omega_{\text{drive}}}.</script>
