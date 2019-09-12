@@ -13,7 +13,7 @@ However, there are some approaches to resolve the problem still in frequency dom
 
 
 <p align="center">
-  <img width="460" src="\auxmodes.png">
+  <img width="460" src="https://github.com/nicksauerwein/IOpy/blob/master/docs/docs/auxmodes.png?raw=true">
     <p align = "center">
         The idea of the expanded mode basis for the four-mode isolator (Peterson et. al., 2018).
     </p>
@@ -31,7 +31,7 @@ and
 
 $$H_{\text{drive}} = \sum_{j,m}i\hbar\sqrt{\kappa_{jm}}(s_{\text{in},jm}(t)a^\dagger_je^{-i\omega_mt} + H.c.).$$
 
-With this, we can derive the equations of motion in the time domain and we can define the output ports with the input-output theory as $s_{\text{out},jm} = s_{\text{in},jm} - \sqrt{\kappa_{jm}}a_j$. Then for calculating the scattering matrix we can simulate the equations of motion in the time domain for inputs as sine waves, spanning a frequency band. Then look at the Fourier transform of the output wave at the frequencies we are interested to extract the amplitude and phase of the response. Please note this scattering matrix will not be a simple scattering matrix anymore. Because for example for a single weak sine wave there can be multiple sine waves at the output but we can still look for the frequencies of interest. Once the scattering matrix is calculated, every other parameter like the spectrum can be calculated. 
+With this, we can derive the equations of motion in the time domain and we can define the output ports with the input-output theory as $s_{\text{out},jm} = s_{\text{in},jm} - \sqrt{\kappa_{jm}}a_j$. Then for calculating the scattering matrix we can simulate the equations of motion in the time domain for inputs as sine waves, spanning a frequency band. Then look at the Fourier transform of the output wave at the frequencies we are interested to extract the amplitude and phase of the response. Please note this scattering matrix will not be a simple scattering matrix anymore. Because for example for a single weak sine wave there can be multiple sine waves at the output but we can still look for the frequencies of interest. Once the scattering matrix is calculated, every other parameter like the spectrum can be calculated.
 
 This simulation is done for a simple case of a single cavity. <!--To see the full code go to [TimeDomain - SimpleCavity](http://localhost:8888/notebooks/IOpy/iopy/Time%20Domain/TimeDomain%20-%20SimpleCavity.ipynb). -->The results for this simulation are shown in the figures below.
 
@@ -49,14 +49,14 @@ This simulation is done for a simple case of a single cavity. <!--To see the ful
 
 
 <p align="center">
-  <img width="460" src="\time\amp.png">
+  <img width="460" src="https://github.com/nicksauerwein/IOpy/blob/master/docs/docs/time/amp.png?raw=true">
     <p align = "center">
         The amplitude of the linear response calculated with time domain simulation
     </p>
 </p>
 
 <p align="center">
-  <img width="460" src="\time\phase.png">
+  <img width="460" src="https://github.com/nicksauerwein/IOpy/blob/master/docs/docs/time/phase.png?raw=true">
     <p align = "center">
         The phase of the linear response calculated with time domain simulation
     </p>
