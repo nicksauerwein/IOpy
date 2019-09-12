@@ -6,11 +6,8 @@ pages:
     - Examples: Examples.md
     - Outlook: outlook.md
     - References: references.md
-    CNAME
-    Simple Cavity/
-        simple_cavity_spectrum.png
 # Enabling LaTeX math equations
-markdown_extensions: 
+markdown_extensions:
     - mdx_math:
         enable_dollar_delimiter: True
 extra_javascript: ['https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML']
