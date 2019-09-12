@@ -102,61 +102,102 @@
 <p>On this Page, the theory behind the IOpy calculations is introduced.</p>
 <p>There are different approaches to model open quantum systems. But the two most commonly used ones are the density matrix approach using master equations and the Langevin equations, which is also known as input-output theory. Input-output theory allows us to directly model the quantum fluctuations injected from any port into the system. Quantum Langevin equations are formulated on the level of the Heisenberg equations of motion describing the time evolution of any operator of the system. Moreover, in case of optical cavities any coherent laser drive that may be present can be taken into account. For more details see <a href="https://www.springer.com/de/book/9783540223016">Gardiner and Zoller (2004)</a> and <a href="http://dx.doi.org/10.1103/RevModPhys.82.1155">Clerk et al. (2010)</a>.</p>
 <p><br />For example, for an optical cavity which is driven by a coherent laser field with the detuning $\Delta$ from the cavity resonance frequency, via a coupling of $\kappa_{ex}$ and is also coupled to the environment through the dissipation rate of $\kappa_0$, the equations of motion can be written as</p>
-<p>$$\dot a = -\frac{\kappa}{2}a + i\Delta a + \sqrt{\kappa_{\text{ex}}}a_{\text{in},\text{ex}} + \sqrt{\kappa_{0}}a_{\text{in},0},$$</p>
+<p>
+<script type="math/tex; mode=display">\dot a = -\frac{\kappa}{2}a + i\Delta a + \sqrt{\kappa_{\text{ex}}}a_{\text{in},\text{ex}} + \sqrt{\kappa_{0}}a_{\text{in},0},</script>
+</p>
 <p>where $\kappa = \kappa_0 + \kappa_{\text{ex}}$ is the total dissipation rate. $a_{\text{in},\text{ex}}$ and $a_{\text{in},0}$ are input operators of the driving field and the stochastic thermal field respectively. This equation can also be written in terms of quadrature operators</p>
-<p>$$\dot X = \Delta Y -\frac{\kappa}{2} X + \sqrt{\kappa_{\text{ex}}}\, X_{\text{in},\text{ex}} + \sqrt{\kappa_{0}}\, X_{\text{in},0}$$
-$$\dot Y = -\Delta X -\frac{\kappa}{2} Y + \sqrt{\kappa_{\text{ex}}}\, Y_{\text{in},\text{ex}} + \sqrt{\kappa_{0}}\, Y_{\text{in},0},$$</p>
+<p>
+<script type="math/tex; mode=display">\dot X = \Delta Y -\frac{\kappa}{2} X + \sqrt{\kappa_{\text{ex}}}\, X_{\text{in},\text{ex}} + \sqrt{\kappa_{0}}\, X_{\text{in},0}</script>
+<script type="math/tex; mode=display">\dot Y = -\Delta X -\frac{\kappa}{2} Y + \sqrt{\kappa_{\text{ex}}}\, Y_{\text{in},\text{ex}} + \sqrt{\kappa_{0}}\, Y_{\text{in},0},</script>
+</p>
 <p>where the quadrature operators are defined as</p>
-<p>$$X = \frac{a^\dagger + a}{\sqrt{2}},$$
-$$Y = i\frac{a^\dagger - a}{\sqrt{2}}.$$</p>
+<p>
+<script type="math/tex; mode=display">X = \frac{a^\dagger + a}{\sqrt{2}},</script>
+<script type="math/tex; mode=display">Y = i\frac{a^\dagger - a}{\sqrt{2}}.</script>
+</p>
 <p>According to the input-output theory of open quantum systems, the output field (which in case of optical cavity can be the reflected or transmitted light through the cavity) is given by</p>
-<p>$$a_{\text{out}} = a_{\text{in}} - \sqrt{\kappa_{\text{ex}}}a.$$</p>
+<p>
+<script type="math/tex; mode=display">a_{\text{out}} = a_{\text{in}} - \sqrt{\kappa_{\text{ex}}}a.</script>
+</p>
 <p>It can also be written in terms of quadratures
-$$X_{\text{out},\text{ex}} = X_{\text{in},\text{ex}} - \sqrt{\kappa_{\text{ex}}}\, X,$$
-$$Y_{\text{out},\text{ex}} = Y_{\text{in},\text{ex}} - \sqrt{\kappa_{\text{ex}}}\, Y.$$</p>
+<script type="math/tex; mode=display">X_{\text{out},\text{ex}} = X_{\text{in},\text{ex}} - \sqrt{\kappa_{\text{ex}}}\, X,</script>
+<script type="math/tex; mode=display">Y_{\text{out},\text{ex}} = Y_{\text{in},\text{ex}} - \sqrt{\kappa_{\text{ex}}}\, Y.</script>
+</p>
 <p>Any set of Langevin equations, linearized around a stationary solution, can in principle be written in the form</p>
-<p>$$\dot Z = \textbf{M}Z + \textbf{L}Z_{\text{in}} \tag{1},$$</p>
+<p>
+<script type="math/tex; mode=display">\dot Z = \textbf{M}Z + \textbf{L}Z_{\text{in}} \tag{1},</script>
+</p>
 <p>with the input-output relations
-$$Z_{\text{out}} = Z_{\text{in}} - \textbf{L}^TZ,$$</p>
+<script type="math/tex; mode=display">Z_{\text{out}} = Z_{\text{in}} - \textbf{L}^TZ,</script>
+</p>
 <p>where $Z$ is a vector containing the quadrature operators of different oscillators involved in the dynamics. $Z_{\text{in}}$ and $Z_{\text{out}}$ are vectors containing the quadrature operators of the input and output fields. For the optical cavity of the example above we have</p>
-<p>$$Z = \begin{pmatrix} X \ Y \end{pmatrix},\quad Z_{\text{in}} = \begin{pmatrix} X_{\text{in},\text{ex}} \ Y_{\text{in},\text{ex}} \ X_{\text{in},0} \ Y_{\text{in},0}\end{pmatrix},\quad Z_{\text{out}} = \begin{pmatrix} X_{\text{out},\text{ex}} \ Y_{\text{out},\text{ex}} \ X_{\text{out},0} \ Y_{\text{out},0}\end{pmatrix}$$</p>
+<p>
+<script type="math/tex; mode=display">Z = \begin{pmatrix} X \\ Y \end{pmatrix},\quad Z_{\text{in}} = \begin{pmatrix} X_{\text{in},\text{ex}} \\ Y_{\text{in},\text{ex}} \\ X_{\text{in},0} \\ Y_{\text{in},0}\end{pmatrix},\quad Z_{\text{out}} = \begin{pmatrix} X_{\text{out},\text{ex}} \\ Y_{\text{out},\text{ex}} \\ X_{\text{out},0} \\ Y_{\text{out},0}\end{pmatrix}</script>
+</p>
 <p>and</p>
-<p>$$\textbf{M} = \begin{pmatrix} -\frac{\kappa}{2} &amp;\Delta
-                             \-\Delta           &amp;-\frac{\kappa}{2} \end{pmatrix}, \quad 
-  \textbf{L}= \begin{pmatrix} \sqrt{\kappa_{\text{ex}}} &amp;0 &amp;\sqrt{\kappa_{0}} &amp;0
-                            \0 &amp;\sqrt{\kappa_{\text{ex}}} &amp;0 &amp;\sqrt{\kappa_{0}}\end{pmatrix}.$$</p>
+<p>
+<script type="math/tex; mode=display">\textbf{M} = \begin{pmatrix} -\frac{\kappa}{2} &\Delta
+                             \\-\Delta           &-\frac{\kappa}{2} \end{pmatrix}, \quad 
+  \textbf{L}= \begin{pmatrix} \sqrt{\kappa_{\text{ex}}} &0 &\sqrt{\kappa_{0}} &0
+                            \\0 &\sqrt{\kappa_{\text{ex}}} &0 &\sqrt{\kappa_{0}}\end{pmatrix}.</script>
+</p>
 <p>Due to the linearity of the equations one can take the Fourier transform of the equations and define a scattering matrix which relates the output fields to the input fields</p>
-<p>$$Z_{\text{out}}(\omega) = \textbf{S}(\omega)Z_{\text{in}}(\omega) \tag{2},$$</p>
+<p>
+<script type="math/tex; mode=display">Z_{\text{out}}(\omega) = \textbf{S}(\omega)Z_{\text{in}}(\omega) \tag{2},</script>
+</p>
 <p>where</p>
-<p>$$\textbf{S} = 1 + \textbf{L}^T(i\omega+\textbf{M})^{-1}\textbf{L} \tag{3}.$$</p>
+<p>
+<script type="math/tex; mode=display">\textbf{S} = 1 + \textbf{L}^T(i\omega+\textbf{M})^{-1}\textbf{L} \tag{3}.</script>
+</p>
 <h1 id="measurements">Measurements</h1>
 <p>IOpy implements two different methods to characterize a linear system. They mimic closely the different types of measurements performed in the laboratory. First is the linear response of the system, which is similar to output of a vector network analyser (VNA). And, second is the spectrum of the output field, which is the same as the output of the spectrum analyser.</p>
 <h2 id="linear-response">Linear Response</h2>
 <p>According to the <a href="http://127.0.0.1:8000/theory/#input-output-formalism">Equation (2)</a>, a quadrature pair of any output port $i$ can be related to the quadrature pair of any input port $j$ using a submatrix of the scattering matrix</p>
-<p>$$\begin{pmatrix}X_{\text{out},i} \ Y_{\text{out},i}\end{pmatrix} = \textbf{S}^{(ij)} \begin{pmatrix}X_{\text{in},j} \ Y_{\text{in},j}\end{pmatrix}.$$</p>
+<p>
+<script type="math/tex; mode=display">\begin{pmatrix}X_{\text{out},i} \\ Y_{\text{out},i}\end{pmatrix} = \textbf{S}^{(ij)} \begin{pmatrix}X_{\text{in},j} \\ Y_{\text{in},j}\end{pmatrix}.</script>
+</p>
 <p>Then the output field operator can be written as</p>
-<p>$$a_{\text{out},i} = \frac{X_{\text{out},i} + iY_{\text{out},i}}{\sqrt2} = (\textbf{S}^{(ij)}<em>{11} + i\textbf{S}^{(ij)}</em>{21})\frac{X_{\text{in},j}}{\sqrt2} +
-                                       (\textbf{S}^{(ij)}<em>{22} - i\textbf{S}^{(ij)}</em>{12})\frac{iY_{\text{in},j}}{\sqrt2}.$$</p>
+<p>
+<script type="math/tex; mode=display">a_{\text{out},i} = \frac{X_{\text{out},i} + iY_{\text{out},i}}{\sqrt2} = (\textbf{S}^{(ij)}_{11} + i\textbf{S}^{(ij)}_{21})\frac{X_{\text{in},j}}{\sqrt2} +
+                                       (\textbf{S}^{(ij)}_{22} - i\textbf{S}^{(ij)}_{12})\frac{iY_{\text{in},j}}{\sqrt2}.</script>
+</p>
 <p>In many cases the input field is a coherent drive with constant amplitude and $X_{\text{in},j}$ and $Y_{\text{in},j}$ are cosine part and sine part of it. Therefore, choosing any arbitrary values for the quadratures, as long as they satisfy the identity $X_{\text{in},j}^2+Y_{\text{in},j}^2=1$, will only impose a total phase shift to the response. By choosing $Y_{\text{in},j}$ to be zero, we consider this phase shift to be zero and $a_{\text{in},j}=X_{\text{in},j}/\sqrt2$. as a result, any phase response in the output is being calculated with respect to the input field.</p>
-<p>$$a_{\text{out},i} = (\textbf{S}^{(ij)}<em>{11} + i\textbf{S}^{(ij)}</em>{21})a_{\text{in},j}$$</p>
+<p>
+<script type="math/tex; mode=display">a_{\text{out},i} = (\textbf{S}^{(ij)}_{11} + i\textbf{S}^{(ij)}_{21})a_{\text{in},j}</script>
+</p>
 <p>or in a more familiar notation
-$$\chi^{(ij)}(\omega) = \textbf{S}^{(ij)}<em>{11} + i\textbf{S}^{(ij)}</em>{21} \tag{4}.$$</p>
+<script type="math/tex; mode=display">\chi^{(ij)}(\omega) = \textbf{S}^{(ij)}_{11} + i\textbf{S}^{(ij)}_{21} \tag{4}.</script>
+</p>
 <h2 id="spectra">Spectra</h2>
 <p>In general for analyzing the spectrum of some measured signals, we can define a correlator using a measurement matrix $Q_{ij}$</p>
-<p>$$Q(\tau) = \langle Q_{ij}Z_{\text{out},i}(0)Z_{\text{out},j}(\tau)\rangle,$$</p>
+<p>
+<script type="math/tex; mode=display">Q(\tau) = \langle Q_{ij}Z_{\text{out},i}(0)Z_{\text{out},j}(\tau)\rangle,</script>
+</p>
 <p>where we have used the Einstein notation for the summations. The Fourier transform of this correlator would be the spectral density or spectrum</p>
-<p>$$S_{QQ}[\omega] = \int_{-\infty}^{\infty} Q(\tau) e^{i\omega\tau}d\tau.$$</p>
+<p>
+<script type="math/tex; mode=display">S_{QQ}[\omega] = \int_{-\infty}^{\infty} Q(\tau) e^{i\omega\tau}d\tau.</script>
+</p>
 <p>Due to the linearity of the expectation value and the integral, the spectrum can be rewritten in the following way</p>
-<p>$$ S_{QQ}[\omega] = \frac{1}{2\pi} Q_{ij}\int_{-\infty}^{\infty} \langle Z_{\text{out},i}(\omega_1)Z_{\text{out},j}(\omega) \rangle d\omega_1.$$</p>
+<p>
+<script type="math/tex; mode=display"> S_{QQ}[\omega] = \frac{1}{2\pi} Q_{ij}\int_{-\infty}^{\infty} \langle Z_{\text{out},i}(\omega_1)Z_{\text{out},j}(\omega) \rangle d\omega_1.</script>
+</p>
 <p>According to <a href="http://127.0.0.1:8000/theory/#input-output-formalism">Equation (2)</a>, we can write the output signals in terms of input signals</p>
-<p>$$Z_{\text{out},i}(\omega) = S_{ik}(\omega)Z_{\text{in},k}(\omega),$$
-$$S_{QQ}[\omega] = \frac{1}{2\pi} Q_{ij}\int_{-\infty}^{\infty}S_{ik}(\omega_1)S_{jl}(\omega) \langle Z_{\text{in},k}(\omega_1)Z_{\text{in},l}(\omega) \rangle d\omega_1 \tag{5}.$$</p>
+<p>
+<script type="math/tex; mode=display">Z_{\text{out},i}(\omega) = S_{ik}(\omega)Z_{\text{in},k}(\omega),</script>
+<script type="math/tex; mode=display">S_{QQ}[\omega] = \frac{1}{2\pi} Q_{ij}\int_{-\infty}^{\infty}S_{ik}(\omega_1)S_{jl}(\omega) \langle Z_{\text{in},k}(\omega_1)Z_{\text{in},l}(\omega) \rangle d\omega_1 \tag{5}.</script>
+</p>
 <p>In general, the input signals can be correlated with each other and have complicated statistical behaviors. In many situations (such as thermal input noises) it's a good approximation to consider different sources to be uncorrelated. More precisely</p>
-<p>$$\langle Z_{\text{in},k}(\omega_1)Z_{\text{in},l}(\omega) \rangle = 2\pi\delta_{kl}\mathcal{S}_k^{\text{in}}(\omega)\delta(\omega_1+\omega),$$</p>
+<p>
+<script type="math/tex; mode=display">\langle Z_{\text{in},k}(\omega_1)Z_{\text{in},l}(\omega) \rangle = 2\pi\delta_{kl}\mathcal{S}_k^{\text{in}}(\omega)\delta(\omega_1+\omega),</script>
+</p>
 <p>where $\mathcal{S}_k^{\text{in}}(\omega)$ is the spectral density of the $k^\text{th}$ input signal. Now, we can simplify Equation (5) to</p>
-<p>$$S_{QQ}[\omega] = Q_{ij}S_{ik}(-\omega)S_{jk}(\omega)\mathcal{S}_k^{\text{in}}(\omega). $$</p>
+<p>
+<script type="math/tex; mode=display">S_{QQ}[\omega] = Q_{ij}S_{ik}(-\omega)S_{jk}(\omega)\mathcal{S}_k^{\text{in}}(\omega). </script>
+</p>
 <p>This final result is used in the calculations of IOpy. Here we make a remark on the summations by rearranging the terms in the following way</p>
-<p>$$S_{QQ}[\omega] = \sum_k \mathcal{S}<em>k^{\text{in}}(\omega) (\sum</em>{i,j} Q_{ij}S_{ik}(-\omega)S_{jk}(\omega)) = \sum_k c_k(\omega)\mathcal{S}_k^{\text{in}}(\omega).$$</p>
+<p>
+<script type="math/tex; mode=display">S_{QQ}[\omega] = \sum_k \mathcal{S}_k^{\text{in}}(\omega) (\sum_{i,j} Q_{ij}S_{ik}(-\omega)S_{jk}(\omega)) = \sum_k c_k(\omega)\mathcal{S}_k^{\text{in}}(\omega).</script>
+</p>
 <p>This illustrates that the spectrum can be expressed as a sum of the different input noise contributions.</p></div>
         </div>
 
@@ -169,6 +210,7 @@ $$S_{QQ}[\omega] = \frac{1}{2\pi} Q_{ij}\int_{-\infty}^{\infty}S_{ik}(\omega_1)S
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
         <script src="../js/base.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
         <script src="../search/main.js" defer></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">

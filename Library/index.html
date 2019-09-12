@@ -149,7 +149,8 @@ Attributes:
 </code></pre>
 
 <p><code>nbar</code> is calculated using the formula
-$$\bar n =\frac{1}{e^{\frac{\hbar\omega}{kT}}-1}.$$</p>
+<script type="math/tex; mode=display">\bar n =\frac{1}{e^{\frac{\hbar\omega}{kT}}-1}.</script>
+</p>
 <p>Methods:</p>
 <pre><code class="python">'''
 spectrum(self, omegas):
@@ -168,9 +169,13 @@ spectrum(self, omegas):
 <p>Currently for the input noise spectrum we consider the simplest case that it is a thermal spectrum. In future a feature will be added that allows for user defined spectra. This would make it possible to account for the classical noises of the lasers (phase noise and amplitude noise).</p>
 <h4 id="class-coupling">Class <code>Coupling</code></h4>
 <p>This class represents the couplings between two <code>Mode</code>s using the coupling vector. The coupling vector $V_g$ is a 4-dimensional vector which is defined in a way that the interaction Hamiltonian for two coupled modes would be</p>
-<p>$$H_{\text{int}} = 2\hbar(V_{g,1}X_1X_2 + V_{g,1}X_1Y_2 + V_{g,1}Y_1X_2 + V_{g,1}Y_1Y_2).$$</p>
+<p>
+<script type="math/tex; mode=display">H_{\text{int}} = 2\hbar(V_{g,1}X_1X_2 + V_{g,1}X_1Y_2 + V_{g,1}Y_1X_2 + V_{g,1}Y_1Y_2).</script>
+</p>
 <p>For optomechanics the couling vector is</p>
-<p>$$V_g = (g, 0, 0, 0).$$</p>
+<p>
+<script type="math/tex; mode=display">V_g = (g, 0, 0, 0).</script>
+</p>
 <pre><code class="python">'''
 Attributes:
     mode1: first mode.
@@ -268,7 +273,9 @@ Attributes:
 <p>Objects and functions in this script are used to perfom measurements on the output fields. The possible measurement schemes are linear response and spectrum. For more information on the definitions see Paragraph <a href="http://127.0.0.1:8000/theory/#measurements">measurements</a> on the theory Page.</p>
 <h4 id="class-measurementoperator">Class <code>MeasurementOperator</code></h4>
 <p>This class represents a general measurement with a measurement matrix for defining a correlator</p>
-<p>$$Q(\tau) = \langle Q_{ij}Z_{\text{out},i}(0)Z_{\text{out},j}(\tau)\rangle,$$</p>
+<p>
+<script type="math/tex; mode=display">Q(\tau) = \langle Q_{ij}Z_{\text{out},i}(0)Z_{\text{out},j}(\tau)\rangle,</script>
+</p>
 <p>where $Q_{ij}$ is the $ij^{th}$ element of the measurement matrix.</p>
 <p>Refer to the Paragraph <a href="http://127.0.0.1:8000/theory/#spectra">spectra</a> of the theory Page for more information on the measurement matrix.</p>
 <pre><code class="python">'''
@@ -282,8 +289,9 @@ Attributes:
 
 <h4 id="class-powermeasurement">Class <code>PowerMeasurement</code></h4>
 <p>This class represents a power measurement scheme object. The correlator function and measurement matrix in this scheme are
-$$ Q(\tau) = \langle X(0)X(\tau) + iX(0)Y(\tau) - iY(0)X(\tau) + Y(0)Y(\tau) \rangle ,$$
-$$ [Q] = \begin{pmatrix} 1 &amp;i \ -i &amp;1 \end{pmatrix}. $$</p>
+<script type="math/tex; mode=display"> Q(\tau) = \langle X(0)X(\tau) + iX(0)Y(\tau) - iY(0)X(\tau) + Y(0)Y(\tau) \rangle ,</script>
+<script type="math/tex; mode=display"> [Q] = \begin{pmatrix} 1 &i \\ -i &1 \end{pmatrix}. </script>
+</p>
 <pre><code class="python">'''
 Attributes:
     system: the system which the output field is coming from.
@@ -296,11 +304,16 @@ Attributes:
 <h4 id="class-homodynmeasurement">Class <code>HomodynMeasurement</code></h4>
 <p>This class represents a Homodyn measurement scheme object with a homodyning angle.
 The correlator function and measurement matrix in this scheme are</p>
-<p>$$ 
+<p>
+<script type="math/tex; mode=display"> 
 Q(\tau) = \langle \cos^2(\theta) X(0)X(\tau) + \sin(\theta)\cos(\theta) X(0)Y(\tau)
-$$$$\quad\quad\quad + \sin(\theta)\cos(\theta) Y(0)X(\tau) + \sin^2(\theta) Y(0)Y(\tau) \rangle, 
-$$</p>
-<p>$$ [Q] = \begin{pmatrix} \cos^2(\theta) &amp;\sin(\theta)\cos(\theta) \ \sin(\theta)\cos(\theta) &amp;\sin^2(\theta) \end{pmatrix}. $$</p>
+</script>
+<script type="math/tex; mode=display">\quad\quad\quad + \sin(\theta)\cos(\theta) Y(0)X(\tau) + \sin^2(\theta) Y(0)Y(\tau) \rangle, 
+</script>
+</p>
+<p>
+<script type="math/tex; mode=display"> [Q] = \begin{pmatrix} \cos^2(\theta) &\sin(\theta)\cos(\theta) \\ \sin(\theta)\cos(\theta) &\sin^2(\theta) \end{pmatrix}. </script>
+</p>
 <pre><code class="python">'''
 Attributes:
     system: the system which the output field is coming from.
@@ -312,7 +325,7 @@ Attributes:
 
 <h4 id="function-linear_response">Function <code>linear_response</code></h4>
 <p>This function calculates linear response (susceptibility) of the system from one specific input port to an output port in frequency domain
-$$    a_{\text{out}} = \chi  a_{\text{in}} .$$
+<script type="math/tex; mode=display">    a_{\text{out}} = \chi  a_{\text{in}} .</script>
 Refer to <a href="http://127.0.0.1:8000/theory/#measurements">Equation (4)</a> of linear response Paragraph on the theory Page for more information on linear response. </p>
 <pre><code class="python">'''    
     Args:
@@ -357,10 +370,12 @@ Refer to <a href="http://127.0.0.1:8000/theory/#measurements">Equation (4)</a> o
 <p>Functions in this script are used to calculate the DC shifts resulting from nonlinear effects.</p>
 <h4 id="function-kerr_effect_nbar">Function <code>Kerr_effect_nbar</code></h4>
 <p>This function finds the steady state average photon number in an optical cavity with kerr type nonlinearity. It findes the smallest root of a third order polynomial equation:</p>
-<p>$$ [\frac{- \kappa_{\text{ex}}P_{\text{in}}}{\hbar\omega_{\text{drive}}}]\bar n^3 + 
+<p>
+<script type="math/tex; mode=display"> [\frac{- \kappa_{\text{ex}}P_{\text{in}}}{\hbar\omega_{\text{drive}}}]\bar n^3 + 
    (\Delta^2 + (\frac{\kappa}{2})^2)\bar n^2 + 
    (2K\Delta) \bar n +
-   (K^2) = 0$$</p>
+   (K^2) = 0</script>
+</p>
 <pre><code class="python">'''
     Args:
         P_in: input power in Watts.
@@ -378,7 +393,9 @@ Refer to <a href="http://127.0.0.1:8000/theory/#measurements">Equation (4)</a> o
 <h4 id="function-optomechanics">Function <code>optomechanics</code></h4>
 <p>This function finds the steady state average photon number in an optomechanical cavity and also finds the DC shift cavity 
 resonance frequency. It uses the <code>Kerr_effect_nbar()</code> function to solve the third order equation</p>
-<p>$$\bar n [ \frac{\kappa^2}{4} + (\Delta - (\frac{2g_0^2}{\Omega_m})\bar n)^2 ] = \kappa_{\text{ext}} \frac{P_{\text{in}}}{\hbar\omega_{\text{drive}}}.$$</p>
+<p>
+<script type="math/tex; mode=display">\bar n [ \frac{\kappa^2}{4} + (\Delta - (\frac{2g_0^2}{\Omega_m})\bar n)^2 ] = \kappa_{\text{ext}} \frac{P_{\text{in}}}{\hbar\omega_{\text{drive}}}.</script>
+</p>
 <pre><code class="python">'''    
     Args:
         P_in: input power in Watts.
@@ -436,6 +453,7 @@ resonance frequency. It uses the <code>Kerr_effect_nbar()</code> function to sol
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
         <script src="../js/base.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
         <script src="../search/main.js" defer></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
