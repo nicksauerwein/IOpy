@@ -7,7 +7,7 @@ pages:
     - Outlook: outlook.md
     - References: references.md
 # Enabling LaTeX math equations
-markdown_extensions:
-    - mdx_math:
-        enable_dollar_delimiter: True
-extra_javascript: ['https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML']
+#markdown_extensions:
+#    - mdx_math:
+#        enable_dollar_delimiter: True
+#extra_javascript: ['https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML']
