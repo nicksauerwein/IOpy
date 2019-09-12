@@ -117,14 +117,10 @@
 <p>But in both cases, the calculations rely on truncating an infinite series and using the approximations like rotating wave approximation which we want to avoid in IOpy for keeping the calculations general. Moreover, these ideas will result into huge complexity in case of more than two drives.</p>
 <h2 id="time-domain-simulations">Time Domain Simulations</h2>
 <p>These issues lead us to think about a totally different approach for the calculations which is adopted from what is really happening in the experiments. In experiments, a VNA measures the scattering matrix of a network injecting a coherent signal (a sine wave) to the network and extracting the amplitude and phase from the output of the network. This, we can exactly done with time-domain simulations. In principle, we can write the most general Hamiltonian of the optomechanical network as the following</p>
-<p>
-<script type="math/tex; mode=display">H_{\text{sys}} = \sum_k \hbar\omega_{\text{cav},k}a^{\dagger}_ka_k + \sum_j \hbar\Omega_jb^{\dagger}_jb_j -\hbar\sum_{j,k,l}[g_0]_{kl}^ja^\dagger_ka_l(b^\dagger_j+b_j),</script>
-</p>
+<p>$$H_{\text{sys}} = \sum_k \hbar\omega_{\text{cav},k}a^{\dagger}<em>ka_k + \sum_j \hbar\Omega_jb^{\dagger}_jb_j -\hbar\sum</em>{j,k,l}[g_0]_{kl}^ja^\dagger_ka_l(b^\dagger_j+b_j),$$</p>
 <p>and</p>
-<p>
-<script type="math/tex; mode=display">H_{\text{drive}} = \sum_{j,m}i\hbar\sqrt{\kappa_{jm}}(s_{\text{in},jm}(t)a^\dagger_je^{-i\omega_mt} + H.c.).</script>
-</p>
-<p>With this, we can derive the equations of motion in the time domain and we can define the output ports with the input-output theory as <script type="math/tex">s_{\text{out},jm} = s_{\text{in},jm} - \sqrt{\kappa_{jm}}a_j</script>. Then for calculating the scattering matrix we can simulate the equations of motion in the time domain for inputs as sine waves, spanning a frequency band. Then look at the Fourier transform of the output wave at the frequencies we are interested to extract the amplitude and phase of the response. Please note this scattering matrix will not be a simple scattering matrix anymore. Because for example for a single weak sine wave there can be multiple sine waves at the output but we can still look for the frequencies of interest. Once the scattering matrix is calculated, every other parameter like the spectrum can be calculated. </p>
+<p>$$H_{\text{drive}} = \sum_{j,m}i\hbar\sqrt{\kappa_{jm}}(s_{\text{in},jm}(t)a^\dagger_je^{-i\omega_mt} + H.c.).$$</p>
+<p>With this, we can derive the equations of motion in the time domain and we can define the output ports with the input-output theory as $s_{\text{out},jm} = s_{\text{in},jm} - \sqrt{\kappa_{jm}}a_j$. Then for calculating the scattering matrix we can simulate the equations of motion in the time domain for inputs as sine waves, spanning a frequency band. Then look at the Fourier transform of the output wave at the frequencies we are interested to extract the amplitude and phase of the response. Please note this scattering matrix will not be a simple scattering matrix anymore. Because for example for a single weak sine wave there can be multiple sine waves at the output but we can still look for the frequencies of interest. Once the scattering matrix is calculated, every other parameter like the spectrum can be calculated. </p>
 <p>This simulation is done for a simple case of a single cavity. <!--To see the full code go to <a href="http://localhost:8888/notebooks/IOpy/iopy/Time%20Domain/TimeDomain%20-%20SimpleCavity.ipynb">TimeDomain - SimpleCavity</a>. -->The results for this simulation are shown in the figures below.</p>
 <!--
 ![The amplitude of the linear response calculated with time domain simulation](time/amp.png){width=460 .center}
@@ -166,7 +162,6 @@
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
         <script src="../js/base.js" defer></script>
-        <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" defer></script>
         <script src="../search/main.js" defer></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">

@@ -98,7 +98,7 @@
                 <div class="col-md-9" role="main">
 
 <h1 id="what-is-iopy">What Is IOpy?</h1>
-<p>IOpy is a python-based package for solving the equations of motion of coupled oscillators which are in contact with thermal baths. These equations which are in the form of Langevin equations (or quantum Langevin equations in quantum limit) appear in many research areas in physics. Specifically, in optomechanics, which is the study of interaction of light with mechanical oscillators, this problem forms the essence of the theory. Finding the solutions of Langevin equations in different optomechanical systems can help with discovering and understanding novel phenomena. However, the procedure of finding these solutions is similar in many cases (<a href="https://nicksauerwein.github.io/IOpy/theory/#input-output-formalism">input-output formalism</a>, which is where the name IOpy is coming from) and the essential difference between them is the difference between the physical setups. Moreover, in complex setups the calculations necessary to find the solutions can be hard and tedious to do by hand (for example inverting matrices with large dimensions).</p>
+<p>IOpy is a python-based package for solving the equations of motion of coupled oscillators which are in contact with thermal baths. These equations which are in the form of Langevin equations (or quantum Langevin equations in quantum limit) appear in many research areas in physics. Specifically, in optomechanics, which is the study of interaction of light with mechanical oscillators, this problem forms the essence of the theory. Finding the solutions of Langevin equations in different optomechanical systems can help with discovering and understanding novel phenomena. However, the procedure of finding these solutions is similar in many cases (<a href="http://127.0.0.1:8000/theory/#input-output-formalism">input-output formalism</a>, which is where the name IOpy is coming from) and the essential difference between them is the difference between the physical setups. Moreover, in complex setups the calculations necessary to find the solutions can be hard and tedious to do by hand (for example inverting matrices with large dimensions).</p>
 <p>On the other hand, in many problems in optomechanics there are a lot of physical phenomena which are involved in the dynamics. For newcomers to the field, like students who want to learn optomechanics, it can be confusing to distinguish between the different effects involved in the dynamics. Looking for a solution to resolve the two mentioned issues was the motivation to write this code.</p>
 <p>With IOpy, you can define your physical setup very fast and without the need for going through the details. Further more you can visualize the results in a way which can help people to test their theoretical results and also help newcomers to grasp the elements of the optomechanics. For example to see the emission spectrum of a hot optical resonator you can define your optical mode in a single line:</p>
 <pre><code class="python">a = Mode(name = 'a', omega = 5e9 *2*np.pi)
@@ -119,16 +119,18 @@ spec = me.spectrum(omegas, me.PowerMeasurement(a_outex),
                    components = False, plot = True)
 </code></pre>
 
-<p>And the result would be:
+<p>And the result would be:</p>
+<p><img alt="Simple Cavity Spectrum" src="https://github.com/nicksauerwein/IOpy/blob/master/docs/docs/Simple%20Cavity/simple_cavity_spectrum.png?raw=true" /></p>
 <!--
-<img alt="Simple Cavity Spectrum" src="Simple Cavity/simple_cavity_spectrum.png" />{width=460 .center}
-<script type="math/tex; mode=display">\begin{figure}[!h]
+![Simple Cavity Spectrum](Simple Cavity/simple_cavity_spectrum.png)
+{width=460 .center}
+\begin{figure}[!h]
 \caption{Simple cavity output spectrum}
-\end{figure}</script>
---></p>
+\end{figure}
 <p align="center">
   <img width="460" src="\Simple Cavity\simple_cavity_spectrum.png">
 </p>
+-->
 
 <p>A more detailed explanation of this example as well as more examples with respect to optomechanics are available on the <a href="http://127.0.0.1:8000/Examples/">Examples</a> page.</p>
 <h1 id="structure-of-iopy">Structure of IOpy</h1>
@@ -143,8 +145,8 @@ spec = me.spectrum(omegas, me.PowerMeasurement(a_outex),
 ## Comments of Nick
 In general I would try to make a story around these two usecases.
 IOpy aims for:
-* testing and visulizing of theorectical models 
-* being an educational tool to learn about the classical effects in optomechanics 
+* testing and visulizing of theorectical models
+* being an educational tool to learn about the classical effects in optomechanics
 As an eyecatcher, it maybe makes sense to show a very short example of IOpy on the about page. (You can use the simple cavity example. But don't add a lot of explanation. This you will do in the examples section)
 Usually people (including me =) ) that want to use the software for the first time, just look at the first page to start.
 Also try to make a short comment about the structure of IOpy. What are the important files? And link to the section that gives a more detailed description.
@@ -165,7 +167,6 @@ numpy, scipy, matplotlib (These are all the classics)
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
         <script src="js/base.js" defer></script>
-        <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" defer></script>
         <script src="search/main.js" defer></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
@@ -237,5 +238,5 @@ numpy, scipy, matplotlib (These are all the classics)
 
 <!--
 MkDocs version : 1.0.4
-Build Date UTC : 2019-08-15 13:48:22
+Build Date UTC : 2019-09-12 12:13:42
 -->
