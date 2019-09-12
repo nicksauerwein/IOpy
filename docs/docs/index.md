@@ -30,7 +30,7 @@ spec = me.spectrum(omegas, me.PowerMeasurement(a_outex),
 ```
 And the result would be:
 
-![Simple Cavity Spectrum](https://github.com/nicksauerwein/IOpy/blob/master/docs/docs/Simple%20Cavity/simple_cavity_spectrum.png?raw=true)
+![Simple Cavity Spectrum](https://github.com/nicksauerwein/IOpy/blob/master/docs/docs/Simple%20Cavity/simple_cavity_spectrum.png?raw=true){width=460 .center}
 
 <!--
 ![Simple Cavity Spectrum](Simple Cavity/simple_cavity_spectrum.png)
