@@ -30,15 +30,14 @@ spec = me.spectrum(omegas, me.PowerMeasurement(a_outex),
 ```
 And the result would be:
 
-![Simple Cavity Spectrum](Simple Cavity/simple_cavity_spectrum.png)
+![Simple Cavity Spectrum](https://images.app.goo.gl/AfjBhhgz8Y2gVns79)
 
 <!--
+![Simple Cavity Spectrum](Simple Cavity/simple_cavity_spectrum.png)
 {width=460 .center}
 \begin{figure}[!h]
 \caption{Simple cavity output spectrum}
 \end{figure}
-
-
 <p align="center">
   <img width="460" src="\Simple Cavity\simple_cavity_spectrum.png">
 </p>
