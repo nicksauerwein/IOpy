@@ -37,12 +37,12 @@ And the result would be:
 \begin{figure}[!h]
 \caption{Simple cavity output spectrum}
 \end{figure}
--->
+
 
 <p align="center">
   <img width="460" src="\Simple Cavity\simple_cavity_spectrum.png">
 </p>
-
+-->
 
 A more detailed explanation of this example as well as more examples with respect to optomechanics are available on the [Examples](http://127.0.0.1:8000/Examples/) page.
 
