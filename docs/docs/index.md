@@ -29,17 +29,17 @@ spec = me.spectrum(omegas, me.PowerMeasurement(a_outex),
                    components = False, plot = True)
 ```
 And the result would be:
-<!--
+
 ![Simple Cavity Spectrum](Simple Cavity/simple_cavity_spectrum.png){width=460 .center}
 \begin{figure}[!h]
 \caption{Simple cavity output spectrum}
 \end{figure}
--->
 
+<!--
 <p align="center">
   <img width="460" src="\Simple Cavity\simple_cavity_spectrum.png">
 </p>
-
+-->
 
 A more detailed explanation of this example as well as more examples with respect to optomechanics are available on the [Examples](http://127.0.0.1:8000/Examples/) page.
 
@@ -61,8 +61,8 @@ To install IOpy you have to clone the IOpy repository on your local computer. Th
 ## Comments of Nick
 In general I would try to make a story around these two usecases.
 IOpy aims for:
-* testing and visulizing of theorectical models 
-* being an educational tool to learn about the classical effects in optomechanics 
+* testing and visulizing of theorectical models
+* being an educational tool to learn about the classical effects in optomechanics
 As an eyecatcher, it maybe makes sense to show a very short example of IOpy on the about page. (You can use the simple cavity example. But don't add a lot of explanation. This you will do in the examples section)
 Usually people (including me =) ) that want to use the software for the first time, just look at the first page to start.
 Also try to make a short comment about the structure of IOpy. What are the important files? And link to the section that gives a more detailed description.
