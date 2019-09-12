@@ -1,6 +1,6 @@
 # What Is IOpy?
 
-iOpy is a python-based package for solving the equations of motion of coupled oscillators which are in contact with thermal baths. These equations which are in the form of Langevin equations (or quantum Langevin equations in quantum limit) appear in many research areas in physics. Specifically, in optomechanics, which is the study of interaction of light with mechanical oscillators, this problem forms the essence of the theory. Finding the solutions of Langevin equations in different optomechanical systems can help with discovering and understanding novel phenomena. However, the procedure of finding these solutions is similar in many cases ([input-output formalism](http://127.0.0.1:8000/theory/#input-output-formalism), which is where the name IOpy is coming from) and the essential difference between them is the difference between the physical setups. Moreover, in complex setups the calculations necessary to find the solutions can be hard and tedious to do by hand (for example inverting matrices with large dimensions).
+iOpy is a python-based package for solving the equations of motion of coupled oscillators which are in contact with thermal baths. These equations which are in the form of Langevin equations (or quantum Langevin equations in quantum limit) appear in many research areas in physics. Specifically, in optomechanics, which is the study of interaction of light with mechanical oscillators, this problem forms the essence of the theory. Finding the solutions of Langevin equations in different optomechanical systems can help with discovering and understanding novel phenomena. However, the procedure of finding these solutions is similar in many cases ([input-output formalism](https://nicksauerwein.github.io/IOpy/theory/#input-output-formalism), which is where the name IOpy is coming from) and the essential difference between them is the difference between the physical setups. Moreover, in complex setups the calculations necessary to find the solutions can be hard and tedious to do by hand (for example inverting matrices with large dimensions).
 
 On the other hand, in many problems in optomechanics there are a lot of physical phenomena which are involved in the dynamics. For newcomers to the field, like students who want to learn optomechanics, it can be confusing to distinguish between the different effects involved in the dynamics. Looking for a solution to resolve the two mentioned issues was the motivation to write this code.
 
@@ -30,7 +30,7 @@ spec = me.spectrum(omegas, me.PowerMeasurement(a_outex),
 ```
 And the result would be:
 
-![Simple Cavity Spectrum](https://github.com/nicksauerwein/IOpy/blob/master/docs/docs/Simple%20Cavity/simple_cavity_spectrum.png?raw=true)
+![Simple Cavity Spectrum](https://github.com/nicksauerwein/IOpy/blob/master/docs/docs/Simple%20Cavity/simple_cavity_spectrum.png?raw=true #center)
 
 <!--
 ![Simple Cavity Spectrum](Simple Cavity/simple_cavity_spectrum.png)

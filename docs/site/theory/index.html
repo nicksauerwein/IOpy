@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Theory - IOpy documentation</title>
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="..">IOpy documentation</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="..">About</a>
+                            </li>
+                            <li class="active">
+                                <a href="./">Theory</a>
+                            </li>
+                            <li >
+                                <a href="../Library/">Library</a>
+                            </li>
+                            <li >
+                                <a href="../Examples/">Examples</a>
+                            </li>
+                            <li >
+                                <a href="../outlook/">Outlook</a>
+                            </li>
+                            <li >
+                                <a href="../references/">References</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li >
+                                <a rel="next" href="..">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li >
+                                <a rel="prev" href="../Library/">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#input-output-formalism">Input-Output Formalism</a></li>
+        <li class="main "><a href="#measurements">Measurements</a></li>
+            <li><a href="#linear-response">Linear Response</a></li>
+            <li><a href="#spectra">Spectra</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="input-output-formalism">Input-Output Formalism</h1>
+<p>On this Page, the theory behind the IOpy calculations is introduced.</p>
+<p>There are different approaches to model open quantum systems. But the two most commonly used ones are the density matrix approach using master equations and the Langevin equations, which is also known as input-output theory. Input-output theory allows us to directly model the quantum fluctuations injected from any port into the system. Quantum Langevin equations are formulated on the level of the Heisenberg equations of motion describing the time evolution of any operator of the system. Moreover, in case of optical cavities any coherent laser drive that may be present can be taken into account. For more details see <a href="https://www.springer.com/de/book/9783540223016">Gardiner and Zoller (2004)</a> and <a href="http://dx.doi.org/10.1103/RevModPhys.82.1155">Clerk et al. (2010)</a>.</p>
+<p><br />For example, for an optical cavity which is driven by a coherent laser field with the detuning $\Delta$ from the cavity resonance frequency, via a coupling of $\kappa_{ex}$ and is also coupled to the environment through the dissipation rate of $\kappa_0$, the equations of motion can be written as</p>
+<p>$$\dot a = -\frac{\kappa}{2}a + i\Delta a + \sqrt{\kappa_{\text{ex}}}a_{\text{in},\text{ex}} + \sqrt{\kappa_{0}}a_{\text{in},0},$$</p>
+<p>where $\kappa = \kappa_0 + \kappa_{\text{ex}}$ is the total dissipation rate. $a_{\text{in},\text{ex}}$ and $a_{\text{in},0}$ are input operators of the driving field and the stochastic thermal field respectively. This equation can also be written in terms of quadrature operators</p>
+<p>$$\dot X = \Delta Y -\frac{\kappa}{2} X + \sqrt{\kappa_{\text{ex}}}\, X_{\text{in},\text{ex}} + \sqrt{\kappa_{0}}\, X_{\text{in},0}$$
+$$\dot Y = -\Delta X -\frac{\kappa}{2} Y + \sqrt{\kappa_{\text{ex}}}\, Y_{\text{in},\text{ex}} + \sqrt{\kappa_{0}}\, Y_{\text{in},0},$$</p>
+<p>where the quadrature operators are defined as</p>
+<p>$$X = \frac{a^\dagger + a}{\sqrt{2}},$$
+$$Y = i\frac{a^\dagger - a}{\sqrt{2}}.$$</p>
+<p>According to the input-output theory of open quantum systems, the output field (which in case of optical cavity can be the reflected or transmitted light through the cavity) is given by</p>
+<p>$$a_{\text{out}} = a_{\text{in}} - \sqrt{\kappa_{\text{ex}}}a.$$</p>
+<p>It can also be written in terms of quadratures
+$$X_{\text{out},\text{ex}} = X_{\text{in},\text{ex}} - \sqrt{\kappa_{\text{ex}}}\, X,$$
+$$Y_{\text{out},\text{ex}} = Y_{\text{in},\text{ex}} - \sqrt{\kappa_{\text{ex}}}\, Y.$$</p>
+<p>Any set of Langevin equations, linearized around a stationary solution, can in principle be written in the form</p>
+<p>$$\dot Z = \textbf{M}Z + \textbf{L}Z_{\text{in}} \tag{1},$$</p>
+<p>with the input-output relations
+$$Z_{\text{out}} = Z_{\text{in}} - \textbf{L}^TZ,$$</p>
+<p>where $Z$ is a vector containing the quadrature operators of different oscillators involved in the dynamics. $Z_{\text{in}}$ and $Z_{\text{out}}$ are vectors containing the quadrature operators of the input and output fields. For the optical cavity of the example above we have</p>
+<p>$$Z = \begin{pmatrix} X \ Y \end{pmatrix},\quad Z_{\text{in}} = \begin{pmatrix} X_{\text{in},\text{ex}} \ Y_{\text{in},\text{ex}} \ X_{\text{in},0} \ Y_{\text{in},0}\end{pmatrix},\quad Z_{\text{out}} = \begin{pmatrix} X_{\text{out},\text{ex}} \ Y_{\text{out},\text{ex}} \ X_{\text{out},0} \ Y_{\text{out},0}\end{pmatrix}$$</p>
+<p>and</p>
+<p>$$\textbf{M} = \begin{pmatrix} -\frac{\kappa}{2} &amp;\Delta
+                             \-\Delta           &amp;-\frac{\kappa}{2} \end{pmatrix}, \quad 
+  \textbf{L}= \begin{pmatrix} \sqrt{\kappa_{\text{ex}}} &amp;0 &amp;\sqrt{\kappa_{0}} &amp;0
+                            \0 &amp;\sqrt{\kappa_{\text{ex}}} &amp;0 &amp;\sqrt{\kappa_{0}}\end{pmatrix}.$$</p>
+<p>Due to the linearity of the equations one can take the Fourier transform of the equations and define a scattering matrix which relates the output fields to the input fields</p>
+<p>$$Z_{\text{out}}(\omega) = \textbf{S}(\omega)Z_{\text{in}}(\omega) \tag{2},$$</p>
+<p>where</p>
+<p>$$\textbf{S} = 1 + \textbf{L}^T(i\omega+\textbf{M})^{-1}\textbf{L} \tag{3}.$$</p>
+<h1 id="measurements">Measurements</h1>
+<p>IOpy implements two different methods to characterize a linear system. They mimic closely the different types of measurements performed in the laboratory. First is the linear response of the system, which is similar to output of a vector network analyser (VNA). And, second is the spectrum of the output field, which is the same as the output of the spectrum analyser.</p>
+<h2 id="linear-response">Linear Response</h2>
+<p>According to the <a href="http://127.0.0.1:8000/theory/#input-output-formalism">Equation (2)</a>, a quadrature pair of any output port $i$ can be related to the quadrature pair of any input port $j$ using a submatrix of the scattering matrix</p>
+<p>$$\begin{pmatrix}X_{\text{out},i} \ Y_{\text{out},i}\end{pmatrix} = \textbf{S}^{(ij)} \begin{pmatrix}X_{\text{in},j} \ Y_{\text{in},j}\end{pmatrix}.$$</p>
+<p>Then the output field operator can be written as</p>
+<p>$$a_{\text{out},i} = \frac{X_{\text{out},i} + iY_{\text{out},i}}{\sqrt2} = (\textbf{S}^{(ij)}<em>{11} + i\textbf{S}^{(ij)}</em>{21})\frac{X_{\text{in},j}}{\sqrt2} +
+                                       (\textbf{S}^{(ij)}<em>{22} - i\textbf{S}^{(ij)}</em>{12})\frac{iY_{\text{in},j}}{\sqrt2}.$$</p>
+<p>In many cases the input field is a coherent drive with constant amplitude and $X_{\text{in},j}$ and $Y_{\text{in},j}$ are cosine part and sine part of it. Therefore, choosing any arbitrary values for the quadratures, as long as they satisfy the identity $X_{\text{in},j}^2+Y_{\text{in},j}^2=1$, will only impose a total phase shift to the response. By choosing $Y_{\text{in},j}$ to be zero, we consider this phase shift to be zero and $a_{\text{in},j}=X_{\text{in},j}/\sqrt2$. as a result, any phase response in the output is being calculated with respect to the input field.</p>
+<p>$$a_{\text{out},i} = (\textbf{S}^{(ij)}<em>{11} + i\textbf{S}^{(ij)}</em>{21})a_{\text{in},j}$$</p>
+<p>or in a more familiar notation
+$$\chi^{(ij)}(\omega) = \textbf{S}^{(ij)}<em>{11} + i\textbf{S}^{(ij)}</em>{21} \tag{4}.$$</p>
+<h2 id="spectra">Spectra</h2>
+<p>In general for analyzing the spectrum of some measured signals, we can define a correlator using a measurement matrix $Q_{ij}$</p>
+<p>$$Q(\tau) = \langle Q_{ij}Z_{\text{out},i}(0)Z_{\text{out},j}(\tau)\rangle,$$</p>
+<p>where we have used the Einstein notation for the summations. The Fourier transform of this correlator would be the spectral density or spectrum</p>
+<p>$$S_{QQ}[\omega] = \int_{-\infty}^{\infty} Q(\tau) e^{i\omega\tau}d\tau.$$</p>
+<p>Due to the linearity of the expectation value and the integral, the spectrum can be rewritten in the following way</p>
+<p>$$ S_{QQ}[\omega] = \frac{1}{2\pi} Q_{ij}\int_{-\infty}^{\infty} \langle Z_{\text{out},i}(\omega_1)Z_{\text{out},j}(\omega) \rangle d\omega_1.$$</p>
+<p>According to <a href="http://127.0.0.1:8000/theory/#input-output-formalism">Equation (2)</a>, we can write the output signals in terms of input signals</p>
+<p>$$Z_{\text{out},i}(\omega) = S_{ik}(\omega)Z_{\text{in},k}(\omega),$$
+$$S_{QQ}[\omega] = \frac{1}{2\pi} Q_{ij}\int_{-\infty}^{\infty}S_{ik}(\omega_1)S_{jl}(\omega) \langle Z_{\text{in},k}(\omega_1)Z_{\text{in},l}(\omega) \rangle d\omega_1 \tag{5}.$$</p>
+<p>In general, the input signals can be correlated with each other and have complicated statistical behaviors. In many situations (such as thermal input noises) it's a good approximation to consider different sources to be uncorrelated. More precisely</p>
+<p>$$\langle Z_{\text{in},k}(\omega_1)Z_{\text{in},l}(\omega) \rangle = 2\pi\delta_{kl}\mathcal{S}_k^{\text{in}}(\omega)\delta(\omega_1+\omega),$$</p>
+<p>where $\mathcal{S}_k^{\text{in}}(\omega)$ is the spectral density of the $k^\text{th}$ input signal. Now, we can simplify Equation (5) to</p>
+<p>$$S_{QQ}[\omega] = Q_{ij}S_{ik}(-\omega)S_{jk}(\omega)\mathcal{S}_k^{\text{in}}(\omega). $$</p>
+<p>This final result is used in the calculations of IOpy. Here we make a remark on the summations by rearranging the terms in the following way</p>
+<p>$$S_{QQ}[\omega] = \sum_k \mathcal{S}<em>k^{\text{in}}(\omega) (\sum</em>{i,j} Q_{ij}S_{ik}(-\omega)S_{jk}(\omega)) = \sum_k c_k(\omega)\mathcal{S}_k^{\text{in}}(\omega).$$</p>
+<p>This illustrates that the spectrum can be expressed as a sum of the different input noise contributions.</p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
