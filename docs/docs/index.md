@@ -48,7 +48,7 @@ And the result would be:
 </p>
 -->
 
-A more detailed explanation of this example as well as more examples with respect to optomechanics are available on the [Examples](http://127.0.0.1:8000/Examples/) page.
+A more detailed explanation of this example as well as more examples with respect to optomechanics are available on the [Examples](hhttps://nicksauerwein.github.io/IOpy/Examples/) page.
 
 # Structure of IOpy
 IOpy consists out of four scripts which each serving a special purpose:

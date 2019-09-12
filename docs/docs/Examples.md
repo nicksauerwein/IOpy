@@ -1,6 +1,6 @@
 In this section a set of famous phenomena in optomechanics is presented. These calculations serve first as examples of using IOpy in simulating Langevin equations, and second are benchmarks of IOpy by comparing it to known theoretical models.
 
-# Simple Cavity 
+# Simple Cavity
 
 <!--
 ![Inverted-colour optical micrograph of the circuit consisting of two coupled LC resonators, one having a mechanically com- pliant capacitor (Toth et. al. 2017).](ExamplesImg/LC.png){width=260 .center}
@@ -8,7 +8,7 @@ In this section a set of famous phenomena in optomechanics is presented. These c
 
 
 <p align="center">
-  <img width="260" src="\ExamplesImg\LC.png">
+  <img width="260" src="https://github.com/nicksauerwein/IOpy/blob/master/docs/docs/ExamplesImg/LC.png?raw=true">
     <p align = "center">
         Inverted-colour optical micrograph of the circuit consisting of two coupled LC resonators, one having a mechanically com- pliant capacitor (Toth et. al. 2017).
     </p>
@@ -165,7 +165,7 @@ The graphs below show the comparison between this equation and IOpy results.
     </p>
 </p>
 
-          
+
 In this example we simulate an optomechanical system with a weak drive. Here we want to see the optomechanical cooling due to the increase in optomechanical damping rate. <!--To see the fool written example, go to [Basic optomechanics](http://localhost:8888/notebooks/IOpy/iopy/examples/Basic%20Optomechanics.ipynb).-->
 
 In the basic optomechanical interaction, the cavity resonance frequency shifts by a constant value due to the DC nonlinearity. Therefore, before defining the modes we have to calculate this DC shift.

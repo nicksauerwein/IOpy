@@ -53,7 +53,7 @@ spectrum(self, omegas):
     Args:
         omegas: the frequencies vector at which we want to
                 calculate the spectrum.
-        
+
     Returns:
             spectrum of the input field in units of number
             of photons.
@@ -86,7 +86,7 @@ Methods:
 '''
 contains_mode(self, mode):
     indicates if the mode is involved in this coupling or not.
-        
+
     Args:
         mode: the mode we want to look for.
 
@@ -109,7 +109,7 @@ Attributes:
 '''
 ```
 
-Refer to [Equation (1)](http://127.0.0.1:8000/theory/#input-output-formalism) on the Theory page for more information on $M$ and $L$ matrices.
+Refer to [Equation (1)](https://nicksauerwein.github.io/IOpy/theory/#input-output-formalism) on the Theory page for more information on $M$ and $L$ matrices.
 
 Methods:
 
@@ -117,7 +117,7 @@ Methods:
 '''
 add_mode(self, mode):
     Adding a mode to the system.
-        
+
     Args:
         mode: the mode we want to add.
 '''
@@ -154,15 +154,15 @@ make_ML(self):
 SMatrix(self, omegas):
     Constructs the scattering matrix of the system for a
     frequency range.
-    
+
     Args:
         omegas: frequencies vector in rad/sec.
-        
+
     Returns:
         Ss: the scattering matrix.
 '''
 ```
-Refer to [Equation (3)](http://127.0.0.1:8000/theory/#input-output-formalism) on Theory page for more information about scattering matrix.
+Refer to [Equation (3)](https://nicksauerwein.github.io/IOpy/theory/#input-output-formalism) on Theory page for more information about scattering matrix.
 
 #### Class `Output`
 This class represents the output field of the system with respect to an input field (in terms of input-output formalism).
@@ -178,7 +178,7 @@ Attributes:
 ```
 
 # measurement
-Objects and functions in this script are used to perfom measurements on the output fields. The possible measurement schemes are linear response and spectrum. For more information on the definitions see Paragraph [measurements](http://127.0.0.1:8000/theory/#measurements) on the theory Page.
+Objects and functions in this script are used to perfom measurements on the output fields. The possible measurement schemes are linear response and spectrum. For more information on the definitions see Paragraph [measurements](https://nicksauerwein.github.io/IOpy/theory/#measurements) on the theory Page.
 
 #### Class `MeasurementOperator`
 This class represents a general measurement with a measurement matrix for defining a correlator
@@ -187,7 +187,7 @@ $$Q(\tau) = \langle Q_{ij}Z_{\text{out},i}(0)Z_{\text{out},j}(\tau)\rangle,$$
 
 where $Q_{ij}$ is the $ij^{th}$ element of the measurement matrix.
 
-Refer to the Paragraph [spectra](http://127.0.0.1:8000/theory/#spectra) of the theory Page for more information on the measurement matrix.
+Refer to the Paragraph [spectra](https://nicksauerwein.github.io/IOpy/theory/#spectra) of the theory Page for more information on the measurement matrix.
 
 ```python
 '''
@@ -218,9 +218,9 @@ Attributes:
 This class represents a Homodyn measurement scheme object with a homodyning angle.
 The correlator function and measurement matrix in this scheme are
 
-$$ 
+$$
 Q(\tau) = \langle \cos^2(\theta) X(0)X(\tau) + \sin(\theta)\cos(\theta) X(0)Y(\tau)
-$$$$\quad\quad\quad + \sin(\theta)\cos(\theta) Y(0)X(\tau) + \sin^2(\theta) Y(0)Y(\tau) \rangle, 
+$$$$\quad\quad\quad + \sin(\theta)\cos(\theta) Y(0)X(\tau) + \sin^2(\theta) Y(0)Y(\tau) \rangle,
 $$
 
 $$ [Q] = \begin{pmatrix} \cos^2(\theta) &\sin(\theta)\cos(\theta) \\ \sin(\theta)\cos(\theta) &\sin^2(\theta) \end{pmatrix}. $$
@@ -239,7 +239,7 @@ Attributes:
 
 This function calculates linear response (susceptibility) of the system from one specific input port to an output port in frequency domain
 $$    a_{\text{out}} = \chi  a_{\text{in}} .$$
-Refer to [Equation (4)](http://127.0.0.1:8000/theory/#measurements) of linear response Paragraph on the theory Page for more information on linear response. 
+Refer to [Equation (4)](https://nicksauerwein.github.io/IOpy/theory/#measurements) of linear response Paragraph on the theory Page for more information on linear response.
 
 ```python
 '''    
@@ -251,7 +251,7 @@ Refer to [Equation (4)](http://127.0.0.1:8000/theory/#measurements) of linear re
         output: the output port.
         Input: the input port.
         plot: flag, indicates to plot the susceptibilities or not.
-        
+
     Returns:
         omegas_out: the frequencies vector we want to calculate
                     the linear response for them, in frame of the
@@ -261,7 +261,7 @@ Refer to [Equation (4)](http://127.0.0.1:8000/theory/#measurements) of linear re
 ```
 
 #### Function `spectrum`
-The spectrum of an output field. Refer to [spectra](http://127.0.0.1:8000/theory/#spectra) Paragraph on the theory Page for more information on the spectra. 
+The spectrum of an output field. Refer to [spectra](https://nicksauerwein.github.io/IOpy/theory/#spectra) Paragraph on the theory Page for more information on the spectra.
 
 ```python
 '''
@@ -274,7 +274,7 @@ The spectrum of an output field. Refer to [spectra](http://127.0.0.1:8000/theory
         components: flag, indicates to calcuate different contributions
                     of noise sources or just calculate the whole spectrum.
         plot: flag, indicates to plot the spectra or not.
-        
+
     Returns:
         spec: the spectrum of the output field in case of components = False.
               A list of spectra from different contributions in case of
@@ -289,8 +289,8 @@ Functions in this script are used to calculate the DC shifts resulting from nonl
 #### Function `Kerr_effect_nbar`
 This function finds the steady state average photon number in an optical cavity with kerr type nonlinearity. It findes the smallest root of a third order polynomial equation:
 
-$$ [\frac{- \kappa_{\text{ex}}P_{\text{in}}}{\hbar\omega_{\text{drive}}}]\bar n^3 + 
-   (\Delta^2 + (\frac{\kappa}{2})^2)\bar n^2 + 
+$$ [\frac{- \kappa_{\text{ex}}P_{\text{in}}}{\hbar\omega_{\text{drive}}}]\bar n^3 +
+   (\Delta^2 + (\frac{\kappa}{2})^2)\bar n^2 +
    (2K\Delta) \bar n +
    (K^2) = 0$$
 
@@ -303,16 +303,16 @@ $$ [\frac{- \kappa_{\text{ex}}P_{\text{in}}}{\hbar\omega_{\text{drive}}}]\bar n^
         omega_c: cavity resonance frequency in rad/sec.
         omega_drive: frequency of the input field in rad/sec.
         K: nonlinearity coefficient in rad/sec.
-        
+
     returns:
         smallest real root of the third order polynomial equation.
 '''
 ```
 
 #### Function `optomechanics`
-This function finds the steady state average photon number in an optomechanical cavity and also finds the DC shift cavity 
+This function finds the steady state average photon number in an optomechanical cavity and also finds the DC shift cavity
 resonance frequency. It uses the `Kerr_effect_nbar()` function to solve the third order equation
-    
+
 $$\bar n [ \frac{\kappa^2}{4} + (\Delta - (\frac{2g_0^2}{\Omega_m})\bar n)^2 ] = \kappa_{\text{ext}} \frac{P_{\text{in}}}{\hbar\omega_{\text{drive}}}.$$
 
 ```python
@@ -325,7 +325,7 @@ $$\bar n [ \frac{\kappa^2}{4} + (\Delta - (\frac{2g_0^2}{\Omega_m})\bar n)^2 ] =
         omega_drive: frequency of the input field in rad/sec.
         omega_m: resonance frequency of the mechanical oscillator in rad/sec.
         g_0:  vacuum optomechanical coupling rate in rad/sec.
-        
+
     returns:
         omega_c: modified cavity resonance frequency in rad/sec.
         g: optomechanical coupling rate in rad/sec.
