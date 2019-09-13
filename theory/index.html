@@ -101,11 +101,11 @@
 <h1 id="input-output-formalism">Input-Output Formalism</h1>
 <p>On this Page, the theory behind the IOpy calculations is introduced.</p>
 <p>There are different approaches to model open quantum systems. But the two most commonly used ones are the density matrix approach using master equations and the Langevin equations, which is also known as input-output theory. Input-output theory allows us to directly model the quantum fluctuations injected from any port into the system. Quantum Langevin equations are formulated on the level of the Heisenberg equations of motion describing the time evolution of any operator of the system. Moreover, in case of optical cavities any coherent laser drive that may be present can be taken into account. For more details see <a href="https://www.springer.com/de/book/9783540223016">Gardiner and Zoller (2004)</a> and <a href="http://dx.doi.org/10.1103/RevModPhys.82.1155">Clerk et al. (2010)</a>.</p>
-<p><br />For example, for an optical cavity which is driven by a coherent laser field with the detuning $\Delta$ from the cavity resonance frequency, via a coupling of $\kappa_{ex}$ and is also coupled to the environment through the dissipation rate of $\kappa_0$, the equations of motion can be written as</p>
+<p><br />For example, for an optical cavity which is driven by a coherent laser field with the detuning <script type="math/tex">\Delta</script> from the cavity resonance frequency, via a coupling of <script type="math/tex">\kappa_{ex}</script> and is also coupled to the environment through the dissipation rate of <script type="math/tex">\kappa_0</script>, the equations of motion can be written as</p>
 <p>
 <script type="math/tex; mode=display">\dot a = -\frac{\kappa}{2}a + i\Delta a + \sqrt{\kappa_{\text{ex}}}a_{\text{in},\text{ex}} + \sqrt{\kappa_{0}}a_{\text{in},0},</script>
 </p>
-<p>where $\kappa = \kappa_0 + \kappa_{\text{ex}}$ is the total dissipation rate. $a_{\text{in},\text{ex}}$ and $a_{\text{in},0}$ are input operators of the driving field and the stochastic thermal field respectively. This equation can also be written in terms of quadrature operators</p>
+<p>where <script type="math/tex">\kappa = \kappa_0 + \kappa_{\text{ex}}</script> is the total dissipation rate. <script type="math/tex">a_{\text{in},\text{ex}}</script> and <script type="math/tex">a_{\text{in},0}</script> are input operators of the driving field and the stochastic thermal field respectively. This equation can also be written in terms of quadrature operators</p>
 <p>
 <script type="math/tex; mode=display">\dot X = \Delta Y -\frac{\kappa}{2} X + \sqrt{\kappa_{\text{ex}}}\, X_{\text{in},\text{ex}} + \sqrt{\kappa_{0}}\, X_{\text{in},0}</script>
 <script type="math/tex; mode=display">\dot Y = -\Delta X -\frac{\kappa}{2} Y + \sqrt{\kappa_{\text{ex}}}\, Y_{\text{in},\text{ex}} + \sqrt{\kappa_{0}}\, Y_{\text{in},0},</script>
@@ -130,14 +130,14 @@
 <p>with the input-output relations
 <script type="math/tex; mode=display">Z_{\text{out}} = Z_{\text{in}} - \textbf{L}^TZ,</script>
 </p>
-<p>where $Z$ is a vector containing the quadrature operators of different oscillators involved in the dynamics. $Z_{\text{in}}$ and $Z_{\text{out}}$ are vectors containing the quadrature operators of the input and output fields. For the optical cavity of the example above we have</p>
+<p>where <script type="math/tex">Z</script> is a vector containing the quadrature operators of different oscillators involved in the dynamics. <script type="math/tex">Z_{\text{in}}</script> and <script type="math/tex">Z_{\text{out}}</script> are vectors containing the quadrature operators of the input and output fields. For the optical cavity of the example above we have</p>
 <p>
 <script type="math/tex; mode=display">Z = \begin{pmatrix} X \\ Y \end{pmatrix},\quad Z_{\text{in}} = \begin{pmatrix} X_{\text{in},\text{ex}} \\ Y_{\text{in},\text{ex}} \\ X_{\text{in},0} \\ Y_{\text{in},0}\end{pmatrix},\quad Z_{\text{out}} = \begin{pmatrix} X_{\text{out},\text{ex}} \\ Y_{\text{out},\text{ex}} \\ X_{\text{out},0} \\ Y_{\text{out},0}\end{pmatrix}</script>
 </p>
 <p>and</p>
 <p>
 <script type="math/tex; mode=display">\textbf{M} = \begin{pmatrix} -\frac{\kappa}{2} &\Delta
-                             \\-\Delta           &-\frac{\kappa}{2} \end{pmatrix}, \quad 
+                             \\-\Delta           &-\frac{\kappa}{2} \end{pmatrix}, \quad
   \textbf{L}= \begin{pmatrix} \sqrt{\kappa_{\text{ex}}} &0 &\sqrt{\kappa_{0}} &0
                             \\0 &\sqrt{\kappa_{\text{ex}}} &0 &\sqrt{\kappa_{0}}\end{pmatrix}.</script>
 </p>
@@ -152,7 +152,7 @@
 <h1 id="measurements">Measurements</h1>
 <p>IOpy implements two different methods to characterize a linear system. They mimic closely the different types of measurements performed in the laboratory. First is the linear response of the system, which is similar to output of a vector network analyser (VNA). And, second is the spectrum of the output field, which is the same as the output of the spectrum analyser.</p>
 <h2 id="linear-response">Linear Response</h2>
-<p>According to the <a href="http://127.0.0.1:8000/theory/#input-output-formalism">Equation (2)</a>, a quadrature pair of any output port $i$ can be related to the quadrature pair of any input port $j$ using a submatrix of the scattering matrix</p>
+<p>According to the <a href="https://nicksauerwein.github.io/IOpy/theory/#input-output-formalism">Equation (2)</a>, a quadrature pair of any output port <script type="math/tex">i</script> can be related to the quadrature pair of any input port <script type="math/tex">j</script> using a submatrix of the scattering matrix</p>
 <p>
 <script type="math/tex; mode=display">\begin{pmatrix}X_{\text{out},i} \\ Y_{\text{out},i}\end{pmatrix} = \textbf{S}^{(ij)} \begin{pmatrix}X_{\text{in},j} \\ Y_{\text{in},j}\end{pmatrix}.</script>
 </p>
@@ -161,7 +161,7 @@
 <script type="math/tex; mode=display">a_{\text{out},i} = \frac{X_{\text{out},i} + iY_{\text{out},i}}{\sqrt2} = (\textbf{S}^{(ij)}_{11} + i\textbf{S}^{(ij)}_{21})\frac{X_{\text{in},j}}{\sqrt2} +
                                        (\textbf{S}^{(ij)}_{22} - i\textbf{S}^{(ij)}_{12})\frac{iY_{\text{in},j}}{\sqrt2}.</script>
 </p>
-<p>In many cases the input field is a coherent drive with constant amplitude and $X_{\text{in},j}$ and $Y_{\text{in},j}$ are cosine part and sine part of it. Therefore, choosing any arbitrary values for the quadratures, as long as they satisfy the identity $X_{\text{in},j}^2+Y_{\text{in},j}^2=1$, will only impose a total phase shift to the response. By choosing $Y_{\text{in},j}$ to be zero, we consider this phase shift to be zero and $a_{\text{in},j}=X_{\text{in},j}/\sqrt2$. as a result, any phase response in the output is being calculated with respect to the input field.</p>
+<p>In many cases the input field is a coherent drive with constant amplitude and <script type="math/tex">X_{\text{in},j}</script> and <script type="math/tex">Y_{\text{in},j}</script> are cosine part and sine part of it. Therefore, choosing any arbitrary values for the quadratures, as long as they satisfy the identity <script type="math/tex">X_{\text{in},j}^2+Y_{\text{in},j}^2=1</script>, will only impose a total phase shift to the response. By choosing <script type="math/tex">Y_{\text{in},j}</script> to be zero, we consider this phase shift to be zero and <script type="math/tex">a_{\text{in},j}=X_{\text{in},j}/\sqrt2</script>. as a result, any phase response in the output is being calculated with respect to the input field.</p>
 <p>
 <script type="math/tex; mode=display">a_{\text{out},i} = (\textbf{S}^{(ij)}_{11} + i\textbf{S}^{(ij)}_{21})a_{\text{in},j}</script>
 </p>
@@ -169,7 +169,8 @@
 <script type="math/tex; mode=display">\chi^{(ij)}(\omega) = \textbf{S}^{(ij)}_{11} + i\textbf{S}^{(ij)}_{21} \tag{4}.</script>
 </p>
 <h2 id="spectra">Spectra</h2>
-<p>In general for analyzing the spectrum of some measured signals, we can define a correlator using a measurement matrix $Q_{ij}$</p>
+<p>In general for analyzing the spectrum of some measured signals, we can define a correlator using a measurement matrix <script type="math/tex">Q_{ij}</script>
+</p>
 <p>
 <script type="math/tex; mode=display">Q(\tau) = \langle Q_{ij}Z_{\text{out},i}(0)Z_{\text{out},j}(\tau)\rangle,</script>
 </p>
@@ -181,7 +182,7 @@
 <p>
 <script type="math/tex; mode=display"> S_{QQ}[\omega] = \frac{1}{2\pi} Q_{ij}\int_{-\infty}^{\infty} \langle Z_{\text{out},i}(\omega_1)Z_{\text{out},j}(\omega) \rangle d\omega_1.</script>
 </p>
-<p>According to <a href="http://127.0.0.1:8000/theory/#input-output-formalism">Equation (2)</a>, we can write the output signals in terms of input signals</p>
+<p>According to <a href="https://nicksauerwein.github.io/IOpy/theory/#input-output-formalism">Equation (2)</a>, we can write the output signals in terms of input signals</p>
 <p>
 <script type="math/tex; mode=display">Z_{\text{out},i}(\omega) = S_{ik}(\omega)Z_{\text{in},k}(\omega),</script>
 <script type="math/tex; mode=display">S_{QQ}[\omega] = \frac{1}{2\pi} Q_{ij}\int_{-\infty}^{\infty}S_{ik}(\omega_1)S_{jl}(\omega) \langle Z_{\text{in},k}(\omega_1)Z_{\text{in},l}(\omega) \rangle d\omega_1 \tag{5}.</script>
@@ -190,7 +191,7 @@
 <p>
 <script type="math/tex; mode=display">\langle Z_{\text{in},k}(\omega_1)Z_{\text{in},l}(\omega) \rangle = 2\pi\delta_{kl}\mathcal{S}_k^{\text{in}}(\omega)\delta(\omega_1+\omega),</script>
 </p>
-<p>where $\mathcal{S}_k^{\text{in}}(\omega)$ is the spectral density of the $k^\text{th}$ input signal. Now, we can simplify Equation (5) to</p>
+<p>where <script type="math/tex">\mathcal{S}_k^{\text{in}}(\omega)</script> is the spectral density of the <script type="math/tex">k^\text{th}</script> input signal. Now, we can simplify Equation (5) to</p>
 <p>
 <script type="math/tex; mode=display">S_{QQ}[\omega] = Q_{ij}S_{ik}(-\omega)S_{jk}(\omega)\mathcal{S}_k^{\text{in}}(\omega). </script>
 </p>

@@ -168,7 +168,7 @@ spectrum(self, omegas):
 
 <p>Currently for the input noise spectrum we consider the simplest case that it is a thermal spectrum. In future a feature will be added that allows for user defined spectra. This would make it possible to account for the classical noises of the lasers (phase noise and amplitude noise).</p>
 <h4 id="class-coupling">Class <code>Coupling</code></h4>
-<p>This class represents the couplings between two <code>Mode</code>s using the coupling vector. The coupling vector $V_g$ is a 4-dimensional vector which is defined in a way that the interaction Hamiltonian for two coupled modes would be</p>
+<p>This class represents the couplings between two <code>Mode</code>s using the coupling vector. The coupling vector <script type="math/tex">V_g</script> is a 4-dimensional vector which is defined in a way that the interaction Hamiltonian for two coupled modes would be</p>
 <p>
 <script type="math/tex; mode=display">H_{\text{int}} = 2\hbar(V_{g,1}X_1X_2 + V_{g,1}X_1Y_2 + V_{g,1}Y_1X_2 + V_{g,1}Y_1Y_2).</script>
 </p>
@@ -209,7 +209,7 @@ Attributes:
 '''
 </code></pre>
 
-<p>Refer to <a href="https://nicksauerwein.github.io/IOpy/theory/#input-output-formalism">Equation (1)</a> on the Theory page for more information on $M$ and $L$ matrices.</p>
+<p>Refer to <a href="https://nicksauerwein.github.io/IOpy/theory/#input-output-formalism">Equation (1)</a> on the Theory page for more information on <script type="math/tex">M</script> and <script type="math/tex">L</script> matrices.</p>
 <p>Methods:</p>
 <pre><code class="python">'''
 add_mode(self, mode):
@@ -276,7 +276,7 @@ Attributes:
 <p>
 <script type="math/tex; mode=display">Q(\tau) = \langle Q_{ij}Z_{\text{out},i}(0)Z_{\text{out},j}(\tau)\rangle,</script>
 </p>
-<p>where $Q_{ij}$ is the $ij^{th}$ element of the measurement matrix.</p>
+<p>where <script type="math/tex">Q_{ij}</script> is the <script type="math/tex">ij^{th}</script> element of the measurement matrix.</p>
 <p>Refer to the Paragraph <a href="https://nicksauerwein.github.io/IOpy/theory/#spectra">spectra</a> of the theory Page for more information on the measurement matrix.</p>
 <pre><code class="python">'''
 Attributes:
