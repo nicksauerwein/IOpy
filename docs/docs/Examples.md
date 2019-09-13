@@ -252,7 +252,7 @@ The peak that can be seen is because of low sampling rate of the calculations. T
     </p>
 </p>
 
-Here we can clearly see different contributions to the spectrum. In addition the width of the spectrum is equal to the theory value $\Gamma_{\text{eff}} = \Gamma_m (1 + C)$ (with $C$ as the cooperativity equal to $\frac{4g^2}{\kappa\Gamma_m}$) which results in cooling.
+Here we can clearly see different contributions to the spectrum. In addition the width of the spectrum is equal to the theory value \(\Gamma_{\text{eff}} = \Gamma_m (1 + C)\) (with \(C\) as the cooperativity equal to \(\frac{4g^2}{\kappa\Gamma_m}\)) which results in cooling.
 
 
 # Strong Coupling Regime
@@ -269,11 +269,11 @@ Here we can clearly see different contributions to the spectrum. In addition the
 </p>
 
 
-In this example we show the effect of increasing of the laser input power ($P_{\text{in}}$). For the details on the theory see [(Aspelmeyer, Kippenberg, Marquardt (2014))](https://journals.aps.org/rmp/abstract/10.1103/RevModPhys.86.1391), Section VII.C. By increasing the input power, at the beginning we can observe an improvement in the cooling, but as we continue increasing the power, the optical and mechanical modes hybridize to form two new modes with the eigenfrequencies
+In this example we show the effect of increasing of the laser input power (\(P_{\text{in}}\)). For the details on the theory see [(Aspelmeyer, Kippenberg, Marquardt (2014))](https://journals.aps.org/rmp/abstract/10.1103/RevModPhys.86.1391), Section VII.C. By increasing the input power, at the beginning we can observe an improvement in the cooling, but as we continue increasing the power, the optical and mechanical modes hybridize to form two new modes with the eigenfrequencies
 
 $$ \omega_{\pm} = \frac{\Omega_m-\Delta}{2} \pm \sqrt{g^2 + (\frac{\Omega_m+\Delta}{2})^2}.$$
 
-When the driving laser is exactly detuned on the red sideband ($\Delta=-\Omega_m$) the splitting of these two modes is equal to $2g$. In this example we want to show this splitting on the spectrum.
+When the driving laser is exactly detuned on the red sideband (\(\Delta=-\Omega_m\)) the splitting of these two modes is equal to \(2g\). In this example we want to show this splitting on the spectrum.
 
 To simulate this phenomenon, the code is exactly the same as the previous example but with a different input power.<!-- To see the full code go to [Strong coupling regime](http://localhost:8888/notebooks/IOpy/iopy/examples/Strong%20Coupling%20Regime.ipynb). -->
 

@@ -7,7 +7,7 @@ pages:
     - Outlook: outlook.md
     - References: references.md
 # Enabling LaTeX math equations
-extra_javascript: 
+extra_javascript:
     - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML
 
 markdown_extensions:

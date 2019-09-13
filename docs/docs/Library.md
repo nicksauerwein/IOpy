@@ -63,7 +63,7 @@ spectrum(self, omegas):
 Currently for the input noise spectrum we consider the simplest case that it is a thermal spectrum. In future a feature will be added that allows for user defined spectra. This would make it possible to account for the classical noises of the lasers (phase noise and amplitude noise).
 
 #### Class `Coupling`
-This class represents the couplings between two `Mode`s using the coupling vector. The coupling vector $V_g$ is a 4-dimensional vector which is defined in a way that the interaction Hamiltonian for two coupled modes would be
+This class represents the couplings between two `Mode`s using the coupling vector. The coupling vector \(V_g\) is a 4-dimensional vector which is defined in a way that the interaction Hamiltonian for two coupled modes would be
 
 $$H_{\text{int}} = 2\hbar(V_{g,1}X_1X_2 + V_{g,1}X_1Y_2 + V_{g,1}Y_1X_2 + V_{g,1}Y_1Y_2).$$
 
@@ -109,7 +109,7 @@ Attributes:
 '''
 ```
 
-Refer to [Equation (1)](https://nicksauerwein.github.io/IOpy/theory/#input-output-formalism) on the Theory page for more information on $M$ and $L$ matrices.
+Refer to [Equation (1)](https://nicksauerwein.github.io/IOpy/theory/#input-output-formalism) on the Theory page for more information on \(M\) and \(L\) matrices.
 
 Methods:
 
@@ -185,7 +185,7 @@ This class represents a general measurement with a measurement matrix for defini
 
 $$Q(\tau) = \langle Q_{ij}Z_{\text{out},i}(0)Z_{\text{out},j}(\tau)\rangle,$$
 
-where $Q_{ij}$ is the $ij^{th}$ element of the measurement matrix.
+where \(Q_{ij}\) is the \(ij^{th}\) element of the measurement matrix.
 
 Refer to the Paragraph [spectra](https://nicksauerwein.github.io/IOpy/theory/#spectra) of the theory Page for more information on the measurement matrix.
 
